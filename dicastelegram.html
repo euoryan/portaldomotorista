@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dicas Telegram</title>
+        <link rel="icon" type="image/svg+xml" href="assets\images\favicon\dicas.svg">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafafa;
+        }
+        
+        .hero-section {
+            background: #0088cc;
+            height: auto;
+            padding: 2rem 0;
+        }
+
+        .telegram-logo {
+          width: 48px; /* Reduzido de 64px */
+          height: 48px; /* Reduzido de 64px */
+          padding: 0.75rem; /* Reduzido de 1rem */
+          background: white;
+          border-radius: 12px; /* Reduzido de 16px */
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          display: flex; /* Adicionado */
+          align-items: center; /* Adicionado */
+          justify-content: center; /* Adicionado */
+      }
+
+        .telegram-logo svg {
+          width: 24px; /* Adicionado */
+          height: 24px; /* Adicionado */
+          fill: #0088cc; /* Adicionado - cor do Telegram */
+        }
+
+        .highlight {
+            color: #0088cc;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .store-link {
+            color: #0088cc;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background: rgba(0, 136, 204, 0.1);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .store-link:hover {
+            background: rgba(0, 136, 204, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tutorial-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tutorial-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .tutorial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tutorial-text {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
+
+        .youtube-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #ff0000;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .youtube-button:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #0088cc;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .social-link {
+            color: #4b5563;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #0077b3;
+            transform: translateY(-2px);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+    </head>
+    <body class="min-h-screen flex flex-col">
+      <header class="hero-section">
+          <div class="container mx-auto px-4 flex flex-col items-center">
+              <div class="telegram-logo mb-4">
+                  <!-- Novo SVG -->
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                      <path d="M272 384c9.6-31.9 29.5-59.1 49.2-86.2c0 0 0 0 0 0c5.2-7.1 10.4-14.2 15.4-21.4c19.8-28.5 31.4-63 31.4-100.3C368 78.8 289.2 0 192 0S16 78.8 16 176c0 37.3 11.6 71.9 31.4 100.3c5 7.2 10.2 14.3 15.4 21.4c0 0 0 0 0 0c19.8 27.1 39.7 54.4 49.2 86.2l160 0zM192 512c44.2 0 80-35.8 80-80l0-16-160 0 0 16c0 44.2 35.8 80 80 80zM112 176c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-61.9 50.1-112 112-112c8.8 0 16 7.2 16 16s-7.2 16-16 16c-44.2 0-80 35.8-80 80z"/>
+                  </svg>
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-bold text-white text-center mb-2">Dicas do Telegram</h1>
+              <p class="text-lg text-white text-center opacity-90 max-w-xl">Descubra como usar o Telegram e explorar seus principais recursos.</p>
+          </div>
+      </header>
+  </body>
+  
+
+        <main class="flex-grow">
+            <div class="tutorial-section">
+                <div class="tutorial-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/MCSIcsY506U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="text-center">
+                        <a href="https://www.youtube.com/watch?v=MCSIcsY506U" target="_blank" class="youtube-button">
+                            <i class="fab fa-youtube"></i>
+                            Ver no YouTube
+                        </a>
+                    </div>
+                </div>
+
+                <div class="tutorial-card">
+                    <h2 class="text-2xl font-bold mb-6">Comece a Usar o Telegram</h2>
+                    
+                    <p class="tutorial-text">
+                        O <span class="highlight">Telegram</span> revolucionou a forma como nos comunicamos, oferecendo uma plataforma segura, rápida e repleta de recursos. Vamos explorar como começar!
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <a href="https://play.google.com/store/apps/details?id=org.telegram.messenger" target="_blank" class="store-link">
+                            <i class="fab fa-google-play"></i>
+                            Baixar para Android
+                        </a>
+                        <a href="https://apps.apple.com/app/telegram-messenger/id686449807" target="_blank" class="store-link">
+                            <i class="fab fa-app-store-ios"></i>
+                            Baixar para iOS
+                        </a>
+                    </div>
+                </div>
+
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <i class="fas fa-lock feature-icon"></i>
+                        <h3 class="text-lg font-bold mb-2">Privacidade</h3>
+                        <p>Criptografia de ponta a ponta e controle total sobre seus dados.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-robot feature-icon"></i>
+                        <h3 class="text-lg font-bold mb-2">Bots</h3>
+                        <p>Assistentes automatizados para diversas tarefas.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h3 class="text-lg font-bold mb-2">Grupos</h3>
+                        <p>Conversas com até 200 mil participantes.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-broadcast-tower feature-icon"></i>
+                        <h3 class="text-lg font-bold mb-2">Canais</h3>
+                        <p>Compartilhe conteúdo com audiências ilimitadas.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-card">
+                    <h3 class="text-xl font-bold mb-4">Configuração Inicial</h3>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <p class="mb-2"><span class="highlight">1.</span> Faça o download do aplicativo na sua loja preferida</p>
+                            <p class="mb-2"><span class="highlight">2.</span> Insira seu número de telefone para registro</p>
+                            <p class="mb-2"><span class="highlight">3.</span> Digite o código de verificação recebido por SMS</p>
+                            <p><span class="highlight">4.</span> Configure seu perfil com nome e foto (opcional)</p>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 mt-8">Recursos Avançados</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-shield-alt text-2xl text-blue-500 mr-3"></i>
+                                <h4 class="font-semibold">Chat Secreto</h4>
+                            </div>
+                            <p class="text-gray-600">Conversas com criptografia ponta a ponta e autodestruição automática.</p>
+                            <a href="https://telegram.org/blog/secret-chats" target="_blank" class="text-blue-500 hover:text-blue-600 mt-2 inline-block">
+                                Saiba mais →
+                            </a>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-cloud text-2xl text-blue-500 mr-3"></i>
+                                <h4 class="font-semibold">Armazenamento em Nuvem</h4>
+                            </div>
+                            <p class="text-gray-600">Compartilhe arquivos de até 2GB e acesse de qualquer dispositivo.</p>
+                            <a href="https://telegram.org/blog/shared-files" target="_blank" class="text-blue-500 hover:text-blue-600 mt-2 inline-block">
+                                Saiba mais →
+                            </a>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-paint-brush text-2xl text-blue-500 mr-3"></i>
+                                <h4 class="font-semibold">Personalização</h4>
+                            </div>
+                            <p class="text-gray-600">Temas, stickers e emojis personalizados para seu estilo único.</p>
+                            <a href="https://telegram.org/blog/custom-themes" target="_blank" class="text-blue-500 hover:text-blue-600 mt-2 inline-block">
+                                Explore temas →
+                            </a>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-video text-2xl text-blue-500 mr-3"></i>
+                                <h4 class="font-semibold">Chamadas em Grupo</h4>
+                            </div>
+                            <p class="text-gray-600">Videochamadas com até 1000 participantes simultâneos.</p>
+                            <a href="https://telegram.org/blog/group-video-calls" target="_blank" class="text-blue-500 hover:text-blue-600 mt-2 inline-block">
+                                Como usar →
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 p-6 rounded-lg mt-8">
+                        <h3 class="text-xl font-bold mb-4">Dicas de Segurança</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <p>Ative a <a href="https://telegram.org/blog/2fa" target="_blank" class="text-blue-500 hover:underline">verificação em duas etapas</a> para proteção extra</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <p>Configure a privacidade do seu número de telefone nas configurações</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <p>Use pastas para organizar suas conversas por categorias</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <p>Faça backup regular das suas conversas importantes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-lg mt-8">
+                        <h3 class="text-xl font-bold mb-4">Recursos Extras</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <a href="https://telegram.org/blog" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                                <div class="flex items-center">
+                                    <i class="fas fa-newspaper text-blue-500 text-xl mr-3"></i>
+                                    <span>Blog Oficial</span>
+                                </div>
+                            </a>
+                            <a href="https://telegram.org/faq" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                                <div class="flex items-center">
+                                    <i class="fas fa-question-circle text-blue-500 text-xl mr-3"></i>
+                                    <span>FAQ</span>
+                                </div>
+                            </a>
+                            <a href="https://desktop.telegram.org/" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                                <div class="flex items-center">
+                                    <i class="fas fa-desktop text-blue-500 text-xl mr-3"></i>
+                                    <span>Versão Desktop</span>
+                                </div>
+                            </a>
+                            <a href="https://core.telegram.org/api" target="_blank" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                                <div class="flex items-center">
+                                    <i class="fas fa-code text-blue-500 text-xl mr-3"></i>
+                                    <span>API para Desenvolvedores</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col items-center justify-center gap-2 text-center">
+                    <div class="flex items-center gap-2">
+                        <a href="https://www.instagram.com/euoryan/" target="_blank" class="social-link flex items-center gap-2">
+                            <i class="fab fa-instagram text-xl" style="font-size: 16px;"></i>
+                            <span class="font-medium">@euoryan</span>
+                        </a>
+                    </div>
+                    <p class="text-sm text-gray-500">&copy; 2024 | Todos os direitos reservados</p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

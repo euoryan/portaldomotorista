@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#216dde">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Portal do Motorista</title>
+    <meta name="description" content="Portal para motoristas com acesso a diretórios, suporte e dicas. Comunicação fácil, rotas automáticas e suporte 24h.">
+    <meta name="keywords" content="motoristas, transporte, diretórios, rotas, comunicação, suporte">
+    <link rel="icon" type="image/png" href="assets\images\favicon\portal.svg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">Portal do <span>Motorista</span></a>
+            <div class="nav-toggle">
+                <i class="fas fa-bars" style="font-size: 1.2rem;"></i>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="active">Início</a>
+                <a href="#projetos">Páginas</a>
+                <a href="#vantagens">Vantagens</a>
+                <a href="#contato">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Portal do<br><span><span class="name">Motorista 🚌</span></span></h1>
+            <p>Diretórios, ferramentas e dicas para motoristas. Acesse o conteúdo e facilite seu trabalho na estrada.</p>
+            <a href="#projetos" class="btn">Explorar Páginas</a>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <section id="projetos">
+        <div class="section-content">
+            <h2 class="section-title">Páginas</h2>
+            <div class="projects-grid">
+                <div class="project-card" onclick="window.location.href='diretoriosmotoristas.html';">
+                    <div class="project-image">
+                        <img src="assets\images\projetos\directmot.png" alt="Diretórios Motoristas">
+                        <a href="diretoriosmotoristas.html" class="btn">Visitar</a>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Diretório de Links</h3>
+                        <p class="project-description">Acesso fácil a diretórios úteis para motoristas.</p>
+                        <div class="project-tags">
+                            <span class="tag">Diretórios</span>
+                            <span class="tag">Motoristas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="window.location.href='downloadtelegram.html';">
+                    <div class="project-image">
+                        <img src="assets\images\projetos\downtel.png" alt="Guia: Baixar Telegram">
+                        <a href="downloadtelegram.html" class="btn">Visitar</a>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Guia Novos Motoristas</h3>
+                        <p class="project-description">Faça o download e entre em contato com nosso suporte e bot.</p>
+                        <div class="project-tags">
+                            <span class="tag">Telegram</span>
+                            <span class="tag">Comunicação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="window.location.href='dicastelegram.html';">
+                    <div class="project-image">
+                        <img src="assets\images\projetos\dicastel.png" alt="Dicas Telegram">
+                        <a href="dicastelegram.html" class="btn">Visitar</a>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Dicas Telegram</h3>
+                        <p class="project-description">Descubra como usar o Telegram e explorar seus principais recursos.</p>
+                        <div class="project-tags">
+                            <span class="tag">Telegram</span>
+                            <span class="tag">Dicas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vantagens">
+        <div class="section-content">
+            <h2 class="section-title">Vantagens</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-comments skill-icon"></i>
+                    <h3>Comunicação Rápida</h3>
+                    <p>Suporte rápido para suas dúvidas.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-route skill-icon"></i>
+                    <h3>Rotas Automáticas</h3>
+                    <p>Receba rotas sem complicação.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-headset skill-icon"></i>
+                    <h3>Suporte 24h</h3>
+                    <p>Ajuda sempre disponível.</p>
+                </div>
+            </div>
+        </div>
+    </section>    
+
+    <footer id="contato">
+        <div class="section-content">
+            <hr style="border: none; border-top: 1px solid #ccc; width: 100%;">
+            <div class="social-links">
+                <a href="https://instagram.com/euoryan" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/euoryan" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
