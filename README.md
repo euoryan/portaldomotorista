@@ -51,6 +51,6 @@ O "Portal do Motorista" é uma plataforma desenvolvida para facilitar o dia a di
 
 <div align="center">
 
-Feito com ☕ e dedicação para todos os motoristas por Ryan 😉 Se gostou, compartilhe para ajudar outros!
+Feito com ☕ e código por Ryan ;) Se gostou, deixa uma estrela pra ajudar! ⭐
 
 </div>
