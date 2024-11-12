@@ -11,6 +11,96 @@
     <meta name="keywords" content="motoristas, transporte, diretórios, rotas, comunicação, suporte">
     <link rel="icon" type="image/png" href="assets\images\favicon\portal.svg">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Seus estilos CSS existentes */
+        .hero-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Define a cor inicial dos ícones */
+        .social-links a {
+            color: #333; /* Cor inicial dos ícones, ajuste conforme preferir */
+            font-size: 24px; /* Ajuste o tamanho do ícone se necessário */
+            margin: 0 0px; /* Espaçamento entre os ícones */
+            transition: color 0.3s ease; /* Transição suave para o hover */
+        }
+
+        /* Define a cor do ícone ao passar o mouse */
+        .social-links a:hover {
+            color: #3a6899; /* Cor dos ícones no hover, ajuste conforme preferir */
+        }
+
+        .bus-icon {
+            font-size: 2.5rem;
+            color: #216dde;
+            transform-origin: center;
+            animation: driveBy 3s infinite;
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        @keyframes driveBy {
+            0% {
+                transform: translateX(-20px) scale(0.9);
+                opacity: 0;
+            }
+            20% {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+            40% {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+            60% {
+                transform: translateX(0) scale(1) rotateY(0deg);
+                opacity: 1;
+            }
+            80% {
+                transform: translateX(20px) scale(0.9) rotateY(180deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateX(-20px) scale(0.9) rotateY(0deg);
+                opacity: 0;
+            }
+        }
+
+        .road-reflection {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(33, 109, 222, 0.3), transparent);
+            filter: blur(1px);
+            animation: reflection 3s infinite;
+        }
+
+        @keyframes reflection {
+            0% {
+                opacity: 0;
+                transform: translateX(-70%);
+            }
+            20% {
+                opacity: 0.5;
+                transform: translateX(-50%);
+            }
+            80% {
+                opacity: 0.5;
+                transform: translateX(-30%);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-70%);
+            }
+
+        }
+    </style>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -31,7 +121,11 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Portal do<br><span><span class="name">Motorista 🚌</span></span></h1>
+            <h1>Portal do<br><span><span class="name">Motorista 
+                <i class="fas fa-bus bus-icon">
+                    <div class="road-reflection"></div>
+                </i>
+            </span></span></h1>
             <p>Diretórios, ferramentas e dicas para motoristas. Acesse o conteúdo e facilite seu trabalho na estrada.</p>
             <a href="#projetos" class="btn">Explorar Páginas</a>
             <div class="scroll-indicator">
