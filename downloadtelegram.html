@@ -204,7 +204,26 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
-    <header class="hero-section">
+    <header class="hero-section relative">
+        <div style="position: absolute; top: 1rem; left: 1rem;">
+            <a href="index.html" style="
+                background-color: white; /* Fundo branco */
+                color: #216dde; /* Texto e ícone azul */
+                padding: 0.5rem 1.2rem;
+                border-radius: 0.5rem;
+                font-size: 0.875rem;
+                font-weight: 500;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                border: 1px solid #216dde; /* Borda azul sutil */
+                transition: background-color 0.2s ease;
+                cursor: pointer;
+            " onmouseover="this.style.backgroundColor='#f2f4f6';" onmouseout="this.style.backgroundColor='white';">
+                <i class="fas fa-arrow-left" style="color: #216dde; font-size: 1.1rem;"></i> Portal
+            </a>
+        </div>
         <div class="container mx-auto px-4 flex flex-col items-center">
             <div class="telegram-logo mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
