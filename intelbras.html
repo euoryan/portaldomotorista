@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia Intelbras</title>
+  <link rel="icon" type="image/svg+xml" href="assets\images\favicon\intelbras.svg">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #fafafa;
+    line-height: 1.7;
+  }
+
+  .hero-section {
+    background: #0088cc;
+    padding: 2rem 0;
+    color: white;
+  }
+
+  /* Existing header styles */
+  .telegram-logo {
+    width: 48px;
+    height: 48px;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .telegram-logo svg {
+    width: 24px;
+    height: 24px;
+    fill: #0088cc;
+  }
+
+  /* Blog post styles */
+  .blog-post {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    transition: transform 0.2s ease;
+  }
+
+  .blog-post:hover {
+    transform: translateY(-2px);
+  }
+
+  .blog-post h2 {
+    color: #0088cc;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .blog-post-content {
+    color: #374151;
+    line-height: 1.8;
+  }
+
+  .blog-post-meta {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .tag {
+    display: inline-block;
+    background: #e5e7eb;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    color: #374151;
+    margin-right: 0.5rem;
+  }
+
+  .action-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #0088cc;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+  }
+
+  .action-button:hover {
+    background: #006699;
+  }
+
+  /* Footer styles */
+  .social-link {
+    transition: color 0.2s ease;
+  }
+
+  .social-link:hover {
+    color: #0088cc;
+  }
+
+  footer .grid {
+    display: flex;
+    justify-content: center; /* Centraliza as colunas horizontalmente */
+    gap: 7rem; /* Ajuste o espaçamento entre as colunas */
+    text-align: left; /* Mantém o texto das colunas alinhado à esquerda */
+  }
+
+  /* Centraliza o texto de direitos reservados */
+  .footer-rights {
+    text-align: center;
+    margin-top: 1rem;
+    border-top: 1px solid #374151;
+    padding-top: 1rem;
+  }
+
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+  <header class="hero-section relative">
+    <div style="position: absolute; top: 1rem; left: 1rem;">
+      <a href="index.html" style="background-color: white; color: #216dde; padding: 0.5rem 1.2rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid #216dde; transition: background-color 0.2s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='#f2f4f6';" onmouseout="this.style.backgroundColor='white';">
+        <i class="fas fa-arrow-left" style="color: #216dde; font-size: 1.1rem;"></i> Portal
+      </a>
+    </div>
+    <div class="container mx-auto px-4 flex flex-col items-center">
+      <div class="telegram-logo mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+          <path d="M0 80l0 48c0 17.7 14.3 32 32 32l16 0 48 0 0-80c0-26.5-21.5-48-48-48S0 53.5 0 80zM112 32c10 13.4 16 30 16 48l0 304c0 35.3 28.7 64 64 64s64-28.7 64-64l0-5.3c0-32.4 26.3-58.7 58.7-58.7L480 320l0-192c0-53-43-96-96-96L112 32zM464 480c61.9 0 112-50.1 112-112c0-8.8-7.2-16-16-16l-245.3 0c-14.7 0-26.7 11.9-26.7 26.7l0 5.3c0 53-43 96-96 96l176 0 96 0z"/>
+        </svg>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-bold text-white text-center mb-2">Guia Intelbras</h1>
+      <p class="text-lg text-white text-center opacity-90 max-w-xl">Procedimentos essenciais para atendimento Intelbras.</p>
+    </div>
+  </header>
+
+  <main class="flex-grow container mx-auto px-4 py-8">
+    <div class="max-w-3xl mx-auto">
+      <!-- Portal Access Section -->
+      <article class="blog-post">
+        <h2>Portal Intelbras</h2>
+        <div class="blog-post-content">
+          <p>Acesse o portal da empresa para obter todas as informações necessárias para as rotas da Intelbras:</p>
+          <ul class="list-disc ml-6 mt-2">
+            <li>Link para realizar a rota</li>
+            <li>Roteiro detalhado</li>
+            <li>Grupo da rota no WhatsApp</li>
+          </ul>
+          <a href="https://bit.ly/roteirointelbras" target="_blank" class="action-button mt-4">
+            <i class="fa-solid fa-globe"></i>
+            Acessar Portal
+          </a>
+        </div>
+        <div class="blog-post-meta">
+          <span class="tag">Essencial</span>
+          <span class="tag">Portal</span>
+        </div>
+      </article>
+
+      <!-- Communication Section -->
+      <article class="blog-post">
+        <h2>Comunicação e Início de Viagem</h2>
+        <div class="blog-post-content">
+          <p>Protocolos importantes para o início da sua viagem:</p>
+          <ul class="list-disc ml-6">
+            <li>Avise obrigatoriamente no grupo da rota sobre o início da viagem</li>
+            <li>Compartilhamento de localização é opcional (cortesia)</li>
+            <li>Em caso de bloqueios, comunique o novo trajeto no grupo</li>
+          </ul>
+        </div>
+        <div class="blog-post-meta">
+          <span class="tag">Comunicação</span>
+          <span class="tag">Procedimentos</span>
+        </div>
+      </article>
+
+      <!-- Route Management Section -->
+      <article class="blog-post">
+        <h2>Gestão de Rotas</h2>
+        <div class="blog-post-content">
+          <p>Diretrizes para alterações e gestão de rotas:</p>
+          <ul class="list-disc ml-6">
+            <li>Alterações devem ser solicitadas ao Operacional</li>
+            <li>Passageiros devem solicitar mudanças via DP Intelbras</li>
+            <li>Pontos de parada são referências flexíveis</li>
+            <li>Rotas de retorno espelham as de ida, respeitando regulamentações</li>
+          </ul>
+        </div>
+        <div class="blog-post-meta">
+          <span class="tag">Rotas</span>
+          <span class="tag">Gestão</span>
+        </div>
+      </article>
+
+      <!-- Access Card Section -->
+      <article class="blog-post">
+        <h2>Cartão de Acesso</h2>
+        <div class="blog-post-content">
+          <p>Procedimentos para controle de acesso:</p>
+          <ul class="list-disc ml-6">
+            <li>Uso do cartão é <strong>obrigatório</strong></li>
+            <li>Em caso de esquecimento, registre os dados do funcionário</li>
+          </ul>
+          <a href="https://bit.ly/registrocrachas" target="_blank" class="action-button mt-4">
+            <i class="fa-solid fa-id-card"></i>
+            Registrar Ocorrência
+          </a>
+        </div>
+        <div class="blog-post-meta">
+          <span class="tag">Acesso</span>
+          <span class="tag">Controle</span>
+        </div>
+      </article>
+
+      <!-- Final Message -->
+      <article class="blog-post">
+        <div class="blog-post-content text-center">
+          <p class="italic font-semibold">"Somos uma equipe unida, o que nos torna prósperos em alcançar resultados positivos."</p>
+          <p class="mt-4">Caso tenha dúvidas, entre em contato com o setor operacional.</p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        
+        <!-- Produtos -->
+        <div>
+          <h3 class="text-lg font-semibold mb-2">Produtos</h3>
+          <ul class="text-sm text-gray-400 space-y-2">
+            <li><a href="https://www.exemplo.com/produto1" class="hover:text-white">Produto 1</a></li>
+            <li>Produto 2</li>
+            <li>Produto 3</li>
+          </ul>
+        </div>
+        
+        <!-- Sobre -->
+        <div>
+          <h3 class="text-lg font-semibold mb-2">Sobre</h3>
+          <ul class="text-sm text-gray-400 space-y-2">
+            <li><a href="https://www.exemplo.com/sobre1" class="hover:text-white">Sobre 1</a></li>
+            <li>Sobre 2</li>
+            <li>Sobre 3</li>
+          </ul>
+        </div>
+        
+        <!-- Contato -->
+        <div>
+          <h3 class="text-lg font-semibold mb-2">Contato</h3>
+          <ul class="text-sm text-gray-400 space-y-2">
+            <li><a href="https://www.exemplo.com/contato1" class="hover:text-white">Contato 1</a></li>
+            <li>Contato 2</li>
+            <li>Contato 3</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Redes Sociais -->
+      <div class="flex justify-center space-x-6 mt-8">
+        <a href="https://www.instagram.com/seuusuario" target="_blank" class="text-gray-400 hover:text-white">
+          <i class="fab fa-instagram text-2xl"></i>
+        </a>
+        <a href="https://www.facebook.com/seuusuario" target="_blank" class="text-gray-400 hover:text-white">
+          <i class="fab fa-facebook-f text-2xl"></i>
+        </a>
+        <a href="https://www.twitter.com/seuusuario" target="_blank" class="text-gray-400 hover:text-white">
+          <i class="fab fa-twitter text-2xl"></i>
+        </a>
+      </div>
+      
+      <!-- Links Legais -->
+      <div class="flex justify-center space-x-4 mt-8">
+        <a href="https://www.exemplo.com/politica-de-privacidade" class="text-sm text-blue-400 hover:text-blue-500">Política de Privacidade</a>
+        <a href="https://www.exemplo.com/termos-de-uso" class="text-sm text-blue-400 hover:text-blue-500">Termos de Uso</a>
+      </div>
+      
+      <!-- Direitos Reservados -->
+      <div class="footer-rights text-xs text-gray-500">
+        <p>&copy; 2024 Ryan. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>  
+</body>
+</html>
