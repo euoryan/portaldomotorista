@@ -209,16 +209,123 @@
         </div>
     </section>    
 
-    <footer id="contato">
-        <div class="section-content">
-            <hr style="border: none; border-top: 1px solid #ccc; width: 100%;">
-            <div class="social-links">
-                <a href="https://instagram.com/euoryan" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://github.com/euoryan" target="_blank"><i class="fab fa-github"></i></a>
-            </div>
+    <footer class="f">
+        <div class="w">
+          <p class="t">Desenvolvido por Ryan <i class="fa-solid fa-mug-hot"></i></p>
+          
+          <div class="c">
+            <a href="mailto:ryanzera.dev@gmail.com">
+              <i class="fas fa-envelope"></i>ryanzera.dev@gmail.com
+            </a>
+            <a href="tel:+5548984613946">
+              <i class="fas fa-phone-alt"></i>+55 (48) 98461-3946
+            </a>
+          </div>
+          
+          <div class="s">
+            <a href="https://instagram.com/seu_instagram" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://github.com/seu_github" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/seu_linkedin" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+       
+          <div class="l">
+            <a href="/politica-de-privacidade">Política de Privacidade</a>
+            <span>•</span>
+            <a href="/termos-de-uso">Termos de Uso</a>
+          </div>
         </div>
-    </footer>
-
+       
+        <hr>
+        
+        <div class="w">
+          <div class="cp">
+            <small>© 2024 Todos os direitos reservados.</small>
+          </div>
+        </div>
+        <style>
+          .f {
+            background: #111827;
+            color: #9CA3AF;
+            font: 14px Inter, sans-serif;
+            padding: 16px;
+          }
+          .w {
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+          }
+          .t {
+            font-size: 14px;
+            margin: 0 0 16px;
+          }
+          .c {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-bottom: 12px;
+          }
+          .s {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 12px;
+          }
+          .l {
+            font-size: 13px;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 12px;
+          }
+          hr {
+            border: 0;
+            height: 1px;
+            background: rgba(156, 163, 175, 0.2);
+            margin: 0 0 12px;
+          }
+          .cp {
+            color: #6B7280;
+            font-size: 12px;
+          }
+          a {
+            color: inherit;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+          }
+          i {
+            margin-right: 8px;
+          }
+          .fa-mug-hot {
+            color: #0066ff;
+            animation: b 1s infinite;
+            margin-left: 4px;
+            margin-right: 0;
+          }
+          a:hover {
+            color: #fff;
+          }
+          @keyframes b {
+            50% {transform: scale(1.1)}
+          }
+          @media(max-width: 640px) {
+            .c {
+              flex-direction: column;
+              gap: 8px;
+            }
+            .f {
+              padding: 12px;
+            }
+          }
+        </style>
+       </footer>
     <script src="script.js"></script>
 </body>
 </html>
