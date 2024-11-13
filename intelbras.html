@@ -238,65 +238,79 @@
     </div>
   </main>
 
-  <footer class="bg-gray-900 text-white py-12">
-    <div class="container mx-auto px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        
-        <!-- Produtos -->
-        <div>
-          <h3 class="text-lg font-semibold mb-2">Produtos</h3>
-          <ul class="text-sm text-gray-400 space-y-2">
-            <li><a href="https://www.exemplo.com/produto1" class="hover:text-white">Produto 1</a></li>
-            <li>Produto 2</li>
-            <li>Produto 3</li>
-          </ul>
+<!-- Animação do coração -->
+<style>
+  @keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  .animate-heartbeat {
+    animation: heartbeat 1.5s infinite;
+    display: inline-block;
+  }
+  </style>
+  
+  <footer class="bg-gray-900 text-white py-6">
+    <div class="w-full">
+      <!-- Conteúdo principal -->
+      <div class="px-4 md:px-6 max-w-6xl mx-auto">
+        <!-- Créditos do desenvolvedor -->
+        <div class="text-center text-xs text-gray-400 mb-4">
+          <p>Desenvolvido com <i class="fas fa-heart text-red-500 animate-heartbeat"></i> por Ryan</p>
         </div>
-        
-        <!-- Sobre -->
-        <div>
-          <h3 class="text-lg font-semibold mb-2">Sobre</h3>
-          <ul class="text-sm text-gray-400 space-y-2">
-            <li><a href="https://www.exemplo.com/sobre1" class="hover:text-white">Sobre 1</a></li>
-            <li>Sobre 2</li>
-            <li>Sobre 3</li>
-          </ul>
+  
+        <!-- Informações de contato -->
+        <div class="flex flex-col items-center space-y-3 mb-4">
+          <!-- Email e Telefone -->
+          <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+            <a href="mailto:ryanzera.dev@gmail.com" class="flex items-center text-gray-400 hover:text-white transition-colors duration-200 text-sm">
+              <i class="fas fa-envelope mr-2 text-sm"></i>
+              ryanzera.dev@gmail.com
+            </a>
+            <a href="tel:+5548984613946" class="flex items-center text-gray-400 hover:text-white transition-colors duration-200 text-sm">
+              <i class="fas fa-phone-alt mr-2 text-sm"></i>
+              +55 (48) 98461-3946
+            </a>
+          </div>
+          
+          <!-- Redes Sociais -->
+          <div class="flex gap-6">
+            <a href="https://instagram.com/seu_instagram" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-200">
+              <i class="fab fa-instagram text-lg"></i>
+            </a>
+            <a href="https://github.com/seu_github" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-200">
+              <i class="fab fa-github text-lg"></i>
+            </a>
+            <a href="https://linkedin.com/in/seu_linkedin" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-200">
+              <i class="fab fa-linkedin text-lg"></i>
+            </a>
+          </div>
         </div>
-        
-        <!-- Contato -->
-        <div>
-          <h3 class="text-lg font-semibold mb-2">Contato</h3>
-          <ul class="text-sm text-gray-400 space-y-2">
-            <li><a href="https://www.exemplo.com/contato1" class="hover:text-white">Contato 1</a></li>
-            <li>Contato 2</li>
-            <li>Contato 3</li>
-          </ul>
+  
+        <!-- Links legais -->
+        <div class="flex justify-center gap-3 text-xs text-gray-400 mb-3">
+          <a href="/politica-de-privacidade" class="hover:text-white transition-colors duration-200">
+            Política de Privacidade
+          </a>
+          <span class="text-gray-600">•</span>
+          <a href="/termos-de-uso" class="hover:text-white transition-colors duration-200">
+            Termos de Uso
+          </a>
         </div>
       </div>
-      
-      <!-- Redes Sociais -->
-      <div class="flex justify-center space-x-6 mt-8">
-        <a href="https://www.instagram.com/seuusuario" target="_blank" class="text-gray-400 hover:text-white">
-          <i class="fab fa-instagram text-2xl"></i>
-        </a>
-        <a href="https://www.facebook.com/seuusuario" target="_blank" class="text-gray-400 hover:text-white">
-          <i class="fab fa-facebook-f text-2xl"></i>
-        </a>
-        <a href="https://www.twitter.com/seuusuario" target="_blank" class="text-gray-400 hover:text-white">
-          <i class="fab fa-twitter text-2xl"></i>
-        </a>
-      </div>
-      
-      <!-- Links Legais -->
-      <div class="flex justify-center space-x-4 mt-8">
-        <a href="https://www.exemplo.com/politica-de-privacidade" class="text-sm text-blue-400 hover:text-blue-500">Política de Privacidade</a>
-        <a href="https://www.exemplo.com/termos-de-uso" class="text-sm text-blue-400 hover:text-blue-500">Termos de Uso</a>
-      </div>
-      
-      <!-- Direitos Reservados -->
-      <div class="footer-rights text-xs text-gray-500">
-        <p>&copy; 2024 Ryan. Todos os direitos reservados.</p>
+  
+      <!-- Linha divisória -->
+      <div class="w-full border-t border-gray-800"></div>
+  
+      <!-- Copyright -->
+      <div class="text-center text-xs text-gray-500 px-4 mt-3">
+        <p>© 2024 Todos os direitos reservados.</p>
       </div>
     </div>
-  </footer>  
+  </footer>
 </body>
 </html>
