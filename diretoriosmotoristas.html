@@ -172,19 +172,171 @@
         <div id="directories-container" class="max-w-2xl mx-auto space-y-6"></div>
     </main>
 
-    <footer>
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col items-center justify-center gap-2 text-center"> <!-- Alinhamento central adicionado aqui -->
-                <div class="flex items-center gap-2">
-                    <a href="https://www.instagram.com/euoryan/" target="_blank" class="social-link flex items-center gap-2">
-                        <i class="fab fa-instagram text-xl" style="font-size: 16px;"></i>
-                        <span class="font-medium">@euoryan</span>
-                    </a>
-                </div>
-                <p class="text-sm text-gray-500">&copy; 2024 | Todos os direitos reservados</p>
-            </div>
+    <footer class="f">
+        <div class="notification">Copiado!</div>
+        
+        <div class="w">
+          <p class="t">Desenvolvido por Ryan <i class="fa-solid fa-mug-hot"></i></p>
+          
+          <div class="c">
+            <button class="copy-btn" data-value="ryanzera.dev@gmail.com">
+              <i class="fas fa-envelope"></i>ryanzera.dev@gmail.com
+            </button>
+            <button class="copy-btn" data-value="+5548984613946">
+              <i class="fas fa-phone-alt"></i>+55 (48) 98461-3946
+            </button>
+          </div>
+          
+          <div class="s">
+            <a href="https://instagram.com/seu_instagram" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://github.com/seu_github" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/seu_linkedin" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+       
+          <div class="l">
+            <a href="/politica-de-privacidade">Política de Privacidade</a>
+            <span>•</span>
+            <a href="/termos-de-uso">Termos de Uso</a>
+          </div>
         </div>
-    </footer>    
+       
+        <hr>
+        
+        <div class="w">
+          <div class="cp">
+            <small>© 2024 Todos os direitos reservados.</small>
+          </div>
+        </div>
+      
+        <style>
+          .f {
+            background: #111827;
+            color: #9CA3AF;
+            font: 14px Inter, sans-serif;
+            padding: 16px;
+            position: relative;
+          }
+          .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2e9aff;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: 0.3s;
+          }
+          .notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+          }
+          .w {
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+          }
+          .t {
+            font-size: 14px;
+            margin: 0 0 16px;
+          }
+          .c {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-bottom: 12px;
+          }
+          .s {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 12px;
+          }
+          .l {
+            font-size: 13px;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 12px;
+          }
+          hr {
+            border: 0;
+            height: 1px;
+            background: rgba(156, 163, 175, 0.2);
+            margin: 12px 0;
+          }
+          .cp {
+            color: #6B7280;
+            font-size: 12px;
+          }
+          a, .copy-btn {
+            color: inherit;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+          }
+          .copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font: inherit;
+            padding: 0;
+          }
+          i {
+            margin-right: 8px;
+          }
+          .fa-mug-hot {
+            color: #4791ff;
+            animation: b 1s infinite;
+            margin-left: 4px;
+            margin-right: 0;
+          }
+          a:hover, .copy-btn:hover {
+            color: #fff;
+          }
+          @keyframes b {
+            50% {transform: scale(1.1)}
+          }
+          @media(max-width: 640px) {
+            .c {
+              flex-direction: column;
+              gap: 8px;
+              align-items: center;
+            }
+          }
+        </style>
+      
+        <script>
+          const notification = document.querySelector('.notification');
+          let timeoutId;
+      
+          document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+              const text = btn.getAttribute('data-value');
+              await navigator.clipboard.writeText(text);
+              
+              // Limpa o timeout anterior se existir
+              if (timeoutId) clearTimeout(timeoutId);
+              
+              // Mostra a notificação
+              notification.classList.add('show');
+              
+              // Remove a notificação após 2 segundos
+              timeoutId = setTimeout(() => {
+                notification.classList.remove('show');
+              }, 2000);
+            });
+          });
+        </script>
+      </footer>   
     
     <script>
         // JavaScript para renderização dos diretórios
