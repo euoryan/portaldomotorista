@@ -238,34 +238,18 @@
     </div>
   </main>
 
-<!-- Animação do coração -->
-<style>
-  @keyframes heartbeat {
-    0% { transform: scale(1); }
-    25% { transform: scale(1.1); }
-    50% { transform: scale(1); }
-    75% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-  }
-  
-  .animate-heartbeat {
-    animation: heartbeat 1.5s infinite;
-    display: inline-block;
-  }
-  </style>
-  
   <footer class="bg-gray-900 text-white py-6">
     <div class="w-full">
-      <!-- Conteúdo principal -->
       <div class="px-4 md:px-6 max-w-6xl mx-auto">
-        <!-- Créditos do desenvolvedor -->
-        <div class="text-center text-xs text-gray-400 mb-4">
-          <p>Desenvolvido com <i class="fas fa-heart text-red-500 animate-heartbeat"></i> por Ryan</p>
+        <!-- Créditos do desenvolvedor com efeito máquina de escrever -->
+        <div class="text-center text-xs text-gray-400 mb-4 h-4">
+          <span class="typewriter-container opacity-0">
+            <span class="typewriter">Desenvolvido com <i class="fas fa-heart text-red-500 animate-heartbeat"></i> por Ryan</span>
+          </span>
         </div>
   
         <!-- Informações de contato -->
         <div class="flex flex-col items-center space-y-3 mb-4">
-          <!-- Email e Telefone -->
           <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
             <a href="mailto:ryanzera.dev@gmail.com" class="flex items-center text-gray-400 hover:text-white transition-colors duration-200 text-sm">
               <i class="fas fa-envelope mr-2 text-sm"></i>
@@ -277,7 +261,6 @@
             </a>
           </div>
           
-          <!-- Redes Sociais -->
           <div class="flex gap-6">
             <a href="https://instagram.com/seu_instagram" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-200">
               <i class="fab fa-instagram text-lg"></i>
@@ -291,7 +274,6 @@
           </div>
         </div>
   
-        <!-- Links legais -->
         <div class="flex justify-center gap-3 text-xs text-gray-400 mb-3">
           <a href="/politica-de-privacidade" class="hover:text-white transition-colors duration-200">
             Política de Privacidade
@@ -303,14 +285,98 @@
         </div>
       </div>
   
-      <!-- Linha divisória -->
       <div class="w-full border-t border-gray-800"></div>
   
-      <!-- Copyright -->
       <div class="text-center text-xs text-gray-500 px-4 mt-3">
         <p>© 2024 Todos os direitos reservados.</p>
       </div>
     </div>
+  
+    <style>
+      @keyframes heartbeat {
+        0% { transform: scale(1); }
+        25% { transform: scale(1.1); }
+        50% { transform: scale(1); }
+        75% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+      
+      .animate-heartbeat {
+        animation: heartbeat 1.5s infinite;
+        display: inline-block;
+      }
+      
+      @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+      }
+      
+      @keyframes blink {
+        50% { border-color: transparent }
+      }
+      
+      .typewriter-container {
+        display: inline-block;
+        transition: opacity 0.3s ease;
+      }
+      
+      .typewriter-container.visible {
+        opacity: 1;
+      }
+      
+      .typewriter {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 2px solid #fff;
+        width: 0;
+        animation: none;
+      }
+      
+      .typewriter.typing {
+        animation: 
+          typing 3s steps(40, end) forwards,
+          blink 0.75s step-end infinite;
+      }
+    </style>
+  
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const container = entry.target;
+              const typewriter = container.querySelector('.typewriter');
+              
+              // Adiciona as classes para iniciar a animação
+              container.classList.add('visible');
+              typewriter.classList.add('typing');
+              
+              // Reinicia a animação após completar
+              typewriter.addEventListener('animationend', function(e) {
+                if (e.animationName === 'typing') {
+                  setTimeout(() => {
+                    typewriter.style.width = '0';
+                    // Remove e readiciona a classe para reiniciar a animação
+                    typewriter.classList.remove('typing');
+                    void typewriter.offsetWidth; // Força reflow
+                    typewriter.classList.add('typing');
+                  }, 2000); // Espera 2 segundos antes de reiniciar
+                }
+              });
+            }
+          });
+        }, {
+          threshold: 0.5 // Ativa quando 50% do elemento está visível
+        });
+  
+        // Observa o container da animação
+        const typewriterContainer = document.querySelector('.typewriter-container');
+        if (typewriterContainer) {
+          observer.observe(typewriterContainer);
+        }
+      });
+    </script>
   </footer>
 </body>
 </html>
