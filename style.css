@@ -415,4 +415,14 @@ footer {
     .project-image {
         height: 180px;
     }
+    
+    .project-card, .skill-card {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+      }
+      
+      body {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+      }
 }
