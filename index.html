@@ -275,29 +275,19 @@
           .footer-container {
               display: flex;
               flex-wrap: wrap;
-              justify-content: center;
+              justify-content: space-between;
               align-items: center;
               gap: 16px;
               max-width: 1200px;
               margin: auto;
+              padding: 0 16px;
           }
   
-          .footer-container span {
-              color: #8b949e;
-          }
-  
-          .footer-container a {
-              color: #8b949e;
-              text-decoration: none;
-          }
-  
-          .footer-container a:hover {
-              color: #ffffff;
-          }
-  
-          .footer-container i {
-              font-size: 14px;
-              vertical-align: middle;
+          .footer-links {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 16px;
+              justify-content: center;
           }
   
           .footer-icons {
@@ -305,22 +295,52 @@
               gap: 12px;
           }
   
+          .footer-icons a,
+          .footer-links a {
+              color: #8b949e;
+              text-decoration: none;
+          }
+  
+          .footer-icons a:hover,
+          .footer-links a:hover {
+              color: #ffffff;
+          }
+  
+          .footer-container span {
+              color: #8b949e;
+          }
+  
           @media (max-width: 768px) {
               .footer-container {
                   flex-direction: column;
-                  gap: 8px;
+                  align-items: center;
+                  text-align: center;
+                  gap: 12px;
+              }
+  
+              .footer-links {
+                  order: 2; /* Links ficam acima dos direitos no mobile */
               }
   
               .footer-icons {
                   justify-content: center;
               }
+  
+              .footer-rights {
+                  order: 3; /* Direitos sempre no final no mobile */
+              }
           }
       </style>
+  
       <div class="footer-container">
-          <span>© 2024 Ryan</span>
-          <a href="assets/pages/politicadeprivacidade.html" target="_blank">Política de Privacidade</a>
-          <a href="assets/pages/termosdeuso.html" target="_blank">Termos de Uso</a>
-          <a href="mailto:ryanzera.dev@gmail.com">Contato</a>
+          <!-- Links -->
+          <div class="footer-links">
+              <a href="assets/pages/politicadeprivacidade.html" target="_blank">Política de Privacidade</a>
+              <a href="assets/pages/termosdeuso.html" target="_blank">Termos de Uso</a>
+              <a href="mailto:ryanzera.dev@gmail.com">Contato</a>
+          </div>
+  
+          <!-- Ícones -->
           <div class="footer-icons">
               <a href="https://www.instagram.com/euoryan/" aria-label="Instagram">
                   <i class="fab fa-instagram"></i>
@@ -332,8 +352,13 @@
                   <i class="fab fa-linkedin"></i>
               </a>
           </div>
+  
+          <!-- Direitos autorais -->
+          <div class="footer-rights">
+              <span>© 2024 Ryan - Todos os direitos reservados.</span>
+          </div>
       </div>
   </footer>
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
