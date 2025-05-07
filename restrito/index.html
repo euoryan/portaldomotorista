@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Restrita</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap">
+  <style>
+    :root {
+      --accent: #216dde;
+      --text: #c9d1d9;
+      --bg: #0d1117;
+      --bg-alt: #111620;
+      --border: #30363d;
+      --link: #58a6ff;
+      --hover-bg: #21262d;
+    }
+
+    * {margin:0; padding:0; box-sizing:border-box;}
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Ubuntu', sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 750px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    header {
+      padding: 30px 0 15px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav {
+      display: flex;
+    }
+
+    .nav a {
+      color: var(--text-color);
+      margin-left: 25px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .nav a:hover {
+      opacity: 1;
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.2rem;
+    }
+
+    /* Estilos da página 404 */
+    .error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      flex-grow: 1;
+    }
+
+    .error-icon {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .error-code {
+      font-size: 5rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: white;
+      text-shadow: 0 0 10px rgba(33, 109, 222, 0.5);
+      animation: glitch 3s infinite linear;
+      position: relative;
+    }
+
+    @keyframes glitch {
+      0% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
+      
+      2% { transform: skewX(10deg); text-shadow: -3px 0 rgba(33, 109, 222, 0.8); }
+      4% { transform: skewX(-10deg); text-shadow: 3px 0 rgba(222, 33, 33, 0.8); }
+      6% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
+      
+      20% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
+      22% { transform: skewX(5deg); text-shadow: -2px 0 rgba(0, 255, 255, 0.8); }
+      24% { transform: skewX(-5deg); text-shadow: 2px 0 rgba(255, 0, 255, 0.8); }
+      26% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
+      
+      40% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
+      41% { transform: skewX(-7deg); text-shadow: 2px 0 rgba(255, 255, 0, 0.8); }
+      43% { transform: skewX(7deg); text-shadow: -2px 0 rgba(0, 255, 0, 0.8); }
+      45% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
+      
+      60% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
+      62% { transform: skewX(15deg); text-shadow: -4px 0 rgba(255, 0, 0, 0.8); }
+      64% { transform: skewX(-15deg); text-shadow: 4px 0 rgba(0, 0, 255, 0.8); }
+      65% { transform: skewX(5deg); text-shadow: -1px 0 rgba(255, 0, 255, 0.8); }
+      67% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
+      
+      80% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
+      81% { transform: skewX(-3deg); text-shadow: 1px 0 rgba(33, 222, 222, 0.8); }
+      83% { transform: skewX(3deg); text-shadow: -1px 0 rgba(222, 33, 222, 0.8); }
+      85% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
+      
+      100% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
+    }
+
+    .error-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .error-message {
+      max-width: 600px;
+      margin: 0 auto 20px;
+      color: #b4b6b9;
+      font-size: 1.05rem;
+    }
+
+    .error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    /* Estilo de botão antigo (mantido para referência) */
+    .error-button {
+      background-color: var(--bg-alt);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Novo estilo de botão com efeito de reflexo */
+    .primary-button {
+      position: relative;
+      overflow: hidden;
+      background: var(--accent);
+      color: white;
+      padding: 0.6rem 1.5rem;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.25s ease-in-out;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .primary-button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 20%;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: rotate(30deg);
+      transition: all 0.6s ease;
+    }
+
+    .primary-button:hover {
+      background: var(--hover-bg);
+      border-color: var(--text);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .primary-button:hover::after {
+      left: 120%;
+    }
+
+    .footer-anchor {
+      margin-top: auto;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+        padding: 8px;
+        color: white;
+      }
+      
+      .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: #161b22;
+        border-radius: 0 0 6px 6px;
+        border: 1px solid #30363d;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        overflow: hidden;
+      }
+      
+      .nav.active {
+        display: block;
+      }
+      
+      .nav a {
+        display: block;
+        margin: 0;
+        padding: 12px 20px;
+        border-bottom: 1px solid #30363d;
+      }
+      
+      .nav a:last-child {
+        border-bottom: none;
+      }
+      
+      .nav a:hover {
+        background-color: #1c2129;
+      }
+
+      .error-icon {
+        font-size: 4rem;
+      }
+
+      .error-code {
+        font-size: 2rem;
+      }
+
+      .error-title {
+        font-size: 1.5rem;
+      }
+
+      .error-message {
+        font-size: 0.95rem;
+      }
+    }
+      .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: calc(50% - 375px + 20px);
+        background-color: var(--accent);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+      }
+
+      .back-to-top:hover {
+        opacity: 0.9;
+      }
+
+      .back-to-top i {
+        font-size: 1rem;
+      }
+
+      @media (max-width: 790px) {
+        .back-to-top {
+          right: 20px;
+        }
+      }
+  </style>
+</head>
+
+<body>
+  <a href="../" class="back-to-top" aria-label="Voltar para página inicial">
+    <i class="fas fa-house-crack"></i>
+  </a>
+
+  <div class="container">
+    <header>
+      <a href="../" class="logo">Página em Manutenção</a>
+      <button class="hamburger" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="nav">
+        <a href="../">Portal</a>
+        <a href="#footer-anchor">Contato</a>
+        <a href="https://t.me/oppmotorista" target="_blank">Suporte</a>
+      </nav>
+    </header>
+
+    <div class="error-container">
+      <div class="error-icon">
+        <i class="fas fa-tools"></i>
+      </div>
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">Página em Manutenção</h2>
+      <p class="error-message">
+        Estamos trabalhando para melhorar nosso sistema. Esta página está temporariamente indisponível enquanto realizamos atualizações importantes.
+      </p>
+      <div class="error-actions">
+        <a href="../" class="primary-button">
+          <i class="fas fa-home"></i> Voltar ao Portal
+        </a>
+      </div>
+    </div>
+
+    <div id="footer-anchor" class="footer-anchor"></div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Menu mobile toggle
+      const hamburger = document.querySelector('.hamburger');
+      const nav = document.querySelector('.nav');
+      
+      hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        nav.classList.toggle('active');
+      });
+      
+      // Fechar menu ao clicar fora
+      document.addEventListener('click', function(e) {
+        if (!nav.contains(e.target) && !hamburger.contains(e.target) && nav.classList.contains('active')) {
+          nav.classList.remove('active');
+        }
+      });
+      
+      // Fechar menu ao clicar em um link
+      const navLinks = nav.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          nav.classList.remove('active');
+        });
+      });
+      
+      // Footer async load
+      fetch('https://raw.githubusercontent.com/euoryan/euoryan.github.io/refs/heads/main/assets/pages/footer.html')
+        .then(response => response.ok ? response.text() : Promise.reject())
+        .then(html => {
+          const temp = document.createElement('div');
+          temp.innerHTML = html.trim();
+          const footer = temp.querySelector('footer');
+          if (footer) document.querySelector('.footer-anchor').appendChild(footer);
+        })
+        .catch(() => {
+          document.querySelector('.footer-anchor').innerHTML = `
+            <footer class="footer">
+              <div class="container">
+                <div class="footer-rights">
+                  <span>© 2024 por Ryan</span>
+                </div>
+              </div>
+            </footer>
+          `;
+        });
+    });
+  </script>
+</body>
+</html>
