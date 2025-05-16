@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Portal do Motorista</title>
+    <meta name="description"
+        content="Portal para motoristas com acesso a diretórios, suporte e dicas. Comunicação fácil, rotas automáticas e suporte 24h.">
+    <meta name="keywords" content="motoristas, transporte, diretórios, rotas, comunicação, suporte">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon/portal.svg">
+
+    <!-- Fontes e estilos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navegação -->
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">Portal do <span>Motorista</span></a>
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="active">Início</a>
+                <a href="#projetos">Páginas</a>
+                <a href="#falarcomop">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Seção Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="watermark"><i class="fas fa-bus"></i></div>
+            <h1 style="line-height: 1.2;">
+                <span>Guia de <span class="name">Jornada <i class="fas fa-bus bus-icon">
+                            <div class=""></div>
+                        </i></span></span>
+            </h1>
+            <p>Diretórios, ferramentas e dicas para motoristas. Acesse o conteúdo e facilite seu trabalho na estrada.
+            </p>
+            <div class="hero-buttons">
+                <a href="#projetos" class="hero-action-btn">Explorar Páginas</a>
+                <a href="#falarcomop" class="hero-action-btn">Fale conosco</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Projetos -->
+    <section id="projetos">
+        <div class="section-content">
+            <h2 class="section-title">Páginas</h2>
+            <div class="projects-grid">
+                <!-- Card 1 -->
+                <div class="project-card" onclick="window.location.href='guianovos';">
+                    <div class="project-image">
+                        <img src="assets/images/projetos/guianovos.png" alt="Guia Novos Motoristas">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Guia Novos Motoristas <i class="fas fa-external-link-alt"></i></h3>
+                        <p class="project-description">Faça o download e entre em contato com nosso suporte e bot.</p>
+                        <div class="project-tags">
+                            <span class="tag">Comunicação</span>
+                            <span class="tag">Integração</span>
+                            <span class="tag">Processos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="project-card" onclick="window.location.href='nossasregras';">
+                    <div class="project-image">
+                        <img src="assets/images/projetos/nossasregras.png" alt="Nossas Regras">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Nossas Regras <i class="fas fa-external-link-alt"></i></h3>
+                        <p class="project-description">Fique por dentro das diretrizes e normas essenciais para manter a conformidade com os nosso padrões.</p>
+                        <div class="project-tags">
+                            <span class="tag">Diretrizes</span>
+                            <span class="tag">Normas Internas</span>
+                            <span class="tag">Conformidade</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="project-card" onclick="window.location.href='diretoriosdelinks';">
+                    <div class="project-image">
+                        <img src="assets/images/projetos/diretoriolinks.png" alt="Diretórios Motoristas">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Diretório de Links <i class="fas fa-external-link-alt"></i></h3>
+                        <p class="project-description">Acesso fácil a diretórios úteis para motoristas.</p>
+                        <div class="project-tags">
+                            <span class="tag">Diretórios</span>
+                            <span class="tag">Motoristas</span>
+                            <span class="tag">Acessibilidade</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="project-card" onclick="window.location.href='guiaintelbras';">
+                    <div class="project-image">
+                        <img src="assets/images/projetos/guiaintelbras.png" alt="Guia Intelbras">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Guia Intelbras <i class="fas fa-external-link-alt"></i></h3>
+                        <p class="project-description">Procedimentos essenciais para melhor atender a Intelbras.</p>
+                        <div class="project-tags">
+                            <span class="tag">Guia</span>
+                            <span class="tag">Instruções</span>
+                            <span class="tag">Procedimentos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="project-card" onclick="window.location.href='wifimotoristas';">
+                    <div class="project-image">
+                        <img src="assets/images/projetos/wifimotoristas/banner/wifimotoristas.png" alt="Wifi Motoristas">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Wifi Motoristas <i class="fas fa-external-link-alt"></i></h3>
+                        <p class="project-description">Acesse rapidamente a rede Wi-Fi exclusiva para motoristas, senha e QR Code disponíveis.</p>
+                        <div class="project-tags">
+                            <span class="tag">Wifi</span>
+                            <span class="tag">Motoristas</span>
+                            <span class="tag">Conectividade</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="project-card" onclick="window.location.href='guiatelegram';">
+                    <div class="project-image">
+                        <img src="assets/images/projetos/guiatelegram.png" alt="Guia Telegram">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Guia Telegram <i class="fas fa-external-link-alt"></i></h3>
+                        <p class="project-description">Descubra como usar o Telegram e explorar seus principais
+                            recursos.</p>
+                        <div class="project-tags">
+                            <span class="tag">Guia</span>
+                            <span class="tag">Telegram</span>
+                            <span class="tag">Dicas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botão de suporte -->
+            <section id="falarcomop">
+                <div class="support-button">
+                    <a href="https://t.me/oppmotorista" target="_blank" class="btn">
+                        <i class="fas fa-headset"></i>Falar com Operacional
+                    </a>
+                </div>
+        </div>
+    </section>
+
+    <!-- Seção Vantagens -->
+    <section id="vantagens">
+        <div class="section-content">
+            <h2 class="section-title">Vantagens</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-comments skill-icon"></i>
+                    <h3>Comunicação Rápida</h3>
+                    <p>Suporte rápido para suas dúvidas.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-route skill-icon"></i>
+                    <h3>Rotas Automáticas</h3>
+                    <p>Receba rotas sem complicação.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-headset skill-icon"></i>
+                    <h3>Suporte 24h</h3>
+                    <p>Ajuda sempre disponível.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="footer-anchor" style="padding: 0; min-height: 0;">
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-info">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão voltar ao topo -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Indicador de rolagem -->
+    <button class="scroll-indicator" aria-label="Rolar para páginas">
+        <i class="fas fa-chevron-down"></i>
+    </button>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // URL do footer no GitHub Raw
+            const footerUrl = 'https://raw.githubusercontent.com/euoryan/euoryan.github.io/refs/heads/main/assets/pages/footer.html';
+
+            // Função para carregar o footer
+            function loadFooter() {
+                fetch(footerUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erro ao carregar o footer');
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                        const footerContainer = document.createElement('div');
+                        footerContainer.innerHTML = html.trim();
+
+                        const newFooter = footerContainer.querySelector('footer');
+
+                        if (newFooter) {
+                            // Não precisamos mais adicionar id="contato" ao footer
+                            // pois agora temos a seção âncora
+
+                            // Substituir o footer existente ou adicionar após a seção âncora
+                            const existingFooter = document.querySelector('footer');
+                            const anchorSection = document.querySelector('.footer-anchor');
+
+                            if (existingFooter) {
+                                existingFooter.parentNode.replaceChild(newFooter, existingFooter);
+                            } else if (anchorSection) {
+                                anchorSection.appendChild(newFooter);
+                            } else {
+                                document.body.appendChild(newFooter);
+                            }
+                        } else {
+                            throw new Error('Nenhum footer encontrado');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao carregar o footer:', error);
+
+                        // Criar footer de fallback
+                        const fallbackFooter = document.createElement('footer');
+                        fallbackFooter.className = 'footer';
+                        // Não adicionar id="contato" aqui também
+                        fallbackFooter.innerHTML = `
+                            <div class="footer-container">
+                                <div class="footer-rights">
+                                    <span>© 2024 por Ryan</span>
+                                </div>
+                            </div>
+                        `;
+
+                        const existingFooter = document.querySelector('footer');
+                        const anchorSection = document.querySelector('.footer-anchor');
+
+                        if (existingFooter) {
+                            existingFooter.parentNode.replaceChild(fallbackFooter, existingFooter);
+                        } else if (anchorSection) {
+                            anchorSection.appendChild(fallbackFooter);
+                        } else {
+                            document.body.appendChild(fallbackFooter);
+                        }
+                    });
+            }
+
+            loadFooter();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia Novos Motoristas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap">
+  <style>
+    :root {
+      --accent: #216dde;
+      --text: #c9d1d9;
+      --bg: #0d1117;
+      --bg-alt: #111620;
+      --border: #30363d;
+      --link: #58a6ff;
+    }
+
+    * {margin:0; padding:0; box-sizing:border-box;}
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Ubuntu', sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 750px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      padding: 30px 0 15px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav {
+      display: flex;
+    }
+
+    .nav a {
+      color: var(--text-color);
+      margin-left: 25px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .nav a:hover {
+      opacity: 1;
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.2rem;
+    }
+
+    .article {
+      margin-bottom: 60px;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+      font-size: 0.85rem;
+      color: var(--text-color);
+      opacity: 0.7;
+    }
+
+    .article-meta span {
+      margin-right: 20px;
+      margin-bottom: 0px;
+      display: flex;
+      align-items: center;
+    }
+
+    .article-meta i {
+      min-width: 14px;
+      margin-right: 5px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+      line-height: 1.3;
+      color: white;
+    }
+
+    .article-content {
+      font-size: 1.05rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 45px 0 18px;
+      color: white;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    h2::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 4px;
+      background-color: var(--accent);
+      border-radius: 4px;
+    }
+
+    p {
+      margin-bottom: 22px;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 20px 0 25px;
+      padding-left: 10px;
+    }
+
+    li {
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 22px;
+    }
+
+    li::before {
+      content: "•";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    .link-inline {
+      color: var(--link);
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .link-inline:hover {
+      color: #79b9ff;
+    }
+
+    .link-inline i {
+      font-size: 0.8em;
+      margin-left: 4px;
+    }
+
+    .article-intro {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      margin-bottom: 35px;
+      color: #b4b6b9;
+    }
+
+    .quote {
+      font-style: italic;
+      text-align: left;
+      margin: 30px 0;
+      color: #b4b6b9;
+      font-size: 0.9rem;
+    }
+
+    .footer-anchor {
+      margin-top: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 12px 20px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background-color 0.2s;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #1a5ab8;
+    }
+
+    .button-secondary {
+      background-color: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .button-secondary:hover {
+      background-color: rgba(33, 109, 222, 0.1);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      background-color: var(--accent);
+      color: white;
+      border-radius: 50%;
+      font-weight: bold;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    .step-container {
+      display: flex;
+      margin-bottom: 30px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step-content {
+      flex-grow: 1;
+    }
+
+    .step-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .note {
+      background-color: rgba(33, 109, 222, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 12px 15px;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+
+    .tip {
+      background-color: rgba(46, 160, 67, 0.1);
+      border-left: 4px solid #2ea043;
+      padding: 12px 15px;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+        padding: 8px;
+        color: white;
+      }
+      
+      .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: #161b22;
+        border-radius: 0 0 6px 6px;
+        border: 1px solid #30363d;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        overflow: hidden;
+      }
+      
+      .nav.active {
+        display: block;
+      }
+      
+      .nav a {
+        display: block;
+        margin: 0;
+        padding: 12px 20px;
+        border-bottom: 1px solid #30363d;
+      }
+      
+      .nav a:last-child {
+        border-bottom: none;
+      }
+      
+      .nav a:hover {
+        background-color: #1c2129;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+        margin: 30px 0 15px;
+      }
+      
+      .article-content {
+        font-size: 0.95rem;
+      }
+      
+      .article-meta {
+        font-size: 0.8rem;
+      }
+      
+      .article-intro {
+        font-size: 0.85rem;
+      }
+      
+      p, li {
+        margin-bottom: 15px;
+      }
+
+      .button-container {
+        flex-direction: column;
+      }
+
+      .step-container {
+        flex-direction: column;
+      }
+
+      .step-number {
+        margin-bottom: 15px;
+      }
+    }
+      .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: calc(50% - 375px + 20px);
+        background-color: var(--accent);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+      }
+
+      .back-to-top:hover {
+        opacity: 0.9;
+      }
+
+      .back-to-top i {
+        font-size: 1rem;
+      }
+
+      @media (max-width: 790px) {
+        .back-to-top {
+          right: 20px;
+        }
+      }
+  </style>
+</head>
+
+<body>
+  <a href="../" class="back-to-top" aria-label="Voltar para página inicial">
+    <i class="fas fa-house-crack"></i>
+  </a>
+
+  <div class="container">
+    <header>
+      <a href="../" class="logo">Guia Novos Motoristas</a>
+      <button class="hamburger" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="nav">
+        <a href="../">Portal</a>
+        <a href="#footer-anchor">Contato</a>
+        <a href="https://t.me/oppmotorista" target="_blank">Suporte</a>
+      </nav>
+    </header>
+
+    <article class="article">
+      <div class="article-meta">
+        <span>
+          <i class="fas fa-calendar-days"></i>
+          <span>03 Maio, 2025</span>
+        </span>
+        <span>
+          <i class="fas fa-headset"></i>
+          <span>Suporte Operacional</span>
+        </span>
+      </div>
+
+      <h1>Guia Completo para Novos Motoristas</h1>
+      
+      <p class="article-intro" style="margin-top: -20px; margin-bottom: 20px;">
+        Manual completo passo a passo para acesso ao sistema de comunicação e recebimento de rotas. Siga este guia para garantir uma integração eficiente.
+      </p>
+
+      <div class="article-content">
+        <h2>Configuração Inicial</h2>
+        <p>
+          Bem-vindo à nossa equipe de motoristas! Para uma comunicação eficiente e recebimento de rotas programadas, é necessário configurar o Telegram seguindo este guia passo a passo.
+        </p>
+
+        <div class="step-container">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <div class="step-title">Instale o Telegram</div>
+            <p>
+              Primeiro, você precisa baixar e instalar o aplicativo Telegram em seu dispositivo móvel. Selecione a opção de acordo com seu sistema operacional:
+            </p>
+            <div class="button-container">
+              <a href="https://play.google.com/store/apps/details?id=org.telegram.messenger" class="button" target="_blank">
+                <i class="fab fa-android"></i>
+                <span>Android</span>
+              </a>
+              <a href="https://apps.apple.com/br/app/telegram-messenger/id686449807" class="button button-secondary" target="_blank">
+                <i class="fab fa-apple"></i>
+                <span>iOS (iPhone)</span>
+              </a>
+            </div>
+            <div class="tip">
+              <strong>Dica:</strong> O Telegram é um aplicativo leve e gratuito. Certifique-se de ter uma conexão estável à internet durante a instalação. Caso já tenha o aplicativo instalado, verifique se está atualizado na versão mais recente.
+            </div>
+          </div>
+        </div>
+
+        <div class="step-container">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <div class="step-title">Inicie o Bot de Rotas</div>
+            <p>
+              O próximo passo é iniciar o Bot de Rotas, que será responsável por enviar automaticamente suas rotas programadas direto para seu Telegram:
+            </p>
+            <ol>
+              <li>Clique no botão abaixo para acessar o Bot de Rotas</li>
+              <li>Quando o Telegram abrir, pressione o botão "Iniciar" ou "Start"</li>
+              <li>O bot responderá com uma mensagem de boas-vindas e seu ID de usuário</li>
+            </ol>
+            <div class="button-container">
+              <a href="https://t.me/canalrotasbot" class="button" target="_blank">
+                <i class="fas fa-robot"></i>
+                <span>Iniciar Bot de Rotas</span>
+              </a>
+            </div>
+            <div class="note">
+              <strong>Importante:</strong> Este bot serve apenas para o envio automatizado de suas rotas planejadas. Não é um canal direto de comunicação com nossa equipe. Todas as mensagens do bot terão um botão de suporte que o direcionará para o atendimento operacional.
+            </div>
+          </div>
+        </div>
+
+        <div class="step-container">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <div class="step-title">Contate o Suporte Operacional</div>
+            <p>
+              Para finalizar seu cadastro, entre em contato com o Suporte Operacional e informe seu nome de guerra:
+            </p>
+            <ol>
+              <li>Clique no botão abaixo para iniciar a conversa com o suporte</li>
+              <li>Envie uma mensagem com seu nome de guerra (aquele definido durante sua contratação)</li>
+              <li>Aguarde a confirmação do setor operacional</li>
+            </ol>
+            <div class="button-container">
+              <a href="https://t.me/oppmotorista" class="button" target="_blank">
+                <i class="fas fa-headset"></i>
+                <span>Contatar Suporte Operacional</span>
+              </a>
+            </div>
+            <div class="tip">
+              <strong>Importante:</strong> O suporte operacional é seu canal principal de comunicação. Utilize-o para todas as dúvidas relacionadas às rotas, informações detalhadas, resolução de problemas ou outras necessidades. Mantenha sempre uma comunicação profissional e respeitosa.
+            </div>
+          </div>
+        </div>
+
+        <h2>Comunicação Diária</h2>
+        <p>
+          Após a configuração inicial, siga estas diretrizes para uma comunicação eficiente:
+        </p>
+        <ul>
+          <li>Verifique o Telegram regularmente para receber suas rotas programadas</li>
+          <li>Confirme o recebimento das rotas quando solicitado</li>
+          <li>Reporte imediatamente ao suporte operacional qualquer problema ou dúvida</li>
+          <li>Mantenha seus dados de contato sempre atualizados</li>
+        </ul>
+
+        <p>
+          Para esclarecimentos adicionais ou suporte técnico, entre em contato com o departamento operacional através do canal oficial: <a href="https://t.me/oppmotorista" target="_blank" class="link-inline">Suporte Operacional <i class="fa-solid fa-up-right-from-square"></i></a>
+        </p>
+      </div>
+    </article>
+
+    <div id="footer-anchor" class="footer-anchor"></div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Menu mobile toggle
+      const hamburger = document.querySelector('.hamburger');
+      const nav = document.querySelector('.nav');
+      
+      hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        nav.classList.toggle('active');
+      });
+      
+      // Fechar menu ao clicar fora
+      document.addEventListener('click', function(e) {
+        if (!nav.contains(e.target) && !hamburger.contains(e.target) && nav.classList.contains('active')) {
+          nav.classList.remove('active');
+        }
+      });
+      
+      // Fechar menu ao clicar em um link
+      const navLinks = nav.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          nav.classList.remove('active');
+        });
+      });
+      
+      // Footer async load
+      fetch('https://raw.githubusercontent.com/euoryan/euoryan.github.io/refs/heads/main/assets/pages/footer.html')
+        .then(response => response.ok ? response.text() : Promise.reject())
+        .then(html => {
+          const temp = document.createElement('div');
+          temp.innerHTML = html.trim();
+          const footer = temp.querySelector('footer');
+          if (footer) document.querySelector('.footer-anchor').appendChild(footer);
+        })
+        .catch(() => {
+          document.querySelector('.footer-anchor').innerHTML = `
+            <footer class="footer">
+              <div class="container">
+                <div class="footer-rights">
+                  <span>© 2025 Portal do Motorista</span>
+                </div>
+              </div>
+            </footer>
+          `;
+        });
+    });
+  </script>
+</body>
+</html>

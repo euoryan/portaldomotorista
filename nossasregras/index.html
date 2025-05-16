@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nossas Regras</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap">
+  <style>
+    :root {
+      --accent: #216dde;
+      --text: #c9d1d9;
+      --bg: #0d1117;
+      --bg-alt: #111620;
+      --border: #30363d;
+      --link: #58a6ff;
+    }
+
+    * {margin:0; padding:0; box-sizing:border-box;}
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Ubuntu', sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 750px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      padding: 30px 0 15px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav {
+      display: flex;
+    }
+
+    .nav a {
+      color: var(--text-color);
+      margin-left: 25px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .nav a:hover {
+      opacity: 1;
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.2rem;
+    }
+
+    .article {
+      margin-bottom: 60px;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+      font-size: 0.85rem;
+      color: var(--text-color);
+      opacity: 0.7;
+    }
+
+    .article-meta span {
+      margin-right: 20px;
+      margin-bottom: 0px;
+      display: flex;
+      align-items: center;
+    }
+
+    .article-meta i {
+      min-width: 14px;
+      margin-right: 5px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+      line-height: 1.3;
+      color: white;
+    }
+
+    .article-content {
+      font-size: 1.05rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 45px 0 18px;
+      color: white;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    h2::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 4px;
+      background-color: var(--accent);
+      border-radius: 4px;
+    }
+
+    p {
+      margin-bottom: 22px;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 20px 0 25px;
+      padding-left: 10px;
+    }
+
+    li {
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 22px;
+    }
+
+    li::before {
+      content: "•";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    .link-inline {
+      color: var(--link);
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .link-inline:hover {
+      color: #79b9ff;
+    }
+
+    .link-inline i {
+      font-size: 0.8em;
+      margin-left: 4px;
+    }
+
+    .article-intro {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      margin-bottom: 35px;
+      color: #b4b6b9;
+    }
+
+    .quote {
+      font-style: italic;
+      text-align: left;
+      margin: 30px 0;
+      color: #b4b6b9;
+      font-size: 0.9rem;
+    }
+
+    .footer-anchor {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+        padding: 8px;
+        color: white;
+      }
+      
+      .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: #161b22;
+        border-radius: 0 0 6px 6px;
+        border: 1px solid #30363d;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        overflow: hidden;
+      }
+      
+      .nav.active {
+        display: block;
+      }
+      
+      .nav a {
+        display: block;
+        margin: 0;
+        padding: 12px 20px;
+        border-bottom: 1px solid #30363d;
+      }
+      
+      .nav a:last-child {
+        border-bottom: none;
+      }
+      
+      .nav a:hover {
+        background-color: #1c2129;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+        margin: 30px 0 15px;
+      }
+      
+      .article-content {
+        font-size: 0.95rem;
+      }
+      
+      .article-meta {
+        font-size: 0.8rem;
+      }
+      
+      .article-intro {
+        font-size: 0.85rem;
+      }
+      
+      p, li {
+        margin-bottom: 15px;
+      }
+    }
+      .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: calc(50% - 375px + 20px);
+        background-color: var(--accent);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+      }
+
+      .back-to-top:hover {
+        opacity: 0.9;
+      }
+
+      .back-to-top i {
+        font-size: 1rem;
+      }
+
+      @media (max-width: 790px) {
+        .back-to-top {
+          right: 20px;
+        }
+      }
+  </style>
+</head>
+
+<body>
+  <a href="../" class="back-to-top" aria-label="Voltar para página inicial">
+    <i class="fas fa-house-crack"></i>
+  </a>
+
+  <div class="container">
+    <header>
+      <a href="../" class="logo">Nossas Regras</a>
+      <button class="hamburger" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="nav">
+        <!-- Link direto para o index.html que está duas pastas acima -->
+        <a href="../">Portal</a>
+        <a href="#footer-anchor">Contato</a>
+        <a href="https://t.me/oppmotorista" target="_blank">Ligar Suporte</a>
+      </nav>
+    </header>
+
+    <article class="article">
+        <div class="article-meta">
+          <span>
+            <i class="fas fa-calendar-days"></i>
+            <span>05 Maio, 2025</span>
+          </span>
+          <span>
+            <i class="fas fa-headset"></i>
+            <span>Suporte Operacional</span>
+          </span>
+        </div>
+
+      <h1>Nossas Regras: Manual do Motorista</h1>
+      
+      <p class="article-intro" style="margin-top: -20px; margin-bottom: 20px;">
+        Conjunto de normas e procedimentos essenciais para garantir excelência no serviço de transporte de passageiros.
+      </p>
+
+      <div class="article-content">
+        <p class="quote">
+          "Ser a melhor empresa de transporte de passageiros do estado de Santa Catarina para nossos clientes, colaboradores e sócios." - José Marciel Neis
+        </p>
+
+        <h2>Checklist do Veículo</h2>
+        <p>
+          Procedimentos essenciais antes de iniciar qualquer serviço:
+        </p>
+        <ul>
+          <li>Conferir nível de água do motor</li>
+          <li>Verificar nível de óleo do motor</li>
+          <li>Conferir e calibrar os pneus do veículo</li>
+          <li>Verificar nível de óleo diesel</li>
+          <li>Conferir nível de arla</li>
+          <li>Testar todas as luzes do veículo (freio, seta, faróis)</li>
+          <li>Registrar visualmente (foto/vídeo) avarias já existentes no veículo e enviar para o Operacional</li>
+          <li>Verificar se o carro está com o ar carregado antes de sair</li>
+        </ul>
+
+        <h2>Procedimentos na Garagem</h2>
+        <p>
+          Diretrizes essenciais para manutenção e organização dos veículos:
+        </p>
+        <ul>
+          <li>Sempre entre e transite na garagem em 1ª marcha com pisca alerta ligado</li>
+          <li>Verifique nas garagens onde os veículos podem ser estacionados</li>
+          <li>Abasteça o veículo toda vez que entrar na garagem (sempre saia e se afaste durante o abastecimento)</li>
+          <li>Antes de desligar o veículo, desligue todos os componentes elétricos (itinerário, farol, ar-condicionado, pisca alerta)</li>
+          <li>Ao encerrar a rota, afivele os cintos de segurança, arrume os bancos e ajuste as cortinas</li>
+        </ul>
+
+        <h2>Conduta com Passageiros</h2>
+        <p>
+          Orientações para garantir atendimento profissional e respeitoso:
+        </p>
+        <ul>
+          <li>Evite conversas em privado com passageiros (exceto quando solicitado pelo Operacional)</li>
+          <li>Mantenha atendimento estritamente profissional</li>
+          <li>Trate todos os passageiros com respeito e cuidado</li>
+          <li>Evite brincadeiras e discussões durante o serviço</li>
+          <li>Verifique se o passageiro não está chegando ao ponto antes de partir</li>
+          <li>Aguarde os passageiros se sentarem antes de iniciar o deslocamento</li>
+          <li>Tenha atenção ao abrir e fechar as portas do veículo</li>
+        </ul>
+
+        <h2>Procedimentos Durante Viagem</h2>
+        <p>
+          Protocolos para garantir conforto e segurança dos passageiros:
+        </p>
+        <ul>
+          <li>Mantenha o ar-condicionado ligado na temperatura padrão de 23°C</li>
+          <li>Acenda a luz de guia no corredor durante rotas noturnas</li>
+          <li>Cumpra rigorosamente os horários de passagem nos pontos de embarque</li>
+          <li>Nunca passe antes do horário para evitar perdas de embarque</li>
+          <li>Comunique imediatamente qualquer atraso e seu motivo</li>
+          <li>Respeite os limites de velocidade e pratique condução segura e econômica</li>
+          <li>Não altere a rota programada (sugestões devem ser informadas ao Operacional)</li>
+          <li>Realize a rota completa se não houver confirmação de quem "vai" ou "não vai"</li>
+        </ul>
+
+        <h2>Comunicação nos Grupos</h2>
+        <p>
+          Diretrizes para comunicação eficiente nos grupos de trabalho:
+        </p>
+        <ul>
+          <li>Informe sempre ao iniciar a rota (em todas as empresas que possuírem grupos)</li>
+          <li>Comunique imediatamente qualquer atraso aos passageiros e à equipe</li>
+          <li>Compartilhe a localização sempre que possível</li>
+          <li>Em caso de conflito, evite responder no grupo e contate o Operacional</li>
+          <li>Mantenha postura e comunicação profissional com colegas e passageiros</li>
+        </ul>
+
+        <h2>Procedimentos Operacionais</h2>
+        <p>
+          Diretrizes essenciais para a operação diária:
+        </p>
+        <ul>
+          <li>Confirme a escala/carro com o Operacional antes de iniciar a rota</li>
+          <li>Inicie a rota no horário indicado seguindo a planilha/roteiro</li>
+          <li>Comunique qualquer dúvida ou problema na rota ao Operacional</li>
+          <li>Utilize corretamente o itinerário eletrônico</li>
+          <li>Acompanhe os horários pelo aplicativo/link mesmo quando não estiver dirigindo</li>
+          <li>Na dúvida sobre qualquer procedimento, acione a supervisão</li>
+        </ul>
+
+        <h2>Procedimentos de Emergência</h2>
+        <p>
+          Orientações em casos de emergência:
+        </p>
+        <ul>
+          <li><strong>Socorro:</strong> Siga as orientações de segurança e acione o suporte imediatamente</li>
+          <li><strong>Acidentes:</strong> Relate imediatamente qualquer acidente/batida à supervisão</li>
+          <li>Em situações emergenciais, entre em contato urgente com a operação</li>
+          <li>Caso não consiga retorno imediato do Operacional, acione quem for necessário</li>
+          <li>Registre todas as informações relevantes para documentação do ocorrido</li>
+        </ul>
+
+        <h2>Folgas e Dispensas</h2>
+        <p>
+          Procedimentos para solicitação de folgas e dispensas:
+        </p>
+        <ul>
+          <li>Solicite com antecedência mínima necessária</li>
+          <li>Aguarde a confirmação oficial antes de se ausentar</li>
+          <li>Em caso de emergência, comunique o mais rápido possível ao Operacional</li>
+          <li>Alinhe folgas e horários de trabalho antecipadamente</li>
+        </ul>
+
+        <h2>Dicas dos Motoristas Padrinhos</h2>
+        <p>
+          Orientações complementares dos motoristas mais experientes:
+        </p>
+        <ul>
+          <li>Sempre faça uma verificação completa do veículo antes de utilizá-lo</li>
+          <li>Pergunte ao motorista padrinho todas as dúvidas sobre o deslocamento</li>
+          <li>No primeiro dia, já receba e acompanhe os links de rota mesmo que não vá dirigir</li>
+          <li>Acompanhe pelo espelho retrovisor o movimento interno do veículo durante o trajeto</li>
+          <li>Aprenda a leitura dos horários de cada passageiro para evitar perdas durante o trajeto</li>
+        </ul>
+
+        <h2>Contato da Equipe Operacional</h2>
+        <p>
+          Para esclarecimentos adicionais ou suporte operacional, entre em contato com o departamento operacional:
+        </p>
+        <ul>
+          <li>Telefone: +55 48 99117-9435</li>
+          <li>Telegram: <a href="https://t.me/oppmotorista" target="_blank" class="link-inline">@oppmotorista <i class="fa-solid fa-up-right-from-square"></i></a></li>
+        </ul>
+
+        <p>
+          Lembre-se: condução segura e econômica são a marca de excelência de todo motorista. Agradecemos a sua colaboração e desejamos-lhe uma condução segura e agradável!
+        </p>
+      </div>
+    </article>
+
+    <div id="footer-anchor" class="footer-anchor"></div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Menu mobile toggle
+      const hamburger = document.querySelector('.hamburger');
+      const nav = document.querySelector('.nav');
+      
+      hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        nav.classList.toggle('active');
+      });
+      
+      // Fechar menu ao clicar fora
+      document.addEventListener('click', function(e) {
+        if (!nav.contains(e.target) && !hamburger.contains(e.target) && nav.classList.contains('active')) {
+          nav.classList.remove('active');
+        }
+      });
+      
+      // Fechar menu ao clicar em um link
+      const navLinks = nav.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          nav.classList.remove('active');
+        });
+      });
+      
+      // Footer async load
+      fetch('https://raw.githubusercontent.com/euoryan/euoryan.github.io/refs/heads/main/assets/pages/footer.html')
+        .then(response => response.ok ? response.text() : Promise.reject())
+        .then(html => {
+          const temp = document.createElement('div');
+          temp.innerHTML = html.trim();
+          const footer = temp.querySelector('footer');
+          if (footer) document.querySelector('.footer-anchor').appendChild(footer);
+        })
+        .catch(() => {
+          document.querySelector('.footer-anchor').innerHTML = `
+            <footer class="footer">
+              <div class="container">
+                <div class="footer-rights">
+                  <span>© 2024 por Ryan</span>
+                </div>
+              </div>
+            </footer>
+          `;
+        });
+    });
+  </script>
+</body>
+</html>
