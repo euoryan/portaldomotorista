@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>euoryan // wifi motoristas</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%231E90FF'/%3E%3C/svg%3E">  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%231E90FF'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap">
   <style>
     :root {
@@ -16,9 +17,7 @@
       --link: #58a6ff;
       --success: #2ea043;
     }
-
     * {margin:0; padding:0; box-sizing:border-box;}
-
     body {
       background-color: var(--bg);
       color: var(--text);
@@ -26,13 +25,11 @@
       line-height: 1.7;
       font-size: 16px;
     }
-
     .container {
       max-width: 750px;
       margin: 0 auto;
       padding: 0 20px;
     }
-
     header {
       padding: 30px 0 15px;
       margin-bottom: 30px;
@@ -42,18 +39,15 @@
       justify-content: space-between;
       position: relative;
     }
-
     .logo {
       font-size: 1.2rem;
       font-weight: 600;
       color: white;
       text-decoration: none;
     }
-
     .nav {
       display: flex;
     }
-
     .nav a {
       color: var(--text);
       margin-left: 25px;
@@ -62,11 +56,9 @@
       opacity: 0.8;
       transition: opacity 0.2s;
     }
-
     .nav a:hover {
       opacity: 1;
     }
-
     .hamburger {
       display: none;
       cursor: pointer;
@@ -75,11 +67,9 @@
       color: var(--text);
       font-size: 1.2rem;
     }
-
     .article {
       margin-bottom: 60px;
     }
-
     .article-meta {
       display: flex;
       flex-wrap: wrap;
@@ -88,19 +78,16 @@
       color: var(--text);
       opacity: 0.7;
     }
-
     .article-meta span {
       margin-right: 20px;
       margin-bottom: 0px;
       display: flex;
       align-items: center;
     }
-
     .article-meta i {
       min-width: 14px;
       margin-right: 5px;
     }
-
     h1 {
       font-size: 2.4rem;
       font-weight: 700;
@@ -108,18 +95,15 @@
       line-height: 1.3;
       color: white;
     }
-
     .article-content {
       font-size: 1.05rem;
     }
-
     .article-intro {
       font-size: 0.9rem;
       line-height: 1.8;
-      margin-bottom: 35px;
+      margin: -20px 0 20px;
       color: #b4b6b9;
     }
-
     h2 {
       font-size: 1.5rem;
       font-weight: 600;
@@ -128,7 +112,6 @@
       position: relative;
       padding-left: 15px;
     }
-
     h2::before {
       content: "";
       position: absolute;
@@ -139,27 +122,22 @@
       background-color: var(--accent);
       border-radius: 4px;
     }
-
     p {
       margin-bottom: 22px;
     }
-    
     .link-inline {
       color: var(--link);
       font-weight: bold;
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .link-inline:hover {
       color: #79b9ff;
     }
-
     .link-inline i {
       font-size: 0.8em;
       margin-left: 4px;
     }
-
     .wifi-card {
       background-color: var(--bg-alt);
       border: 1px solid var(--border);
@@ -167,17 +145,14 @@
       padding: 20px;
       margin: 30px 0;
     }
-
     .wifi-info {
       margin-bottom: 15px;
     }
-
     .wifi-label {
       font-size: 0.9rem;
       color: #8b949e;
       margin-bottom: 5px;
     }
-
     .wifi-value {
       font-size: 1.1rem;
       color: white;
@@ -189,7 +164,6 @@
       justify-content: space-between;
       align-items: center;
     }
-
     .copy-btn {
       background-color: var(--accent);
       color: white;
@@ -204,25 +178,20 @@
       min-width: 80px;
       justify-content: center;
     }
-
     .copy-btn i {
       margin-right: 5px;
     }
-
     .copy-btn:hover {
       background-color: #1a5ab8;
     }
-    
     .copy-btn.copied {
       background-color: var(--success);
     }
-
     .qrcode-container {
       display: flex;
       justify-content: center;
       margin: 30px 0;
     }
-
     .qrcode-frame {
       background-color: white;
       padding: 15px;
@@ -231,7 +200,6 @@
       position: relative;
       overflow: hidden;
     }
-    
     .qrcode-frame::before {
       content: "";
       position: absolute;
@@ -241,13 +209,12 @@
       height: 6px;
       background: linear-gradient(90deg, var(--accent), #4a89dc);
     }
-
     .qrcode-img {
-      max-width: 150px;
-      border-radius: 0px;
+      width: 150px;
+      height: 150px;
       display: block;
+      border-radius: 4px;
     }
-    
     .qrcode-label {
       text-align: center;
       color: #333;
@@ -255,18 +222,65 @@
       margin-top: 10px;
       font-weight: 500;
     }
-
     .footer-anchor {
       margin-top: 20px;
     }
-
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: calc(50% - 375px + 20px);
+      background-color: var(--accent);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+    }
+    .back-to-top:hover {
+      opacity: 0.9;
+    }
+    .back-to-top i {
+      font-size: 1rem;
+    }
+    .loading {
+      color: #8b949e;
+      text-align: center;
+      padding: 20px;
+      font-style: italic;
+    }
+    .error-fallback {
+      background-color: var(--bg-alt);
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      color: #8b949e;
+      font-size: 0.9rem;
+    }
+    .manual-info {
+      background-color: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+    .manual-info h3 {
+      color: white;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
     @media (max-width: 768px) {
       .hamburger {
         display: block;
         padding: 8px;
         color: white;
       }
-      
       .nav {
         display: none;
         position: absolute;
@@ -281,86 +295,50 @@
         z-index: 100;
         overflow: hidden;
       }
-      
       .nav.active {
         display: block;
       }
-      
       .nav a {
         display: block;
         margin: 0;
         padding: 12px 20px;
         border-bottom: 1px solid #30363d;
       }
-      
       .nav a:last-child {
         border-bottom: none;
       }
-      
       .nav a:hover {
         background-color: #1c2129;
       }
-      
       h1 {
         font-size: 1.8rem;
         margin-bottom: 20px;
       }
-      
       h2 {
         font-size: 1.3rem;
         margin: 30px 0 15px;
       }
-      
       .article-content {
         font-size: 0.95rem;
       }
-      
       .article-meta {
         font-size: 0.8rem;
       }
-      
       .wifi-value {
         font-size: 1rem;
       }
     }
+    @media (max-width: 790px) {
       .back-to-top {
-        position: fixed;
-        bottom: 20px;
-        right: calc(50% - 375px + 20px);
-        background-color: var(--accent);
-        color: white;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        z-index: 999;
+        right: 20px;
       }
-
-      .back-to-top:hover {
-        opacity: 0.9;
-      }
-
-      .back-to-top i {
-        font-size: 1rem;
-      }
-
-      @media (max-width: 790px) {
-        .back-to-top {
-          right: 20px;
-        }
-      }
+    }
   </style>
 </head>
-
 <body>
   <a href="../" class="back-to-top" aria-label="Voltar para página inicial">
     <i class="fas fa-house-crack"></i>
   </a>
-
   <div class="container">
     <header>
       <a href="../" class="logo">Wifi Motoristas</a>
@@ -373,7 +351,6 @@
         <a href="https://t.me/oppmotorista" target="_blank">Ligar Suporte</a>
       </nav>
     </header>
-
     <article class="article">
       <div class="article-meta">
         <span>
@@ -385,20 +362,16 @@
           <span>Suporte Operacional</span>
         </span>
       </div>
-
       <h1>Redes Wi-Fi para Motoristas</h1>
-      
-      <p class="article-intro" style="margin-top: -20px; margin-bottom: 20px;">
+      <p class="article-intro">
         Acesse as redes Wi-Fi disponíveis para motoristas. Escaneie o QR code ou utilize as credenciais abaixo.
       </p>
-
       <div class="article-content">
         <div class="wifi-card">
           <div class="wifi-info">
             <div class="wifi-label">Nome da Rede:</div>
             <div class="wifi-value">BLOCO B MOTORISTAS</div>
           </div>
-          
           <div class="wifi-info">
             <div class="wifi-label">Senha:</div>
             <div class="wifi-value">
@@ -409,10 +382,11 @@
             </div>
           </div>
         </div>
-
+        
         <div class="qrcode-container">
           <div class="qrcode-frame">
-            <img src="../assets/images/projetos/wifimotoristas/qrcode-wifi/qrcodemotoristawifi.png" alt="QR Code Wi-Fi" class="qrcode-img">
+            <img id="qrcode" class="qrcode-img" alt="QR Code Wi-Fi" style="display:none;">
+            <div id="qrcode-loading" class="loading">Carregando QR Code...</div>
             <div class="qrcode-label">BLOCO B MOTORISTAS</div>
           </div>
         </div>
@@ -420,7 +394,6 @@
         <p>
           Escaneie o QR code acima com a câmera do seu smartphone para conectar automaticamente à rede Wi-Fi dos motoristas.
         </p>
-
         <h2>Informações Adicionais</h2>
         <p>
           Conecte-se à rede Wi-Fi disponível em todas as áreas de descanso e refeitórios designados para motoristas na unidade da empresa.
@@ -430,13 +403,10 @@
         </p>
       </div>
     </article>
-
     <div id="footer-anchor" class="footer-anchor"></div>
   </div>
-  
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Menu mobile toggle
       const hamburger = document.querySelector('.hamburger');
       const nav = document.querySelector('.nav');
       
@@ -445,14 +415,12 @@
         nav.classList.toggle('active');
       });
       
-      // Fechar menu ao clicar fora
       document.addEventListener('click', function(e) {
         if (!nav.contains(e.target) && !hamburger.contains(e.target) && nav.classList.contains('active')) {
           nav.classList.remove('active');
         }
       });
       
-      // Fechar menu ao clicar em um link
       const navLinks = nav.querySelectorAll('a');
       navLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -460,7 +428,8 @@
         });
       });
       
-      // Footer async load
+      generateQRCode();
+      
       fetch('https://raw.githubusercontent.com/euoryan/euoryan.github.io/refs/heads/main/assets/pages/footer.html')
         .then(response => response.ok ? response.text() : Promise.reject())
         .then(html => {
@@ -482,27 +451,95 @@
         });
     });
 
-    // Função para copiar a senha
+    function generateQRCode() {
+      const qrImg = document.getElementById('qrcode');
+      const loading = document.getElementById('qrcode-loading');
+      const ssid = 'BLOCO B MOTORISTAS';
+      const password = 'onibus1001@';
+      const wifiString = `WIFI:T:WPA;S:${ssid};P:${password};;`;
+      
+      const qrApis = [
+        `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(wifiString)}`,
+        `https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=${encodeURIComponent(wifiString)}`,
+        `https://qr-generator.qrcode.studio/qr/custom?download=true&file=png&data=${encodeURIComponent(wifiString)}&size=150`
+      ];
+      
+      function tryNextApi(index) {
+        if (index >= qrApis.length) {
+          loading.innerHTML = `
+            <div class="error-fallback">
+              <i class="fas fa-wifi" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+              QR Code temporariamente indisponível<br>
+              <small>Use as credenciais manuais acima</small>
+            </div>
+          `;
+          return;
+        }
+        
+        const img = new Image();
+        img.onload = function() {
+          qrImg.src = this.src;
+          qrImg.style.display = 'block';
+          loading.style.display = 'none';
+        };
+        img.onerror = function() {
+          tryNextApi(index + 1);
+        };
+        img.src = qrApis[index];
+      }
+      
+      tryNextApi(0);
+    }
+
     function copyPassword() {
       const password = document.getElementById('wifi-password').textContent;
       const copyBtn = document.getElementById('copy-btn');
       const originalText = copyBtn.innerHTML;
       
-      navigator.clipboard.writeText(password)
-        .then(() => {
-          // Muda o texto e estilo do botão
-          copyBtn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
-          copyBtn.classList.add('copied');
-          
-          // Retorna ao estado original após 2 segundos
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(password)
+          .then(() => {
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+            copyBtn.classList.add('copied');
+            setTimeout(() => {
+              copyBtn.innerHTML = originalText;
+              copyBtn.classList.remove('copied');
+            }, 2000);
+          })
+          .catch(() => {
+            fallbackCopyTextToClipboard(password, copyBtn, originalText);
+          });
+      } else {
+        fallbackCopyTextToClipboard(password, copyBtn, originalText);
+      }
+    }
+
+    function fallbackCopyTextToClipboard(text, btn, originalText) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.top = "0";
+      textArea.style.left = "0";
+      textArea.style.position = "fixed";
+      textArea.style.opacity = "0";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+          btn.classList.add('copied');
           setTimeout(() => {
-            copyBtn.innerHTML = originalText;
-            copyBtn.classList.remove('copied');
+            btn.innerHTML = originalText;
+            btn.classList.remove('copied');
           }, 2000);
-        })
-        .catch(err => {
-          console.error('Erro ao copiar texto: ', err);
-        });
+        }
+      } catch (err) {
+        console.error('Erro ao copiar texto:', err);
+      }
+      
+      document.body.removeChild(textArea);
     }
   </script>
 </body>
