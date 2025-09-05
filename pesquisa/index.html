@@ -192,75 +192,19 @@
       color: white;
     }
 
-         .form-container {
-       background-color: var(--bg-alt);
-       border: 1px solid var(--border);
-       border-radius: 12px;
-       padding: 30px;
-       margin: 40px 0;
-       text-align: center;
-       position: relative;
-       overflow: hidden;
-     }
-
-     .form-container::before {
-       content: '';
-       position: absolute;
-       top: 0;
-       left: 0;
-       right: 0;
-       height: 4px;
-       background: linear-gradient(90deg, var(--accent), #58a6ff);
-     }
-
-     .form-iframe {
-       width: 100%;
-       height: 800px;
-       border: none;
-       border-radius: 8px;
-       background-color: white;
-       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-       transition: box-shadow 0.3s ease;
-     }
-
-     .form-iframe:hover {
-       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-     }
-
-         .info-box {
-       background: linear-gradient(135deg, rgba(33, 109, 222, 0.08), rgba(88, 166, 255, 0.05));
+     .info-box {
+       background-color: rgba(33, 109, 222, 0.1);
        border: 1px solid rgba(33, 109, 222, 0.2);
-       border-radius: 12px;
-       padding: 25px;
-       margin: 25px 0;
+       border-radius: 8px;
+       padding: 20px;
+       margin: 20px 0;
        text-align: center;
-       position: relative;
-       transition: all 0.3s ease;
-     }
-
-     .info-box:hover {
-       transform: translateY(-2px);
-       box-shadow: 0 8px 24px rgba(33, 109, 222, 0.15);
-       border-color: rgba(33, 109, 222, 0.3);
      }
 
      .info-box i {
-       font-size: 2.5rem;
+       font-size: 2rem;
        color: var(--accent);
-       margin-bottom: 15px;
-       display: block;
-     }
-
-     .info-box h3 {
        margin-bottom: 10px;
-       color: white;
-       font-size: 1.1rem;
-     }
-
-     .info-box p {
-       margin-bottom: 0;
-       color: var(--text);
-       line-height: 1.6;
      }
 
     .back-to-top {
@@ -361,16 +305,7 @@
         flex-direction: column;
       }
 
-             .form-container {
-         padding: 20px;
-         margin: 30px 0;
-       }
-
-       .form-iframe {
-         height: 600px;
-       }
-
-       .info-box {
+             .info-box {
          padding: 20px;
          margin: 20px 0;
        }
@@ -434,6 +369,22 @@
       </p>
 
              <div class="article-content">
+         <h2>Participar da Pesquisa</h2>
+         <p>
+           Clique no botão abaixo para acessar o formulário de pesquisa de satisfação interna.
+         </p>
+
+         <div class="button-container" style="margin: 30px 0 50px 0;">
+           <a href="https://forms.gle/wTqVcGZ5h7tWUWtL9" class="button" target="_blank" rel="noopener noreferrer" style="font-size: 1.1rem; padding: 15px 30px;">
+             <i class="fas fa-external-link-alt"></i>
+             <span>Acessar Formulário de Pesquisa</span>
+           </a>
+           <a href="../" class="button secondary">
+             <i class="fas fa-arrow-left"></i>
+             <span>Voltar ao Portal</span>
+           </a>
+         </div>
+
          <h2>Instruções Importantes</h2>
          <p>
            Esta pesquisa tem como objetivo avaliar a satisfação interna dos colaboradores em relação à equipe. 
@@ -442,8 +393,8 @@
 
          <div class="info-box">
            <i class="fas fa-shield-alt"></i>
-           <h3>Confidencialidade Total</h3>
-           <p>Todas as informações são sigilosas e terão acesso único e exclusivo do conselho de administração da empresa.</p>
+           <h3>Confidencialidade Garantida</h3>
+           <p>Todas as informações deste formulário são sigilosas e terão acesso único e exclusivo do conselho de administração da empresa.</p>
          </div>
 
          <div class="info-box">
@@ -456,37 +407,6 @@
            <i class="fas fa-clock"></i>
            <h3>Tempo Estimado</h3>
            <p>A pesquisa leva aproximadamente 5-10 minutos para ser concluída.</p>
-         </div>
-
-         <h2>Formulário de Pesquisa</h2>
-         <p>
-           Preencha o formulário abaixo diretamente nesta página. É rápido, fácil e você não precisa sair do portal.
-         </p>
-
-         <div class="form-container">
-           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSceVsdLKjydcMoG2Ct_gc1YUhxaM8izQlpC2sWGoxXMGgRDFQ/viewform?embedded=true" 
-                   class="form-iframe" 
-                   frameborder="0" 
-                   marginheight="0" 
-                   marginwidth="0">
-             Carregando formulário…
-           </iframe>
-         </div>
-
-         <h2>Alternativa de Acesso</h2>
-         <p>
-           Se preferir, você pode acessar o formulário em uma nova aba clicando no botão abaixo.
-         </p>
-
-         <div class="button-container">
-           <a href="https://forms.gle/wTqVcGZ5h7tWUWtL9" class="button" target="_blank" rel="noopener noreferrer">
-             <i class="fas fa-external-link-alt"></i>
-             <span>Abrir em Nova Aba</span>
-           </a>
-           <a href="../" class="button secondary">
-             <i class="fas fa-arrow-left"></i>
-             <span>Voltar ao Portal</span>
-           </a>
          </div>
 
          <div class="info-box">

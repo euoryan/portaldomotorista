@@ -81,13 +81,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (scrollIndicator) {
         scrollIndicator.addEventListener('click', function(e) {
             e.preventDefault();
-            const projectsSection = document.querySelector('#projetos');
-            if (projectsSection) {
-                projectsSection.scrollIntoView({ behavior: 'smooth' });
+            const destaqueSection = document.querySelector('#destaque');
+            if (destaqueSection) {
+                destaqueSection.scrollIntoView({ behavior: 'smooth' });
                 
-                // Ativar link "Páginas" ao clicar no indicador de rolagem
+                // Ativar link "Destaque" ao clicar no indicador de rolagem
                 document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
-                document.querySelector('.nav-links a[href="#projetos"]').classList.add('active');
+                document.querySelector('.nav-links a[href="#destaque"]').classList.add('active');
             }
         });
     }

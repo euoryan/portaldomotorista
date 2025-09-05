@@ -233,7 +233,7 @@ section {
   text-align: center;
 }
 
-#projetos, #vantagens, #contato { scroll-margin-top: 80px; }
+#destaque, #projetos, #vantagens, #contato { scroll-margin-top: 80px; }
 
 /* CORREÇÃO: Ajuste do espaçamento entre a seção projetos e vantagens */
 #projetos {
