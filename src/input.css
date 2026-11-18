@@ -1,4 +1,4 @@
-/* Portal do Motorista — sistema visual do portal operacional. */
+/* Portal do Motorista. Sistema visual do portal operacional. */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 :root {
@@ -80,7 +80,7 @@ p, h1, h2, h3, figure { margin: 0; }
 .desktop-nav a:hover, .desktop-nav a.nav-active { color: var(--fg); }
 .header-actions { display: flex; gap: 12px; align-items: center; }
 
-/* Buttons — navy/marca só no primary (padrão Pegasus) */
+/* Botões. A cor da marca fica concentrada nas ações principais. */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   border: 1px solid transparent; border-radius: var(--radius);
@@ -272,7 +272,7 @@ p, h1, h2, h3, figure { margin: 0; }
 .contact-copy p { font-size: 14px; line-height: 1.65; color: var(--fg-muted); margin: 0; max-width: 420px; }
 .contact-band .btn { z-index: 1; flex-shrink: 0; }
 
-/* Footer remoto (eu-ft) — âncora mínima */
+/* Rodapé remoto. */
 .footer-anchor { margin-top: 48px; color: var(--fg-muted); }
 .site-footer, .footer.eu-ft { color: var(--fg-muted); }
 
@@ -312,14 +312,14 @@ p, h1, h2, h3, figure { margin: 0; }
   font-weight: 650; color: var(--marca); margin-bottom: 8px; text-transform: uppercase;
 }
 .article-intro p { font-size: 13.5px; color: var(--fg-muted); line-height: 1.7; margin: 0; }
-.article-section { border-top: 1px solid var(--border); padding-top: 28px; padding-bottom: 28px; scroll-margin-top: 96px; }
+.article-section { border-top: 1px solid var(--border); padding-top: 34px; padding-bottom: 34px; scroll-margin-top: 96px; }
 .article-section h2 { font-size: 22px; line-height: 1.3; color: var(--fg); letter-spacing: -0.03em; font-weight: 650; margin: 0 0 14px; }
 .article-section h3 { font-size: 14px; color: var(--fg); margin: 0 0 6px; font-weight: 600; }
 .article-section > p { color: var(--fg-muted); font-size: 14px; line-height: 1.75; }
 .section-overline { display: block; font-size: 10px; font-weight: 650; letter-spacing: 0.1em; color: var(--marca); margin-bottom: 8px; text-transform: uppercase; }
 
-.article-list { list-style: none; margin: 14px 0 4px; padding: 0; display: grid; gap: 12px; }
-.article-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.6; color: var(--fg-muted); }
+.article-list { list-style: none; margin: 16px 0 4px; padding: 0; display: grid; gap: 13px; }
+.article-list li { display: flex; align-items: flex-start; gap: 11px; font-size: 13.5px; line-height: 1.65; color: var(--fg-muted); }
 .article-list svg { flex-shrink: 0; color: var(--success); margin-top: 2px; }
 
 .emergency-card {
@@ -418,15 +418,17 @@ p, h1, h2, h3, figure { margin: 0; }
 
 .wifi-stack { display: grid; gap: 12px; margin: 16px 0; }
 .wifi-card {
-  display: grid; grid-template-columns: minmax(0, 1fr) 140px; align-items: center; gap: 16px;
-  border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; background: var(--bg-elevated);
+  display: grid; grid-template-columns: minmax(0, 1fr) 210px; align-items: stretch; gap: 0;
+  border: 1px solid var(--border); border-radius: var(--radius); padding: 0; overflow: hidden; background: var(--bg-elevated);
 }
-.wifi-network-icon { color: var(--marca); }
-.wifi-eyebrow { display: block; color: var(--fg-subtle); font-size: 9.5px; font-weight: 650; letter-spacing: 0.08em; margin: 12px 0 4px; }
-.wifi-card h3 { font-size: 18px; letter-spacing: -0.03em; color: var(--fg); }
-.wifi-card p { color: var(--fg-subtle); font-size: 12.5px; line-height: 1.55; margin: 4px 0 16px; }
+.wifi-card-main { min-width: 0; padding: 24px; }
+.wifi-network { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.wifi-network-icon { width: 42px; height: 42px; display: grid; place-items: center; flex-shrink: 0; color: var(--marca); background: var(--marca-dim); border: 1px solid var(--border); border-radius: 9px; }
+.wifi-network small { display: block; color: var(--fg-subtle); font-size: 9px; font-weight: 700; letter-spacing: 0.09em; margin-bottom: 2px; }
+.wifi-network strong { display: block; color: var(--fg); font-size: 17px; letter-spacing: -0.02em; }
+.wifi-card p { color: var(--fg-subtle); font-size: 12.5px; line-height: 1.55; margin: 8px 0 18px; }
 .wifi-pass-label { font-size: 9.5px; letter-spacing: 0.06em; font-weight: 650; color: var(--fg-subtle); margin-bottom: 6px; }
-.password-bar { border: 1px solid var(--border); display: flex; border-radius: var(--radius); align-items: center; min-height: 40px; overflow: hidden; background: var(--bg); }
+.password-bar { border: 1px solid var(--border); display: flex; border-radius: 8px; align-items: center; min-height: 44px; overflow: hidden; background: var(--bg); }
 .password-value { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--fg); letter-spacing: 0.02em; padding: 0 10px; flex: 1; word-break: break-all; }
 .show-password { border: 0; background: transparent; color: var(--fg-subtle); padding: 7px; }
 .copy-btn {
@@ -434,9 +436,13 @@ p, h1, h2, h3, figure { margin: 0; }
   padding: 0 12px; background: var(--marca-strong); border: 0; color: #fff; font-size: 11px; font-weight: 650;
 }
 .copy-btn:hover { background: #1a5fc4; }
-.wifi-qr { display: flex; flex-direction: column; align-items: center; gap: 6px; border-left: 1px solid var(--border); padding-left: 16px; }
-.wifi-qr img { height: 108px; width: 108px; object-fit: contain; background: #fff; border-radius: 6px; padding: 6px; }
-.wifi-qr span { font-size: 10px; color: var(--fg-subtle); text-align: center; line-height: 1.4; }
+.wifi-note { display: flex; align-items: center; gap: 7px; margin-top: 12px; color: var(--fg-subtle); font-size: 10.5px; line-height: 1.45; }
+.wifi-note svg { flex: 0 0 auto; color: var(--marca); }
+.wifi-qr { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 7px; border-left: 1px solid var(--border); padding: 22px; background: var(--bg-soft); }
+.wifi-qr-frame { padding: 8px; border-radius: 10px; background: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.16); }
+.wifi-qr img { display: block; height: 132px; width: 132px; object-fit: contain; background: #fff; border-radius: 4px; padding: 0; }
+.wifi-qr strong { color: var(--fg); font-size: 11.5px; text-align: center; }
+.wifi-qr span { font-size: 10px; color: var(--fg-subtle); text-align: center; line-height: 1.45; }
 
 .article-aside { position: relative; align-self: stretch; }
 .aside-inner { position: sticky; top: 96px; }
@@ -493,6 +499,15 @@ p, h1, h2, h3, figure { margin: 0; }
 .notfound-card { padding-top: 52px; }
 .error-number { font-size: 96px; letter-spacing: -0.06em; font-weight: 700; line-height: 1.1; color: var(--fg); }
 .error-number span { color: var(--marca); }
+
+.state-main { min-height: calc(100vh - var(--header-h)); padding-bottom: 72px; }
+.state-view { width: min(100%, 560px); min-height: 520px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.state-icon { width: 52px; height: 52px; display: grid; place-items: center; margin-bottom: 20px; color: var(--marca); border: 1px solid var(--border); border-radius: 12px; background: var(--bg-elevated); }
+.state-kicker { color: var(--fg-subtle); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.state-view h1 { max-width: 500px; margin: 10px 0 12px; color: var(--fg); font-size: clamp(27px, 4vw, 36px); line-height: 1.18; letter-spacing: -.035em; }
+.state-view > p { max-width: 470px; color: var(--fg-muted); font-size: 14px; line-height: 1.7; }
+.state-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin-top: 24px; }
+.state-view > small { margin-top: 20px; color: var(--fg-subtle); font-size: 11px; }
 
 .toast {
   position: fixed; bottom: 24px; right: 24px; z-index: 120; width: min(400px, calc(100vw - 32px));
@@ -570,7 +585,7 @@ p, h1, h2, h3, figure { margin: 0; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
-/* Refinamento editorial — interface mais direta, sem depender de fotos genéricas. */
+/* Refinamento editorial da interface. */
 :root {
   --bg: #0b1017;
   --bg-elevated: #111925;
@@ -660,6 +675,7 @@ body { background: radial-gradient(760px 420px at 88% -160px, rgba(42, 115, 201,
 .contact-band { min-height: 194px; margin-top: 92px; padding: 34px 36px; border-radius: 12px; background: linear-gradient(110deg, #111e2d, #111925); border-color: rgba(145, 188, 229, 0.18); }
 .contact-mark { width: 88px; height: 88px; color: var(--marca); background: rgba(145, 188, 229, 0.06); border-radius: 10px; }
 .contact-mark img { display: block; width: 76px; height: 76px; object-fit: contain; }
+.contact-support-icon { color: var(--marca); background: var(--marca-dim); }
 .contact-copy h2 { font-size: 25px; }
 
 .article-main { background: transparent; }
@@ -702,6 +718,13 @@ body { background: radial-gradient(760px 420px at 88% -160px, rgba(42, 115, 201,
   .card-cover { min-height: 0; }
   .contact-band { margin-top: 72px; padding: 28px 24px; }
   .article-figure { height: 190px; padding: 0; }
+  .wifi-card { grid-template-columns: 1fr; }
+  .wifi-card-main { padding: 20px; }
+  .wifi-qr { border-left: 0; border-top: 1px solid var(--border); padding: 20px; }
+  .wifi-qr img { width: 144px; height: 144px; }
+  .state-view { min-height: 460px; padding: 48px 0 56px; }
+  .state-actions { width: 100%; }
+  .state-actions .btn { width: 100%; }
   .footer-anchor .eu-ft-in { padding: 22px 20px; flex-direction: column-reverse; text-align: center; }
 }
 @media (max-width: 430px) {
