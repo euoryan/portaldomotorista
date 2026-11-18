@@ -53,7 +53,7 @@ const links = [
  {id:'guiaintelbras',path:'guiaintelbras/',title:'Guia Intelbras',label:'Contrato',tag:'GUIA DO CONTRATO',desc:'Portal, início de viagem, cartão de acesso e rotas.',iconImg:'icons/camera.png',cover:'intelbras.webp',icon:'route',category:'operacao',time:'6 min'},
  {id:'beneficios',path:'beneficios/',title:'Benefícios parceiros',label:'Vantagens',tag:'BENEFÍCIOS',desc:'Descontos e vantagens das parcerias da empresa.',iconImg:'icons/descontos.png',cover:'beneficios.webp',icon:'award',category:'recursos',time:'3 min'},
  {id:'wifimotoristas',path:'wifimotoristas/',title:'Wi-Fi motoristas',label:'Conectividade',tag:'REDES WI-FI',desc:'Rede exclusiva com senha e QR Code.',iconImg:'icons/wifi.png',cover:'wifi.webp',icon:'wifi',category:'recursos',time:'2 min'},
- {id:'restrito',path:'restrito/',title:'Bonificação',label:'Em breve',tag:'EM PREPARAÇÃO',desc:'Entenda a bonificação e em quais situações ela pode ser perdida.',iconImg:'icons/bonificacao.png',cover:'frota.webp',icon:'clock',category:'recursos',time:'—'}
+ {id:'restrito',path:'restrito/',title:'Bonificação',label:'Em breve',tag:'EM PREPARAÇÃO',desc:'Entenda a bonificação e em quais situações ela pode ser perdida.',iconImg:'icons/bonificacao.png',cover:'pages/bonificacao/thumb/bonificacao.png',icon:'clock',category:'recursos',time:'—'}
 ];
 const lookup = Object.fromEntries(links.map(item=>[item.id,item]));
 const contactButton=(label='Falar com Operacional',cls='btn btn-primary')=>`<a class="${cls}" href="${TG}" target="_blank" rel="noopener noreferrer">${I('headset',17)}<span>${label}</span></a>`;
@@ -86,7 +86,7 @@ function loadRemoteFooter(){
 }
 function imgCard(item, compact=false){
   return `<a class="content-card ${compact?'content-card-compact':''}" href="${url(item.path)}">
-    <div class="card-cover"><img src="${asset(item.cover)}" alt="" loading="lazy"/></div>
+    <div class="card-cover"><img src="${asset(item.cover)}${item.id==='restrito'?'?v=5':''}" alt="" loading="lazy"/></div>
     <div class="card-content">
       <div class="card-kicker">${item.tag}</div>
       <div class="card-title">${item.title}</div>
@@ -95,8 +95,16 @@ function imgCard(item, compact=false){
     </div>
   </a>`;
 }
-function quickTile(item,label,description){return `<a href="${url(item.path)}" class="quick-tile"><span class="quick-tile-icon"><img src="${asset(item.iconImg)+'?v=2'}" alt="" width="40" height="40"></span><span class="quick-tile-text"><strong>${label||item.title}</strong><small>${description||item.desc}</small></span><span class="quick-tile-arrow">${I('arrow',17)}</span></a>`;}
-function contactBand(){return `<section id="contato" class="contact-band"><div class="contact-mark"><img src="${asset('icons/telegram.png')+'?v=2'}" alt="" width="48" height="48"></div><div class="contact-copy"><div class="eyebrow">PRECISA DE APOIO?</div><h2>Estamos por perto quando precisar.</h2><p>Dúvidas sobre a operação, rotas ou procedimentos? Fale com o Operacional no Telegram.</p></div>${contactButton('Abrir @oppmotorista','btn btn-primary')}</section>`;}
+function quickTile(item,label,description){return `<a href="${url(item.path)}" class="quick-tile"><span class="quick-tile-icon"><img src="${asset(item.iconImg)}?v=5" alt="" width="52" height="52"></span><span class="quick-tile-text"><strong>${label||item.title}</strong><small>${description||item.desc}</small></span><span class="quick-tile-arrow">${I('arrow',17)}</span></a>`;}
+function contactBand(){return `<section id="contato" class="contact-band">
+  <div class="contact-mark"><img src="${asset('icons/telegram.png')}?v=5" alt="" width="92" height="92"></div>
+  <div class="contact-copy">
+    <div class="eyebrow">PRECISA DE APOIO?</div>
+    <h2>Estamos por perto quando precisar.</h2>
+    <p>Dúvidas sobre a operação, rotas ou procedimentos? Fale com o Operacional no Telegram.</p>
+  </div>
+  ${contactButton('Abrir @oppmotorista','btn btn-primary btn-large')}
+</section>`;}
 function home(){
  return `<main>
  <section class="home-hero"><div class="container-wide hero-inner">
@@ -107,7 +115,7 @@ function home(){
      <div class="hero-actions"><a class="btn btn-primary btn-large" href="${url('guianovos/')}">${I('book',18)} Guia de integração ${I('arrow',17)}</a><a class="btn btn-secondary btn-large" href="${url('nossasregras/')}">Conhecer as regras ${I('arrow',17)}</a></div>
      <div class="hero-proof">${I('checkcircle',16)} Conteúdo claro para consultar sempre que precisar</div>
    </div>
-   <div class="hero-visual"><img src="${img('hero-bus')}" alt="Ilustração do portal" fetchpriority="high"/><div class="visual-note"><span class="visual-note-icon"><img src="${asset('icons/estrela.png')+'?v=2'}" alt="" width="28" height="28"></span><span><strong>Seu dia a dia mais simples</strong><small>Informação que acompanha você.</small></span></div></div>
+   <div class="hero-visual"><img src="${img('hero-bus')}" alt="" fetchpriority="high"/><div class="visual-note"><span class="visual-note-icon"><img src="${asset('icons/estrela.png')}?v=5" alt="" width="32" height="32"></span><span><strong>Seu dia a dia mais simples</strong><small>Informação que acompanha você.</small></span></div></div>
  </div></section>
  <div class="container-wide main-home">
   <section class="quick-section" aria-labelledby="quick-label"><div class="section-label" id="quick-label">COMECE POR AQUI <span class="section-label-line"></span></div><div class="quick-grid">${quickTile(lookup.guianovos,'Sou novo por aqui','Primeiros passos e integração.')}${quickTile(lookup.beneficios,'Benefícios e bonificação','Conheça vantagens e condições.')}${quickTile(lookup.diretoriosdelinks,'Preciso de um link','Acesse formulários e sistemas.')}</div></section>
@@ -196,10 +204,10 @@ const content = {
  ${section('orientacao','Orientação',prose('Escaneie o QR Code com a câmera do celular ou copie a senha manualmente.')+buttonRow(`<a class="btn btn-primary" href="${TG}" target="_blank" rel="noopener noreferrer">${I('headset',17)} Suporte</a>`))}
  `}
 };
-function aside(item){return `<aside class="article-aside"><div class="aside-inner"><div class="toc-box"><div class="toc-label">NESTA PÁGINA</div><nav class="toc-links" aria-label="Nesta página">${item.toc.map(([id,t])=>`<a href="#${id}" data-toc="${id}">${t}</a>`).join('')}</nav></div><div class="aside-contact"><div class="aside-icon">${I('headset',22)}</div><strong>Precisa de ajuda?</strong><p>Fale com o Operacional no Telegram.</p>${contactButton('Abrir @oppmotorista','btn btn-outline btn-aside')}</div><a href="${url('index.html#conteudos')}" class="aside-back">${I('arrowleft',15)} Ver todos os conteúdos</a></div></aside>`;}
+function aside(item){return `<aside class="article-aside"><div class="aside-inner"><div class="toc-box"><div class="toc-label">NESTA PÁGINA</div><nav class="toc-links" aria-label="Nesta página">${item.toc.map(([id,t])=>`<a href="#${id}" data-toc="${id}">${t}</a>`).join('')}</nav></div><div class="aside-contact"><div class="aside-icon"><img src="${asset('icons/telegram.png')}?v=5" alt="" width="40" height="40"></div><strong>Precisa de ajuda?</strong><p>Fale com o Operacional no Telegram.</p>${contactButton('Abrir @oppmotorista','btn btn-outline btn-aside')}</div><a href="${url('index.html#conteudos')}" class="aside-back">${I('arrowleft',15)} Ver todos os conteúdos</a></div></aside>`;}
 function relatedItems(current){return links.filter(x=>x.id!==current && x.id!=='restrito').slice(0,3);}
 function articlePage(key){const item=lookup[key],data=content[key];return `<main class="article-main"><div class="container-wide">${breadcrumb(item)}<div class="article-layout"><article class="article"><header class="article-header"><p class="hero-kicker">${data.sub}</p><h1>${data.heading}</h1><p class="article-deck">${data.excerpt}</p><div class="article-meta"><span>${data.read}</span></div></header><figure class="article-figure"><img src="${asset(item.cover)}" alt=""/></figure><div class="article-body">${data.body()}</div></article>${aside(data)}</div><section class="related-section"><div class="related-heading"><h2>Outros conteúdos</h2></div><div class="content-grid related-grid">${relatedItems(key).map(x=>imgCard(x,true)).join('')}</div></section></div></main>`;}
-function restricted(){return `<main class="special-main"><div class="container-wide">${breadcrumb(lookup.restrito)}<div class="special-card"><div class="special-visual">${I('settings',40)}</div><p class="hero-kicker">Em breve</p><h1>Bonificação em preparação.</h1><p>Esta área ainda está em desenvolvimento. Em breve, as regras de bonificação estarão disponíveis aqui.</p><a class="btn btn-primary btn-large" href="${url('index.html')}">Voltar à página inicial</a></div><div class="special-foot">Enquanto isso, consulte os <a href="${url('index.html#conteudos')}">demais conteúdos</a>.</div></div></main>`;}
+function restricted(){return `<main class="special-main"><div class="container-wide">${breadcrumb(lookup.restrito)}<div class="special-card"><div class="special-visual"><img src="${asset('icons/bonificacao.png')}?v=5" alt="" width="96" height="96"></div><p class="hero-kicker">Em breve</p><h1>Bonificação em preparação.</h1><p>Esta área ainda está em desenvolvimento. Em breve, as regras de bonificação estarão disponíveis aqui.</p><a class="btn btn-primary btn-large" href="${url('index.html')}">Voltar à página inicial</a></div><div class="special-foot">Enquanto isso, consulte os <a href="${url('index.html#conteudos')}">demais conteúdos</a>.</div></div></main>`;}
 function notFound(){return `<main class="special-main"><div class="container-wide"><div class="special-card notfound-card"><div class="error-number">404<span>.</span></div><div class="eyebrow">PÁGINA NÃO ENCONTRADA</div><h1>Parece que esta rota<br/>não existe.</h1><p>O endereço pode ter mudado ou a página não está mais disponível. Volte ao portal para encontrar o que precisa.</p><a class="btn btn-primary btn-large" href="${url('index.html')}">${I('arrowleft',18)} Voltar ao início</a></div></div></main>`;}
 function toast(message){let x=document.querySelector('.toast');if(!x){x=document.createElement('div');x.className='toast';x.setAttribute('role','status');x.setAttribute('aria-live','polite');document.body.appendChild(x);}x.innerHTML=`${I('info',18)}<span>${message}</span>`;x.classList.add('is-visible');clearTimeout(window.__toastTimeout);window.__toastTimeout=setTimeout(()=>x.classList.remove('is-visible'),4200);}
 function bind(){

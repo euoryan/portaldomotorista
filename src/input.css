@@ -166,16 +166,16 @@ p, h1, h2, h3, figure { margin: 0; }
 .main-home { padding-top: 44px; padding-bottom: 88px; }
 .quick-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
 .quick-tile {
-  min-height: 100px; display: flex; align-items: center; gap: 14px; padding: 18px;
+  min-height: 108px; display: flex; align-items: center; gap: 16px; padding: 18px 20px;
   background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius);
   transition: border-color 0.15s, background 0.15s;
 }
 .quick-tile:hover { border-color: var(--border-strong); background: var(--bg-soft); transform: none; }
 .quick-tile-icon {
-  display: grid; place-items: center; flex-shrink: 0; height: 48px; width: 48px;
+  display: grid; place-items: center; flex-shrink: 0; height: 56px; width: 56px;
   border-radius: var(--radius); background: transparent; border: 0; overflow: visible;
 }
-.quick-tile-icon img { width: 42px; height: 42px; object-fit: contain; }
+.quick-tile-icon img { width: 52px; height: 52px; object-fit: contain; }
 .quick-tile-text { flex: 1; min-width: 0; }
 .quick-tile-text strong, .quick-tile-text small { display: block; }
 .quick-tile-text strong { font-weight: 650; letter-spacing: -0.02em; font-size: 14px; color: var(--fg); }
@@ -256,19 +256,20 @@ p, h1, h2, h3, figure { margin: 0; }
 .value-points span { display: block; color: var(--fg-subtle); font-size: 11.5px; line-height: 1.6; margin-top: 6px; }
 
 .contact-band {
-  scroll-margin-top: 100px; display: flex; align-items: center; gap: 22px; min-height: 168px;
-  background: var(--bg-soft); color: var(--fg); margin-top: 80px; padding: 32px 36px;
+  scroll-margin-top: 100px; display: flex; align-items: center; gap: 28px; min-height: 180px;
+  background: var(--bg-elevated); color: var(--fg); margin-top: 80px; padding: 36px 40px;
   border-radius: var(--radius); border: 1px solid var(--border); position: relative; overflow: hidden;
 }
 .contact-band:after { display: none; }
 .contact-mark {
-  height: 56px; width: 56px; display: grid; place-items: center; border-radius: var(--radius);
-  border: 0; background: transparent; flex-shrink: 0; overflow: visible;
+  height: 112px; width: 112px; display: grid; place-items: center; border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--bg-soft); flex-shrink: 0; overflow: visible;
 }
-.contact-mark img { width: 48px; height: 48px; object-fit: contain; }
+.contact-mark img { width: 92px; height: 92px; object-fit: contain; }
 .contact-copy { max-width: 560px; margin-right: auto; z-index: 1; }
-.contact-copy h2 { font-size: 22px; letter-spacing: -0.03em; margin: 6px 0; }
-.contact-copy p { font-size: 13px; line-height: 1.65; color: var(--fg-muted); }
+.contact-copy .eyebrow { margin-bottom: 4px; }
+.contact-copy h2 { font-size: 24px; letter-spacing: -0.03em; margin: 4px 0 10px; font-weight: 700; }
+.contact-copy p { font-size: 14px; line-height: 1.65; color: var(--fg-muted); margin: 0; max-width: 420px; }
 .contact-band .btn { z-index: 1; flex-shrink: 0; }
 
 /* Footer remoto (eu-ft) — âncora mínima */
@@ -449,14 +450,16 @@ p, h1, h2, h3, figure { margin: 0; }
 }
 .aside-contact {
   background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 18px; margin-top: 28px;
+  padding: 20px; margin-top: 28px;
 }
 .aside-icon {
-  width: 40px; height: 40px; border: 1px solid var(--border); color: var(--marca);
-  background: var(--marca-dim); border-radius: var(--radius); display: grid; place-items: center; margin-bottom: 14px;
+  width: 52px; height: 52px; border: 1px solid var(--border); color: var(--marca);
+  background: var(--bg-elevated); border-radius: var(--radius); display: grid; place-items: center; margin-bottom: 14px;
+  overflow: visible;
 }
+.aside-icon img { width: 40px; height: 40px; object-fit: contain; }
 .aside-contact strong { font-size: 13.5px; color: var(--fg); }
-.aside-contact p { font-size: 12px; line-height: 1.6; color: var(--fg-subtle); margin: 8px 0 16px; }
+.aside-contact p { font-size: 12.5px; line-height: 1.6; color: var(--fg-subtle); margin: 8px 0 16px; }
 .btn-aside { font-size: 11.5px; min-height: 34px; padding: 0 10px; }
 .aside-back { margin-top: 20px; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--fg-muted); }
 .aside-back:hover { color: var(--fg); }
@@ -476,9 +479,11 @@ p, h1, h2, h3, figure { margin: 0; }
   border-radius: var(--radius); background: var(--bg-elevated); padding: 56px 32px 64px; overflow: hidden;
 }
 .special-visual {
-  height: 96px; width: 96px; margin: 0 auto 22px; border-radius: var(--radius);
-  background: var(--marca-dim); color: var(--marca); display: grid; place-items: center; position: relative;
+  height: 120px; width: 120px; margin: 0 auto 22px; border-radius: var(--radius);
+  background: var(--bg-soft); border: 1px solid var(--border); color: var(--marca);
+  display: grid; place-items: center; position: relative; overflow: visible;
 }
+.special-visual img { width: 96px; height: 96px; object-fit: contain; }
 .special-orbit { display: none; }
 .special-card .eyebrow { justify-content: center; }
 .special-card h1 { font-size: 36px; line-height: 1.15; letter-spacing: -0.04em; color: var(--fg); margin: 12px 0; }
@@ -541,7 +546,11 @@ p, h1, h2, h3, figure { margin: 0; }
   .content-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .card-link { display: none !important; }
   .value-layout { grid-template-columns: 1fr; gap: 28px; }
-  .contact-band { margin-top: 56px; padding: 24px 20px; display: grid; gap: 14px; }
+  .contact-band { margin-top: 56px; padding: 28px 22px; display: grid; gap: 18px; justify-items: start; }
+  .contact-mark { height: 96px; width: 96px; }
+  .contact-mark img { width: 78px; height: 78px; }
+  .contact-copy h2 { font-size: 22px; }
+  .contact-band .btn { width: 100%; }
   .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .related-grid .content-card:last-child { display: none; }
   .emergency-card { flex-wrap: wrap; }
