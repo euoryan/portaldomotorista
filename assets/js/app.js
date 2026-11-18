@@ -85,8 +85,8 @@ function loadRemoteFooter(){
     .catch(fallback);
 }
 function imgCard(item, compact=false){
-  return `<a class="content-card ${compact?'content-card-compact':''}" href="${url(item.path)}">
-    <div class="card-cover"><img src="${asset(item.cover)}${item.id==='restrito'?'?v=5':''}" alt="" loading="lazy"/></div>
+  return `<a class="content-card content-card-${item.category} ${compact?'content-card-compact':''}" href="${url(item.path)}">
+    <div class="card-cover"><span class="card-cover-icon">${I(item.icon,25)}</span><span class="card-cover-label">${item.label}</span></div>
     <div class="card-content">
       <div class="card-kicker">${item.tag}</div>
       <div class="card-title">${item.title}</div>
@@ -95,9 +95,9 @@ function imgCard(item, compact=false){
     </div>
   </a>`;
 }
-function quickTile(item,label,description){return `<a href="${url(item.path)}" class="quick-tile"><span class="quick-tile-icon"><img src="${asset(item.iconImg)}?v=5" alt="" width="52" height="52"></span><span class="quick-tile-text"><strong>${label||item.title}</strong><small>${description||item.desc}</small></span><span class="quick-tile-arrow">${I('arrow',17)}</span></a>`;}
+function quickTile(item,label,description){return `<a href="${url(item.path)}" class="quick-tile"><span class="quick-tile-icon">${I(item.icon,22)}</span><span class="quick-tile-text"><strong>${label||item.title}</strong><small>${description||item.desc}</small></span><span class="quick-tile-arrow">${I('arrow',17)}</span></a>`;}
 function contactBand(){return `<section id="contato" class="contact-band">
-  <div class="contact-mark"><img src="${asset('icons/telegram.png')}?v=5" alt="" width="92" height="92"></div>
+  <div class="contact-mark">${I('message',30)}</div>
   <div class="contact-copy">
     <div class="eyebrow">PRECISA DE APOIO?</div>
     <h2>Estamos por perto quando precisar.</h2>
@@ -115,7 +115,7 @@ function home(){
      <div class="hero-actions"><a class="btn btn-primary btn-large" href="${url('guianovos/')}">${I('book',18)} Guia de integração ${I('arrow',17)}</a><a class="btn btn-secondary btn-large" href="${url('nossasregras/')}">Conhecer as regras ${I('arrow',17)}</a></div>
      <div class="hero-proof">${I('checkcircle',16)} Conteúdo claro para consultar sempre que precisar</div>
    </div>
-   <div class="hero-visual"><img src="${img('hero-bus')}" alt="" fetchpriority="high"/><div class="visual-note"><span class="visual-note-icon"><img src="${asset('icons/estrela.png')}?v=5" alt="" width="32" height="32"></span><span><strong>Seu dia a dia mais simples</strong><small>Informação que acompanha você.</small></span></div></div>
+   <div class="hero-visual"><div class="hero-illustration" role="img" aria-label="Ilustração de um ônibus">${I('bus',164)}</div><div class="visual-note"><span class="visual-note-icon">${I('checkcircle',19)}</span><span><strong>Seu dia a dia mais simples</strong><small>Informação que acompanha você.</small></span></div></div>
  </div></section>
  <div class="container-wide main-home">
   <section class="quick-section" aria-labelledby="quick-label"><div class="section-label" id="quick-label">COMECE POR AQUI <span class="section-label-line"></span></div><div class="quick-grid">${quickTile(lookup.guianovos,'Sou novo por aqui','Primeiros passos e integração.')}${quickTile(lookup.beneficios,'Benefícios e bonificação','Conheça vantagens e condições.')}${quickTile(lookup.diretoriosdelinks,'Preciso de um link','Acesse formulários e sistemas.')}</div></section>
@@ -204,10 +204,10 @@ const content = {
  ${section('orientacao','Orientação',prose('Escaneie o QR Code com a câmera do celular ou copie a senha manualmente.')+buttonRow(`<a class="btn btn-primary" href="${TG}" target="_blank" rel="noopener noreferrer">${I('headset',17)} Suporte</a>`))}
  `}
 };
-function aside(item){return `<aside class="article-aside"><div class="aside-inner"><div class="toc-box"><div class="toc-label">NESTA PÁGINA</div><nav class="toc-links" aria-label="Nesta página">${item.toc.map(([id,t])=>`<a href="#${id}" data-toc="${id}">${t}</a>`).join('')}</nav></div><div class="aside-contact"><div class="aside-icon"><img src="${asset('icons/telegram.png')}?v=5" alt="" width="40" height="40"></div><strong>Precisa de ajuda?</strong><p>Fale com o Operacional no Telegram.</p>${contactButton('Abrir @oppmotorista','btn btn-outline btn-aside')}</div><a href="${url('index.html#conteudos')}" class="aside-back">${I('arrowleft',15)} Ver todos os conteúdos</a></div></aside>`;}
+function aside(item){return `<aside class="article-aside"><div class="aside-inner"><div class="toc-box"><div class="toc-label">NESTA PÁGINA</div><nav class="toc-links" aria-label="Nesta página">${item.toc.map(([id,t])=>`<a href="#${id}" data-toc="${id}">${t}</a>`).join('')}</nav></div><div class="aside-contact"><div class="aside-icon">${I('message',21)}</div><strong>Precisa de ajuda?</strong><p>Fale com o Operacional no Telegram.</p>${contactButton('Abrir @oppmotorista','btn btn-outline btn-aside')}</div><a href="${url('index.html#conteudos')}" class="aside-back">${I('arrowleft',15)} Ver todos os conteúdos</a></div></aside>`;}
 function relatedItems(current){return links.filter(x=>x.id!==current && x.id!=='restrito').slice(0,3);}
-function articlePage(key){const item=lookup[key],data=content[key];return `<main class="article-main"><div class="container-wide">${breadcrumb(item)}<div class="article-layout"><article class="article"><header class="article-header"><p class="hero-kicker">${data.sub}</p><h1>${data.heading}</h1><p class="article-deck">${data.excerpt}</p><div class="article-meta"><span>${data.read}</span></div></header><figure class="article-figure"><img src="${asset(item.cover)}" alt=""/></figure><div class="article-body">${data.body()}</div></article>${aside(data)}</div><section class="related-section"><div class="related-heading"><h2>Outros conteúdos</h2></div><div class="content-grid related-grid">${relatedItems(key).map(x=>imgCard(x,true)).join('')}</div></section></div></main>`;}
-function restricted(){return `<main class="special-main"><div class="container-wide">${breadcrumb(lookup.restrito)}<div class="special-card"><div class="special-visual"><img src="${asset('icons/bonificacao.png')}?v=5" alt="" width="96" height="96"></div><p class="hero-kicker">Em breve</p><h1>Bonificação em preparação.</h1><p>Esta área ainda está em desenvolvimento. Em breve, as regras de bonificação estarão disponíveis aqui.</p><a class="btn btn-primary btn-large" href="${url('index.html')}">Voltar à página inicial</a></div><div class="special-foot">Enquanto isso, consulte os <a href="${url('index.html#conteudos')}">demais conteúdos</a>.</div></div></main>`;}
+function articlePage(key){const item=lookup[key],data=content[key];return `<main class="article-main"><div class="container-wide">${breadcrumb(item)}<div class="article-layout"><article class="article"><header class="article-header"><p class="hero-kicker">${data.sub}</p><h1>${data.heading}</h1><p class="article-deck">${data.excerpt}</p><div class="article-meta"><span>${data.read}</span></div></header><figure class="article-figure"><div class="article-figure-icon">${I(item.icon,34)}</div><figcaption>${item.label}</figcaption></figure><div class="article-body">${data.body()}</div></article>${aside(data)}</div><section class="related-section"><div class="related-heading"><h2>Outros conteúdos</h2></div><div class="content-grid related-grid">${relatedItems(key).map(x=>imgCard(x,true)).join('')}</div></section></div></main>`;}
+function restricted(){return `<main class="special-main"><div class="container-wide">${breadcrumb(lookup.restrito)}<div class="special-card"><div class="special-visual">${I('award',42)}</div><p class="hero-kicker">Em breve</p><h1>Bonificação em preparação.</h1><p>Esta área ainda está em desenvolvimento. Em breve, as regras de bonificação estarão disponíveis aqui.</p><a class="btn btn-primary btn-large" href="${url('index.html')}">Voltar à página inicial</a></div><div class="special-foot">Enquanto isso, consulte os <a href="${url('index.html#conteudos')}">demais conteúdos</a>.</div></div></main>`;}
 function notFound(){return `<main class="special-main"><div class="container-wide"><div class="special-card notfound-card"><div class="error-number">404<span>.</span></div><div class="eyebrow">PÁGINA NÃO ENCONTRADA</div><h1>Parece que esta rota<br/>não existe.</h1><p>O endereço pode ter mudado ou a página não está mais disponível. Volte ao portal para encontrar o que precisa.</p><a class="btn btn-primary btn-large" href="${url('index.html')}">${I('arrowleft',18)} Voltar ao início</a></div></div></main>`;}
 function toast(message){let x=document.querySelector('.toast');if(!x){x=document.createElement('div');x.className='toast';x.setAttribute('role','status');x.setAttribute('aria-live','polite');document.body.appendChild(x);}x.innerHTML=`${I('info',18)}<span>${message}</span>`;x.classList.add('is-visible');clearTimeout(window.__toastTimeout);window.__toastTimeout=setTimeout(()=>x.classList.remove('is-visible'),4200);}
 function bind(){
