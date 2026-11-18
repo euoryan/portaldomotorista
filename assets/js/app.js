@@ -1,4 +1,4 @@
-/* Portal do Motorista — protótipo visual com conteúdo oficial adaptado. */
+/* Portal do Motorista — interface e conteúdo operacional. */
 (() => {
 'use strict';
 const page = document.body.dataset.page || 'home';
@@ -60,10 +60,10 @@ const contactButton=(label='Falar com Operacional',cls='btn btn-primary')=>`<a c
 const extBtn=(href,label,icon='external')=>`<a class="btn btn-secondary" href="${href}" target="_blank" rel="noopener noreferrer">${I(icon,17)} ${label}</a>`;
 function header(){
  return `<header class="site-header" id="top"><div class="container-wide header-inner">
-  <a class="brand" href="${url('index.html')}" aria-label="Voltar ao início do Portal do Motorista"><span class="brand-symbol"><img src="${favicon}" alt="" width="28" height="28"></span><span class="brand-type"><strong>Portal do Motorista</strong><small>Central operacional</small></span></a>
-  <nav class="desktop-nav" aria-label="Navegação principal"><a class="${page==='home'?'nav-active':''}" href="${url('index.html')}">Início</a><a href="${url('index.html#conteudos')}">Guias e procedimentos</a><a href="${url('diretoriosdelinks/')}">Links úteis</a><a href="${url('index.html#contato')}">Contato</a></nav>
+  <a class="brand" href="${url('index.html')}" aria-label="Voltar ao início do Portal do Motorista"><span class="brand-symbol"><img src="${favicon}" alt="" width="32" height="32"></span><span class="brand-type"><strong>Portal do Motorista</strong></span></a>
+  <nav class="desktop-nav" aria-label="Navegação principal"><a class="${page==='home'?'nav-active':''}" href="${url('index.html')}">Início</a><a href="${url('index.html#avisos')}">Avisos</a><a href="${url('index.html#conteudos')}">Procedimentos</a><a href="${url('beneficios/')}">Benefícios</a><a href="${url('diretoriosdelinks/')}">Links úteis</a></nav>
   <div class="header-actions">${contactButton('Falar com Operacional','btn btn-primary btn-header')}<button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menu">${I('menu',22)}</button></div>
- </div><nav id="mobile-nav" class="mobile-nav" aria-label="Navegação móvel" hidden><a href="${url('index.html')}">Início ${I('chevron',16)}</a><a href="${url('index.html#conteudos')}">Guias e procedimentos ${I('chevron',16)}</a><a href="${url('diretoriosdelinks/')}">Links úteis ${I('chevron',16)}</a><a href="${url('index.html#contato')}">Contato ${I('chevron',16)}</a>${contactButton('Contato operacional','btn btn-primary mobile-contact')}</nav></header>`;
+ </div><nav id="mobile-nav" class="mobile-nav" aria-label="Navegação móvel" hidden><a href="${url('index.html')}">Início ${I('chevron',16)}</a><a href="${url('index.html#avisos')}">Avisos ${I('chevron',16)}</a><a href="${url('index.html#conteudos')}">Procedimentos ${I('chevron',16)}</a><a href="${url('beneficios/')}">Benefícios ${I('chevron',16)}</a><a href="${url('diretoriosdelinks/')}">Links úteis ${I('chevron',16)}</a>${contactButton('Falar com Operacional','btn btn-primary mobile-contact')}</nav></header>`;
 }
 function footer(){
   return `<div class="footer-anchor" id="rodape"></div>`;
@@ -86,7 +86,7 @@ function loadRemoteFooter(){
 }
 function imgCard(item, compact=false){
   return `<a class="content-card content-card-${item.category} ${compact?'content-card-compact':''}" href="${url(item.path)}">
-    <div class="card-cover"><span class="card-cover-icon">${I(item.icon,25)}</span><span class="card-cover-label">${item.label}</span></div>
+    <div class="card-cover"><img src="${asset(item.cover)}${item.id==='restrito'?'?v=6':''}" alt="" loading="lazy"/><span class="card-cover-label">${item.label}</span></div>
     <div class="card-content">
       <div class="card-kicker">${item.tag}</div>
       <div class="card-title">${item.title}</div>
@@ -95,31 +95,36 @@ function imgCard(item, compact=false){
     </div>
   </a>`;
 }
-function quickTile(item,label,description){return `<a href="${url(item.path)}" class="quick-tile"><span class="quick-tile-icon">${I(item.icon,22)}</span><span class="quick-tile-text"><strong>${label||item.title}</strong><small>${description||item.desc}</small></span><span class="quick-tile-arrow">${I('arrow',17)}</span></a>`;}
+function quickTile(item,label,description){return `<a href="${url(item.path)}" class="quick-tile"><span class="quick-tile-icon"><img src="${asset(item.iconImg)}?v=6" alt="" width="52" height="52"></span><span class="quick-tile-text"><strong>${label||item.title}</strong><small>${description||item.desc}</small></span><span class="quick-tile-arrow">${I('arrow',17)}</span></a>`;}
 function contactBand(){return `<section id="contato" class="contact-band">
-  <div class="contact-mark">${I('message',30)}</div>
+  <div class="contact-mark"><img src="${asset('icons/telegram.png')}?v=6" alt="" width="76" height="76"></div>
   <div class="contact-copy">
-    <div class="eyebrow">PRECISA DE APOIO?</div>
-    <h2>Estamos por perto quando precisar.</h2>
-    <p>Dúvidas sobre a operação, rotas ou procedimentos? Fale com o Operacional no Telegram.</p>
+    <div class="eyebrow">CONTATO OPERACIONAL</div>
+    <h2>Precisa falar com a equipe?</h2>
+    <p>Use o Telegram para tirar dúvidas sobre rotas, procedimentos ou a operação.</p>
   </div>
   ${contactButton('Abrir @oppmotorista','btn btn-primary btn-large')}
+</section>`;}
+function notices(){return `<section id="avisos" class="notices-section" aria-labelledby="notices-title">
+  <div class="section-heading notices-heading"><div><div class="eyebrow">AVISOS DA OPERAÇÃO</div><h2 id="notices-title">Comunicados importantes</h2><p>Atualizações e orientações da equipe ficam reunidas aqui.</p></div><span class="status-badge"><span></span> Sem avisos ativos</span></div>
+  <div class="notice-card"><span class="notice-icon">${I('info',20)}</span><div><strong>Nenhum aviso publicado no momento</strong><p>Quando a operação publicar um comunicado, ele aparecerá nesta área para consulta rápida.</p></div></div>
 </section>`;}
 function home(){
  return `<main>
  <section class="home-hero"><div class="container-wide hero-inner">
    <div class="hero-copy">
-     <div class="eyebrow"><span class="eyebrow-dot"></span> SUA CENTRAL DE INFORMAÇÕES</div>
-     <h1>Na rota certa,<br/><span>com a informação certa.</span></h1>
-     <p>Guias, procedimentos e ferramentas para facilitar o seu dia a dia na operação. Tudo organizado, em um só lugar.</p>
-     <div class="hero-actions"><a class="btn btn-primary btn-large" href="${url('guianovos/')}">${I('book',18)} Guia de integração ${I('arrow',17)}</a><a class="btn btn-secondary btn-large" href="${url('nossasregras/')}">Conhecer as regras ${I('arrow',17)}</a></div>
-     <div class="hero-proof">${I('checkcircle',16)} Conteúdo claro para consultar sempre que precisar</div>
+     <div class="eyebrow"><span class="eyebrow-dot"></span> PORTAL DO MOTORISTA</div>
+     <h1>Informação clara para o <span>dia a dia na operação.</span></h1>
+     <p>Consulte procedimentos, acessos, benefícios e orientações da empresa sempre que precisar.</p>
+     <div class="hero-actions"><a class="btn btn-primary btn-large" href="${url('index.html#conteudos')}">${I('book',18)} Ver procedimentos ${I('arrow',17)}</a><a class="btn btn-secondary btn-large" href="${url('guianovos/')}">Sou novo por aqui ${I('arrow',17)}</a></div>
+     <div class="hero-proof">${I('checkcircle',16)} Feito para consultar pelo celular, onde você estiver</div>
    </div>
-   <div class="hero-visual"><div class="hero-illustration" role="img" aria-label="Ilustração de um ônibus">${I('bus',164)}</div><div class="visual-note"><span class="visual-note-icon">${I('checkcircle',19)}</span><span><strong>Seu dia a dia mais simples</strong><small>Informação que acompanha você.</small></span></div></div>
+   <div class="hero-visual"><img src="${img('hero-bus')}" alt="Ônibus de transporte rodoviário" fetchpriority="high"/><div class="visual-note"><span class="visual-note-icon"><img src="${asset('icons/estrela.png')}?v=6" alt="" width="30" height="30"></span><span><strong>Informação sempre à mão</strong><small>Procedimentos e acessos em um só lugar.</small></span></div></div>
  </div></section>
  <div class="container-wide main-home">
+  ${notices()}
   <section class="quick-section" aria-labelledby="quick-label"><div class="section-label" id="quick-label">COMECE POR AQUI <span class="section-label-line"></span></div><div class="quick-grid">${quickTile(lookup.guianovos,'Sou novo por aqui','Primeiros passos e integração.')}${quickTile(lookup.beneficios,'Benefícios e bonificação','Conheça vantagens e condições.')}${quickTile(lookup.diretoriosdelinks,'Preciso de um link','Acesse formulários e sistemas.')}</div></section>
-  <section id="conteudos" class="catalog-section" aria-labelledby="catalog-title"><div class="section-heading"><div><div class="eyebrow">BIBLIOTECA OPERACIONAL</div><h2 id="catalog-title">Tudo o que você precisa saber.</h2><p>Encontre orientações, serviços e informações organizadas por assunto.</p></div><div class="catalog-count">08 CONTEÚDOS</div></div>
+  <section id="conteudos" class="catalog-section" aria-labelledby="catalog-title"><div class="section-heading"><div><div class="eyebrow">CONSULTA RÁPIDA</div><h2 id="catalog-title">Guias e procedimentos</h2><p>Encontre orientações, serviços e acessos organizados por assunto.</p></div><div class="catalog-count">08 CONTEÚDOS</div></div>
     <div class="filter-bar" role="group" aria-label="Filtrar conteúdos"><div class="filter-buttons"><button class="filter-button is-active" data-filter="todos" aria-pressed="true">Todos</button><button class="filter-button" data-filter="guias" aria-pressed="false">Guias</button><button class="filter-button" data-filter="operacao" aria-pressed="false">Operação</button><button class="filter-button" data-filter="recursos" aria-pressed="false">Recursos</button></div><label class="search-field">${I('search',18)}<input id="card-search" aria-label="Pesquisar conteúdos" placeholder="Buscar conteúdo..." autocomplete="off" /></label></div>
     <div id="content-grid" class="content-grid">${links.map(item=>`<div class="filter-item" data-category="${item.category}" data-search="${(item.title+' '+item.desc+' '+item.tag).toLowerCase()}">${imgCard(item)}</div>`).join('')}</div>
     <div id="empty-state" class="empty-state" hidden>${I('search',25)}<strong>Nenhum conteúdo encontrado</strong><span>Tente outra palavra ou escolha uma categoria diferente.</span><button class="btn btn-secondary" id="clear-filters">Limpar filtros</button></div>
@@ -206,8 +211,8 @@ const content = {
 };
 function aside(item){return `<aside class="article-aside"><div class="aside-inner"><div class="toc-box"><div class="toc-label">NESTA PÁGINA</div><nav class="toc-links" aria-label="Nesta página">${item.toc.map(([id,t])=>`<a href="#${id}" data-toc="${id}">${t}</a>`).join('')}</nav></div><div class="aside-contact"><div class="aside-icon">${I('message',21)}</div><strong>Precisa de ajuda?</strong><p>Fale com o Operacional no Telegram.</p>${contactButton('Abrir @oppmotorista','btn btn-outline btn-aside')}</div><a href="${url('index.html#conteudos')}" class="aside-back">${I('arrowleft',15)} Ver todos os conteúdos</a></div></aside>`;}
 function relatedItems(current){return links.filter(x=>x.id!==current && x.id!=='restrito').slice(0,3);}
-function articlePage(key){const item=lookup[key],data=content[key];return `<main class="article-main"><div class="container-wide">${breadcrumb(item)}<div class="article-layout"><article class="article"><header class="article-header"><p class="hero-kicker">${data.sub}</p><h1>${data.heading}</h1><p class="article-deck">${data.excerpt}</p><div class="article-meta"><span>${data.read}</span></div></header><figure class="article-figure"><div class="article-figure-icon">${I(item.icon,34)}</div><figcaption>${item.label}</figcaption></figure><div class="article-body">${data.body()}</div></article>${aside(data)}</div><section class="related-section"><div class="related-heading"><h2>Outros conteúdos</h2></div><div class="content-grid related-grid">${relatedItems(key).map(x=>imgCard(x,true)).join('')}</div></section></div></main>`;}
-function restricted(){return `<main class="special-main"><div class="container-wide">${breadcrumb(lookup.restrito)}<div class="special-card"><div class="special-visual">${I('award',42)}</div><p class="hero-kicker">Em breve</p><h1>Bonificação em preparação.</h1><p>Esta área ainda está em desenvolvimento. Em breve, as regras de bonificação estarão disponíveis aqui.</p><a class="btn btn-primary btn-large" href="${url('index.html')}">Voltar à página inicial</a></div><div class="special-foot">Enquanto isso, consulte os <a href="${url('index.html#conteudos')}">demais conteúdos</a>.</div></div></main>`;}
+function articlePage(key){const item=lookup[key],data=content[key];return `<main class="article-main"><div class="container-wide">${breadcrumb(item)}<div class="article-layout"><article class="article"><header class="article-header"><p class="hero-kicker">${data.sub}</p><h1>${data.heading}</h1><p class="article-deck">${data.excerpt}</p><div class="article-meta"><span>${data.read}</span></div></header><figure class="article-figure"><img src="${asset(item.cover)}" alt=""/><figcaption>${item.label}</figcaption></figure><div class="article-body">${data.body()}</div></article>${aside(data)}</div><section class="related-section"><div class="related-heading"><h2>Outros conteúdos</h2></div><div class="content-grid related-grid">${relatedItems(key).map(x=>imgCard(x,true)).join('')}</div></section></div></main>`;}
+function restricted(){return `<main class="special-main"><div class="container-wide">${breadcrumb(lookup.restrito)}<div class="special-card"><div class="special-visual"><img src="${asset('icons/bonificacao.png')}?v=6" alt="" width="96" height="96"></div><p class="hero-kicker">Em breve</p><h1>Bonificação em preparação.</h1><p>Esta área ainda está em desenvolvimento. Em breve, as regras de bonificação estarão disponíveis aqui.</p><a class="btn btn-primary btn-large" href="${url('index.html')}">Voltar à página inicial</a></div><div class="special-foot">Enquanto isso, consulte os <a href="${url('index.html#conteudos')}">demais conteúdos</a>.</div></div></main>`;}
 function notFound(){return `<main class="special-main"><div class="container-wide"><div class="special-card notfound-card"><div class="error-number">404<span>.</span></div><div class="eyebrow">PÁGINA NÃO ENCONTRADA</div><h1>Parece que esta rota<br/>não existe.</h1><p>O endereço pode ter mudado ou a página não está mais disponível. Volte ao portal para encontrar o que precisa.</p><a class="btn btn-primary btn-large" href="${url('index.html')}">${I('arrowleft',18)} Voltar ao início</a></div></div></main>`;}
 function toast(message){let x=document.querySelector('.toast');if(!x){x=document.createElement('div');x.className='toast';x.setAttribute('role','status');x.setAttribute('aria-live','polite');document.body.appendChild(x);}x.innerHTML=`${I('info',18)}<span>${message}</span>`;x.classList.add('is-visible');clearTimeout(window.__toastTimeout);window.__toastTimeout=setTimeout(()=>x.classList.remove('is-visible'),4200);}
 function bind(){
