@@ -1,0 +1,13 @@
+{
+  "name": "portal-do-motorista",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portal do Motorista — tema escuro oficial, conteúdo operacional",
+  "scripts": {
+    "build:css": "node scripts/build-css.cjs",
+    "serve": "python3 -m http.server 4173"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.10"
+  }
+}
