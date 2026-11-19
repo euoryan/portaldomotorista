@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" fill="none" role="img" aria-label="Ilustração de ônibus">
+  <rect width="640" height="420" rx="16" fill="#111620"/>
+  <path d="M40 320h560" stroke="#30363d" stroke-width="2"/>
+  <ellipse cx="160" cy="318" rx="70" ry="8" fill="#0a0c10" opacity=".55"/>
+  <ellipse cx="470" cy="318" rx="70" ry="8" fill="#0a0c10" opacity=".55"/>
+  <!-- body -->
+  <path d="M78 168c0-28 18-48 48-48h320c42 0 72 22 84 58l28 90c4 14-4 28-18 28H108c-18 0-30-14-30-30v-98Z" fill="#216dde"/>
+  <path d="M78 214h480" stroke="#1a5bb8" stroke-width="3"/>
+  <!-- roof stripe -->
+  <path d="M126 120h318c22 0 36 10 42 28H118c4-16 14-28 28-28Z" fill="#1a5bb8"/>
+  <!-- windshield -->
+  <path d="M470 132c22 6 38 28 46 54H392c0-28 14-50 40-58l38 4Z" fill="#9ec5f0" opacity=".95"/>
+  <path d="M470 132c22 6 38 28 46 54H392c0-28 14-50 40-58l38 4Z" stroke="#0d3a7a" stroke-width="2"/>
+  <!-- side windows -->
+  <rect x="140" y="140" width="52" height="44" rx="6" fill="#9ec5f0"/>
+  <rect x="204" y="140" width="52" height="44" rx="6" fill="#9ec5f0"/>
+  <rect x="268" y="140" width="52" height="44" rx="6" fill="#9ec5f0"/>
+  <rect x="332" y="140" width="52" height="44" rx="6" fill="#9ec5f0"/>
+  <!-- door -->
+  <rect x="108" y="198" width="46" height="90" rx="6" fill="#0d3a7a"/>
+  <circle cx="144" cy="246" r="3" fill="#9ec5f0"/>
+  <!-- headlights -->
+  <rect x="548" y="236" width="18" height="14" rx="3" fill="#f2c14e"/>
+  <rect x="548" y="256" width="14" height="10" rx="2" fill="#e8eef5" opacity=".7"/>
+  <!-- bumper -->
+  <path d="M96 288h448c8 0 12 4 12 10v8H84v-8c0-6 4-10 12-10Z" fill="#161b22"/>
+  <!-- wheels -->
+  <circle cx="160" cy="304" r="36" fill="#0d1117" stroke="#30363d" stroke-width="4"/>
+  <circle cx="160" cy="304" r="16" fill="#216dde"/>
+  <circle cx="470" cy="304" r="36" fill="#0d1117" stroke="#30363d" stroke-width="4"/>
+  <circle cx="470" cy="304" r="16" fill="#216dde"/>
+  <!-- mirror -->
+  <path d="M556 168h18c6 0 10 4 10 10v18c0 4-4 8-8 8h-12" stroke="#8bb4d9" stroke-width="4" stroke-linecap="round"/>
+  <!-- brand mark -->
+  <circle cx="88" cy="96" r="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <path d="M88 82c8 0 14 2 14 6v4c2 0 4 2 4 4v6c0 2-2 4-4 4v10c0 2-2 4-4 4h-4v4c0 2-2 4-4 4h-4c-2 0-4-2-4-4v-4h-4c-2 0-4-2-4-4v-10c-2 0-4-2-4-4v-6c0-2 2-4 4-4v-4c0-4 6-6 14-6Zm-8 18h6v-8h-6v8Zm10 0h6v-8h-6v8Z" fill="#216dde"/>
+</svg>

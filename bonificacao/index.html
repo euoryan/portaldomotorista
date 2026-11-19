@@ -1,400 +1,50 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>euoryan // bonificacao</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%231E90FF'/%3E%3C/svg%3E">  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap">
-  <style>
-    :root {
-      --accent: #216dde;
-      --text: #c9d1d9;
-      --bg: #0d1117;
-      --bg-alt: #111620;
-      --border: #30363d;
-      --link: #58a6ff;
-      --hover-bg: #21262d;
-    }
-
-    * {margin:0; padding:0; box-sizing:border-box;}
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Ubuntu', sans-serif;
-      line-height: 1.7;
-      font-size: 16px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .container {
-      max-width: 750px;
-      margin: 0 auto;
-      padding: 0 20px;
-      width: 100%;
-    }
-
-    header {
-      padding: 30px 0 15px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-    }
-
-    .logo {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: white;
-      text-decoration: none;
-    }
-
-    .nav {
-      display: flex;
-    }
-
-    .nav a {
-      color: var(--text-color);
-      margin-left: 25px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      opacity: 0.8;
-      transition: opacity 0.2s;
-    }
-
-    .nav a:hover {
-      opacity: 1;
-    }
-
-    .hamburger {
-      display: none;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      color: var(--text-color);
-      font-size: 1.2rem;
-    }
-
-    /* Estilos da página 404 */
-    .error-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 60px 20px;
-      flex-grow: 1;
-    }
-
-    .error-icon {
-      font-size: 3rem;
-      color: var(--accent);
-      margin-bottom: 20px;
-      position: relative;
-    }
-
-    .error-code {
-      font-size: 5rem;
-      font-weight: 700;
-      margin-bottom: 5px;
-      color: white;
-      text-shadow: 0 0 10px rgba(33, 109, 222, 0.5);
-      animation: glitch 3s infinite linear;
-      position: relative;
-    }
-
-    @keyframes glitch {
-      0% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
-      
-      2% { transform: skewX(10deg); text-shadow: -3px 0 rgba(33, 109, 222, 0.8); }
-      4% { transform: skewX(-10deg); text-shadow: 3px 0 rgba(222, 33, 33, 0.8); }
-      6% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
-      
-      20% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
-      22% { transform: skewX(5deg); text-shadow: -2px 0 rgba(0, 255, 255, 0.8); }
-      24% { transform: skewX(-5deg); text-shadow: 2px 0 rgba(255, 0, 255, 0.8); }
-      26% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
-      
-      40% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
-      41% { transform: skewX(-7deg); text-shadow: 2px 0 rgba(255, 255, 0, 0.8); }
-      43% { transform: skewX(7deg); text-shadow: -2px 0 rgba(0, 255, 0, 0.8); }
-      45% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
-      
-      60% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
-      62% { transform: skewX(15deg); text-shadow: -4px 0 rgba(255, 0, 0, 0.8); }
-      64% { transform: skewX(-15deg); text-shadow: 4px 0 rgba(0, 0, 255, 0.8); }
-      65% { transform: skewX(5deg); text-shadow: -1px 0 rgba(255, 0, 255, 0.8); }
-      67% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
-      
-      80% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
-      81% { transform: skewX(-3deg); text-shadow: 1px 0 rgba(33, 222, 222, 0.8); }
-      83% { transform: skewX(3deg); text-shadow: -1px 0 rgba(222, 33, 222, 0.8); }
-      85% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
-      
-      100% { transform: skewX(0deg); text-shadow: 0 0 10px rgba(33, 109, 222, 0.5); }
-    }
-
-    .error-title {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: white;
-    }
-
-    .error-message {
-      max-width: 600px;
-      margin: 0 auto 20px;
-      color: #b4b6b9;
-      font-size: 1.05rem;
-    }
-
-    .error-actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 10px;
-    }
-
-    /* Estilo de botão antigo (mantido para referência) */
-    .error-button {
-      background-color: var(--bg-alt);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 20px;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-    }
-
-    /* Novo estilo de botão com efeito de reflexo */
-    .primary-button {
-      position: relative;
-      overflow: hidden;
-      background: var(--accent);
-      color: white;
-      padding: 0.6rem 1.5rem;
-      text-decoration: none;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 5px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: all 0.25s ease-in-out;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .primary-button::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -60%;
-      width: 20%;
-      height: 200%;
-      background: rgba(255, 255, 255, 0.1);
-      transform: rotate(30deg);
-      transition: all 0.6s ease;
-    }
-
-    .primary-button:hover {
-      background: var(--hover-bg);
-      border-color: var(--text);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .primary-button:hover::after {
-      left: 120%;
-    }
-
-    .footer-anchor {
-      margin-top: auto;
-    }
-
-    /* Responsividade */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: block;
-        padding: 8px;
-        color: white;
-      }
-      
-      .nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        width: 100%;
-        background-color: #161b22;
-        border-radius: 0 0 6px 6px;
-        border: 1px solid #30363d;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        z-index: 100;
-        overflow: hidden;
-      }
-      
-      .nav.active {
-        display: block;
-      }
-      
-      .nav a {
-        display: block;
-        margin: 0;
-        padding: 12px 20px;
-        border-bottom: 1px solid #30363d;
-      }
-      
-      .nav a:last-child {
-        border-bottom: none;
-      }
-      
-      .nav a:hover {
-        background-color: #1c2129;
-      }
-
-      .error-icon {
-        font-size: 4rem;
-      }
-
-      .error-code {
-        font-size: 2rem;
-      }
-
-      .error-title {
-        font-size: 1.5rem;
-      }
-
-      .error-message {
-        font-size: 0.95rem;
-      }
-    }
-      .back-to-top {
-        position: fixed;
-        bottom: 20px;
-        right: calc(50% - 375px + 20px);
-        background-color: var(--accent);
-        color: white;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        z-index: 999;
-      }
-
-      .back-to-top:hover {
-        opacity: 0.9;
-      }
-
-      .back-to-top i {
-        font-size: 1rem;
-      }
-
-      @media (max-width: 790px) {
-        .back-to-top {
-          right: 20px;
-        }
-      }
-  </style>
-</head>
-
-<body>
-  <a href="../" class="back-to-top" aria-label="Voltar para página inicial">
-    <i class="fas fa-house-crack"></i>
-  </a>
-
-  <div class="container">
-    <header>
-      <a href="../" class="logo">Bonificação</a>
-      <button class="hamburger" aria-label="Menu">
-        <i class="fas fa-bars"></i>
-      </button>
-      <nav class="nav">
-        <a href="../">Portal</a>
-        <a href="#footer-anchor">Contato</a>
-        <a href="https://t.me/oppmotorista" target="_blank">Suporte</a>
-      </nav>
-    </header>
-
-    <div class="error-container">
-      <div class="error-icon">
-        <i class="fas fa-clock"></i>
-      </div>
-      <h1 class="error-code">Em breve</h1>
-      <h2 class="error-title">Bonificação</h2>
-      <p class="error-message">
-        O guia de bonificação ainda está em preparação. Em breve você encontra aqui as regras e as situações em que a bonificação pode ser perdida.
-      </p>
-      <div class="error-actions">
-        <a href="../" class="primary-button">
-          <i class="fas fa-home"></i> Voltar ao Portal
-        </a>
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bonificação · Portal do Motorista</title><meta name="description" content="Orientações sobre a bonificação dos motoristas."><meta name="application-name" content="Portal do Motorista">
+<meta name="apple-mobile-web-app-title" content="Portal do Motorista"><meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Bonificação · Portal do Motorista"><meta property="og:description" content="Orientações sobre a bonificação dos motoristas."><meta property="og:site_name" content="Portal do Motorista">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=6"><link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=6">
+<link rel="preload" href="../assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="../assets/css/styles.css"><script src="../assets/js/app.js" defer></script></head>
+<body class="is-inner"><a class="skip" href="#principal">Pular para o conteúdo</a><header class="masthead"><div class="wrap topbar"><a class="brand" href="../"><span class="brand-mark" aria-hidden="true"></span><span>Portal do Motorista</span></a>
+  <nav class="primary-nav" aria-label="Principal"><a href="../" data-nav-link="/">Início</a><a href="../#avisos" data-nav-link="/#avisos">Mural de avisos</a><a href="../#conteudos" data-nav-link="/#conteudos">Guias</a><a href="../pesquisa/" data-nav-link="/pesquisa/">Biblioteca</a></nav>
+  <div class="header-tools"><a class="search-trigger" href="../pesquisa/" data-search aria-haspopup="dialog" aria-controls="search-dialog" aria-keyshortcuts="Control+K Meta+K" aria-label="Buscar no portal">
+  <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><span>Buscar<span class="wide-label"> no portal</span></span><kbd data-shortcut>Ctrl K</kbd></a><a class="header-support" href="https://t.me/oppmotorista" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v6a3 3 0 0 1-3 3h-4"/><rect x="3" y="12" width="4" height="7" rx="2"/><rect x="17" y="12" width="4" height="7" rx="2"/></svg><span>Falar com o Tráfego</span></a>
+  <button type="button" id="menu-toggle" class="icon-button" aria-label="Abrir menu" aria-haspopup="dialog" aria-controls="menu" hidden><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <noscript><a class="icon-button menu-fallback" href="#rodape" aria-label="Ir para a navegação do rodapé"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></a></noscript></div>
+  </div></header>
+<main id="principal" class="state wrap"><span class="brand-mark" aria-hidden="true"></span><h1>Bonificação</h1><p>As orientações estão em revisão e serão publicadas aqui.</p><dl class="credit"><dt><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5zm-9 9 9 5 9-5M3 16l9 5 9-5"/></svg>Setor responsável</dt><dd>Gestão de Pessoas</dd></dl><a class="button button-outline" href="../#conteudos">Ver outros guias<svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></main>
+<footer id="rodape"><div class="wrap">
+    <div class="foot-main">
+      <div class="foot-id"><a class="brand" href="../"><span class="brand-mark" aria-hidden="true"></span><span>Portal do Motorista</span></a><p>Guias, avisos e serviços para a rotina de quem dirige.</p><a class="button button-outline foot-support" href="https://t.me/oppmotorista" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v6a3 3 0 0 1-3 3h-4"/><rect x="3" y="12" width="4" height="7" rx="2"/><rect x="17" y="12" width="4" height="7" rx="2"/></svg><span>Falar com o Tráfego</span></a></div>
+      <div class="foot-cols">
+        <div class="foot-col"><h3>Portal</h3><nav aria-label="Seções do portal">
+          <a class="foot-link" href="../">Início</a><a class="foot-link" href="../#avisos">Mural de avisos</a><a class="foot-link" href="../#conteudos">Guias e procedimentos</a><a class="foot-link" href="../pesquisa/">Biblioteca</a>
+        </nav></div>
+        <div class="foot-col"><h3>Guias</h3><nav aria-label="Guias operacionais">
+          <a class="foot-link" href="../guianovos/">Novos motoristas</a><a class="foot-link" href="../sinistro/">Em caso de sinistro</a><a class="foot-link" href="../nossasregras/">Nossas regras</a><a class="foot-link" href="../guiaintelbras/">Guia Intelbras</a>
+        </nav></div>
+        <div class="foot-col"><h3>Serviços</h3><nav aria-label="Serviços e recursos">
+          <a class="foot-link" href="../diretoriosdelinks/">Diretório de links</a><a class="foot-link" href="../beneficios/">Benefícios e parceiros</a><a class="foot-link" href="../wifimotoristas/">Wi-Fi dos motoristas</a><a class="foot-link" href="../bonificacao/">Bonificação</a>
+        </nav></div>
       </div>
     </div>
-
-    <div id="footer-anchor" class="footer-anchor"></div>
-  </div>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Menu mobile toggle
-      const hamburger = document.querySelector('.hamburger');
-      const nav = document.querySelector('.nav');
-      
-      hamburger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        nav.classList.toggle('active');
-      });
-      
-      // Fechar menu ao clicar fora
-      document.addEventListener('click', function(e) {
-        if (!nav.contains(e.target) && !hamburger.contains(e.target) && nav.classList.contains('active')) {
-          nav.classList.remove('active');
-        }
-      });
-      
-      // Fechar menu ao clicar em um link
-      const navLinks = nav.querySelectorAll('a');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          nav.classList.remove('active');
-        });
-      });
-      
-      // Footer async load
-      fetch('https://raw.githubusercontent.com/euoryan/euoryan.github.io/refs/heads/main/assets/pages/footer.html')
-        .then(response => response.ok ? response.text() : Promise.reject())
-        .then(html => {
-          const temp = document.createElement('div');
-          temp.innerHTML = html.trim();
-          const footer = temp.querySelector('footer');
-          if (footer) document.querySelector('.footer-anchor').appendChild(footer);
-        })
-        .catch(() => {
-          document.querySelector('.footer-anchor').innerHTML = `
-            <footer class="footer">
-              <div class="container">
-                <div class="footer-rights">
-                  <span>© 2024 por Ryan</span>
-                </div>
-              </div>
-            </footer>
-          `;
-        });
-    });
-  </script>
-</body>
-</html>
+    <div class="foot-sub"><span class="foot-copy"><span class="brand-mark" aria-hidden="true"></span><small>© 2026 Portal do Motorista</small></span><nav aria-label="Informações legais">
+      <a class="foot-link" href="https://euoryan.com/politica/" target="_blank" rel="noopener noreferrer">Privacidade</a><a class="foot-link" href="https://euoryan.com/termos/" target="_blank" rel="noopener noreferrer">Termos</a>
+    </nav></div>
+  </div></footer><dialog id="menu" class="menu-dialog" aria-labelledby="menu-title">
+    <div class="dialog-head"><a class="brand" href="../"><span class="brand-mark" aria-hidden="true"></span><span>Portal do Motorista</span></a><span class="sr-only" id="menu-title">Menu de navegação</span><button class="icon-button" data-close aria-label="Fechar menu"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div class="sidebar-body"><div class="sidebar-group"><p class="sidebar-label">Navegação</p><nav aria-label="Navegação principal"><a href="../" data-nav-link="/"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10H3zM9 20v-7h6v7"/></svg><span>Início</span></a><a href="../#avisos" data-nav-link="/#avisos"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 20a2.2 2.2 0 0 0 4 0"/></svg><span>Mural de avisos</span></a><a href="../#conteudos" data-nav-link="/#conteudos"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v15M3 4c4 0 6 .5 9 2 3-1.5 5-2 9-2v14c-4 0-6 .5-9 2-3-1.5-5-2-9-2z"/></svg><span>Guias</span></a><a href="../pesquisa/" data-nav-link="/pesquisa/"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h4v15H4zM10 5h4v15h-4zM16 6l3-1 4 14-3 1z"/></svg><span>Biblioteca</span></a></nav></div>
+    <div class="sidebar-group"><p class="sidebar-label">Guias e páginas</p><nav aria-label="Guias do portal"><a href="../guianovos/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Guia para novos motoristas</span></a><a href="../sinistro/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Em caso de sinistro</span></a><a href="../nossasregras/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Nossas regras</span></a><a href="../guiaintelbras/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Guia Intelbras</span></a><a href="../diretoriosdelinks/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Diretório de links</span></a><a href="../beneficios/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Benefícios e parceiros</span></a><a href="../wifimotoristas/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Wi-Fi dos motoristas</span></a><a href="../bonificacao/" aria-current="page"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Bonificação</span></a></nav></div></div>
+    <div class="sidebar-foot"><a class="button button-outline menu-support" href="https://t.me/oppmotorista" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v6a3 3 0 0 1-3 3h-4"/><rect x="3" y="12" width="4" height="7" rx="2"/><rect x="17" y="12" width="4" height="7" rx="2"/></svg><span>Falar com o Tráfego</span></a></div>
+  </dialog>
+  <dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title">
+    <h2 class="sr-only" id="search-title">Busca no portal</h2>
+    <div class="command-field"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="command-input" type="search" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="command-results" aria-label="Buscar páginas ou assuntos" placeholder="Buscar páginas ou assuntos…" autocomplete="off" spellcheck="false">
+      <button class="command-close" data-close aria-label="Fechar busca"><span>Esc</span><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div class="command-group" id="command-group">Sugestões</div>
+    <div id="command-results" role="listbox" aria-labelledby="command-group"></div><p class="command-status" role="status"></p>
+    <template id="command-option"><a role="option" tabindex="-1"><span class="result-icon"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg></span>
+      <span class="result-copy"><strong></strong><small></small></span><span class="result-key"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5v6a3 3 0 0 1-3 3H4m5-5-5 5 5 5"/></svg></span></a></template>
+    <div class="command-bottom"><div class="keyboard-help"><span><kbd>↑</kbd><kbd>↓</kbd> Navegar</span><span><kbd>↵</kbd> Abrir</span></div>
+    <a class="command-library" href="../pesquisa/">Abrir biblioteca<svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+  </dialog></body></html>

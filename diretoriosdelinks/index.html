@@ -1,459 +1,82 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>euoryan // diretórios</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%231E90FF'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap">
-  <style>
-    :root {
-      --accent: #216dde;
-      --text: #c9d1d9;
-      --bg: #0d1117;
-      --bg-alt: #111620;
-      --border: #30363d;
-      --link: #58a6ff;
-    }
-
-    * {margin:0; padding:0; box-sizing:border-box;}
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Ubuntu', sans-serif;
-      line-height: 1.7;
-      font-size: 16px;
-    }
-
-    .container {
-      max-width: 750px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    header {
-      padding: 30px 0 15px;
-      margin-bottom: 30px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-    }
-
-    .logo {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: white;
-      text-decoration: none;
-    }
-
-    .nav {
-      display: flex;
-    }
-
-    .nav a {
-      color: var(--text-color);
-      margin-left: 25px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      opacity: 0.8;
-      transition: opacity 0.2s;
-    }
-
-    .nav a:hover {
-      opacity: 1;
-    }
-
-    .hamburger {
-      display: none;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      color: var(--text-color);
-      font-size: 1.2rem;
-    }
-
-    .article {
-      margin-bottom: 60px;
-    }
-
-    .article-meta {
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 25px;
-      font-size: 0.85rem;
-      color: var(--text-color);
-      opacity: 0.7;
-    }
-
-    .article-meta span {
-      margin-right: 20px;
-      margin-bottom: 0px;
-      display: flex;
-      align-items: center;
-    }
-
-    .article-meta i {
-      min-width: 14px;
-      margin-right: 5px;
-    }
-
-    h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      margin-bottom: 30px;
-      line-height: 1.3;
-      color: white;
-    }
-
-    .article-content {
-      font-size: 1.05rem;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin: 45px 0 18px;
-      color: white;
-      position: relative;
-      padding-left: 15px;
-    }
-
-    h2::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 6px;
-      bottom: 6px;
-      width: 4px;
-      background-color: var(--accent);
-      border-radius: 4px;
-    }
-
-    p {
-      margin-bottom: 22px;
-    }
-
-    ul {
-      list-style-type: none;
-      margin: 20px 0 25px;
-      padding-left: 10px;
-    }
-
-    li {
-      margin-bottom: 12px;
-      position: relative;
-      padding-left: 22px;
-    }
-
-    li::before {
-      content: "•";
-      color: var(--accent);
-      position: absolute;
-      left: 0;
-      font-weight: bold;
-      font-size: 1.2em;
-    }
-
-    .link-inline {
-      color: var(--link);
-      font-weight: bold;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .link-inline:hover {
-      color: #79b9ff;
-    }
-
-    .link-inline i {
-      font-size: 0.8em;
-      margin-left: 4px;
-    }
-
-    .article-intro {
-      font-size: 0.9rem;
-      line-height: 1.8;
-      margin-bottom: 35px;
-      color: #b4b6b9;
-    }
-
-    .quote {
-      font-style: italic;
-      text-align: left;
-      margin: 30px 0;
-      color: #b4b6b9;
-      font-size: 0.9rem;
-    }
-
-    .footer-anchor {
-      margin-top: 20px;
-    }
-
-    @media (max-width: 768px) {
-      .hamburger {
-        display: block;
-        padding: 8px;
-        color: white;
-      }
-      
-      .nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        width: 100%;
-        background-color: #161b22;
-        border-radius: 0 0 6px 6px;
-        border: 1px solid #30363d;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        z-index: 100;
-        overflow: hidden;
-      }
-      
-      .nav.active {
-        display: block;
-      }
-      
-      .nav a {
-        display: block;
-        margin: 0;
-        padding: 12px 20px;
-        border-bottom: 1px solid #30363d;
-      }
-      
-      .nav a:last-child {
-        border-bottom: none;
-      }
-      
-      .nav a:hover {
-        background-color: #1c2129;
-      }
-      
-      h1 {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-      }
-      
-      h2 {
-        font-size: 1.3rem;
-        margin: 30px 0 15px;
-      }
-      
-      .article-content {
-        font-size: 0.95rem;
-      }
-      
-      .article-meta {
-        font-size: 0.8rem;
-      }
-      
-      .article-intro {
-        font-size: 0.85rem;
-      }
-      
-      p, li {
-        margin-bottom: 15px;
-      }
-
-      }
-      .back-to-top {
-        position: fixed;
-        bottom: 20px;
-        right: calc(50% - 375px + 20px);
-        background-color: var(--accent);
-        color: white;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        z-index: 999;
-      }
-
-      .back-to-top:hover {
-        opacity: 0.9;
-      }
-
-      .back-to-top i {
-        font-size: 1rem;
-      }
-
-      @media (max-width: 790px) {
-        .back-to-top {
-          right: 20px;
-        }
-      }
-  </style>
-</head>
-
-<body>
-  <a href="../" class="back-to-top" aria-label="Voltar para página inicial">
-    <i class="fas fa-house-crack"></i>
-  </a>
-
-  <div class="container">
-    <header>
-      <a href="../" class="logo">Diretório de Links</a>
-      <button class="hamburger" aria-label="Menu">
-        <i class="fas fa-bars"></i>
-      </button>
-      <nav class="nav">
-        <!-- Link direto para o index.html que está duas pastas acima -->
-        <a href="../">Portal</a>
-        <a href="#footer-anchor">Contato</a>
-        <a href="https://t.me/oppmotorista" target="_blank">Ligar Suporte</a>
-      </nav>
-    </header>
-
-    <article class="article">
-      <div class="article-meta">
-        <span>
-          <i class="fas fa-calendar-days"></i>
-          <span>03 Maio, 2025</span>
-        </span>
-        <span>
-          <i class="fas fa-headset"></i>
-          <span>Suporte Operacional</span>
-        </span>
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diretório de links · Portal do Motorista</title><meta name="description" content="Formulários e sistemas da operação."><meta name="application-name" content="Portal do Motorista">
+<meta name="apple-mobile-web-app-title" content="Portal do Motorista"><meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Diretório de links · Portal do Motorista"><meta property="og:description" content="Formulários e sistemas da operação."><meta property="og:site_name" content="Portal do Motorista">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=6"><link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=6">
+<link rel="preload" href="../assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="../assets/css/styles.css"><script src="../assets/js/app.js" defer></script></head>
+<body class="is-inner"><a class="skip" href="#principal">Pular para o conteúdo</a><header class="masthead"><div class="wrap topbar"><a class="brand" href="../"><span class="brand-mark" aria-hidden="true"></span><span>Portal do Motorista</span></a>
+  <nav class="primary-nav" aria-label="Principal"><a href="../" data-nav-link="/">Início</a><a href="../#avisos" data-nav-link="/#avisos">Mural de avisos</a><a href="../#conteudos" data-nav-link="/#conteudos">Guias</a><a href="../pesquisa/" data-nav-link="/pesquisa/">Biblioteca</a></nav>
+  <div class="header-tools"><a class="search-trigger" href="../pesquisa/" data-search aria-haspopup="dialog" aria-controls="search-dialog" aria-keyshortcuts="Control+K Meta+K" aria-label="Buscar no portal">
+  <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><span>Buscar<span class="wide-label"> no portal</span></span><kbd data-shortcut>Ctrl K</kbd></a><a class="header-support" href="https://t.me/oppmotorista" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v6a3 3 0 0 1-3 3h-4"/><rect x="3" y="12" width="4" height="7" rx="2"/><rect x="17" y="12" width="4" height="7" rx="2"/></svg><span>Falar com o Tráfego</span></a>
+  <button type="button" id="menu-toggle" class="icon-button" aria-label="Abrir menu" aria-haspopup="dialog" aria-controls="menu" hidden><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <noscript><a class="icon-button menu-fallback" href="#rodape" aria-label="Ir para a navegação do rodapé"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></a></noscript></div>
+  </div></header>
+<main id="principal" class="wrap article-shell"><nav class="crumbs" aria-label="Caminho da página"><a href="../">Início</a><svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg><a href="../pesquisa/">Biblioteca</a><svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg><span aria-current="page">Diretório de links</span></nav>
+    <div class="article-layout"><article class="reading">
+      <header class="reading-head"><h1>Diretório de links</h1>
+      <p class="deck">Formulários e sistemas da operação.</p>
+      <dl class="credit"><dt><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5zm-9 9 9 5 9-5M3 16l9 5 9-5"/></svg>Setor responsável</dt><dd>Infraestrutura e TI (DevOps)</dd></dl></header>
+      <div class="reading-body">
+        <section class="reading-section" id="links"><h2>Formulários e acessos</h2><div class="prose"><ul class="resources"><li><a href="https://euoryan.com/dt/fichamecanica/" target="_blank" rel="noopener noreferrer">
+      <span><strong>Ficha mecânica</strong><small>Preencha o registro do veículo.</small></span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7m-11 4L21 3m-1 11v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5"/></svg>
+    </a></li><li><a href="https://t.me/cadfastbot" target="_blank" rel="noopener noreferrer">
+      <span><strong>Receber rotas</strong><small>Consulte suas viagens no bot do Telegram.</small></span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7m-11 4L21 3m-1 11v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5"/></svg>
+    </a></li><li><a href="https://bit.ly/registrocrachas" target="_blank" rel="noopener noreferrer">
+      <span><strong>Registro de crachá</strong><small>Informe a ausência de crachá.</small></span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7m-11 4L21 3m-1 11v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5"/></svg>
+    </a></li><li><a href="../guianovos/">
+      <span><strong>Guia para novos motoristas</strong><small>Configure os acessos da primeira viagem.</small></span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
+    </a></li><li><a href="../guiaintelbras/">
+      <span><strong>Guia Intelbras</strong><small>Consulte os procedimentos do contrato.</small></span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
+    </a></li><li><a href="https://t.me/oppmotorista" target="_blank" rel="noopener noreferrer">
+      <span><strong>Falar com o Tráfego</strong><small>Atendimento pelo Telegram.</small></span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7m-11 4L21 3m-1 11v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5"/></svg>
+    </a></li></ul></div></section><section class="reading-section" id="notas"><h2>Ao preencher os registros</h2><div class="prose"><ul class="reading-list"><li>A ficha mecânica é obrigatória. Inclua os detalhes e os identificadores solicitados no formulário.</li><li>Registre toda ausência de crachá.</li><li>Use o bot de rotas apenas para as funções disponíveis no próprio aplicativo.</li></ul></div></section>
       </div>
-
-      <h1>Diretório de Links: Recursos e Ferramentas Essenciais</h1>
-      
-      <p class="article-intro" style="margin-top: -20px; margin-bottom: 20px;">
-        Encontre rapidamente recursos e ferramentas essenciais em um só lugar para garantir a excelência operacional.
-      </p>
-
-      <div class="article-content">
-        <h2>Ficha Mecânica</h2>
-        <p>
-          Acesse rapidamente o formulário para as fichas mecânicas:
-        </p>
-        <ul>
-          <li>Preenchimento obrigatório em qualquer circunstância</li>
-          <li>Inclua todos os detalhes possíveis para melhor compreensão</li>
-          <li>Registre os IDs das fichas para futura identificação</li>
-        </ul>
-        <p>
-          Para acessar o formulário oficial da ficha mecânica, <a href="https://euoryan.com/dt/fichamecanica/" target="_blank" class="link-inline">clique aqui <i class="fa-solid fa-up-right-from-square"></i></a>.
-        </p>
-
-        <h2>Dúvidas sobre o Telegram</h2>
-        <p>
-          Informações importantes sobre o uso do Telegram em nossa operação:
-        </p>
-        <ul>
-          <li>Consulte regularmente para estar sempre informado</li>
-          <li>Siga os processos estabelecidos para comunicação eficiente</li>
-          <li>Entre em contato com o suporte se precisar de assistência</li>
-        </ul>
-        <p>
-          Para visualizar os processos de comunicação via Telegram, <a href="guiatelegram.html" target="_blank" class="link-inline">acesse aqui <i class="fa-solid fa-up-right-from-square"></i></a>.
-        </p>
-
-        <h2>Portal de Roteiro Intelbras</h2>
-        <p>
-          Diretrizes para acesso ao portal de roteiros da Intelbras:
-        </p>
-        <ul>
-          <li>O portal é separado por turnos, cada um com suas rotas específicas</li>
-          <li>As rotas sofrem atualizações constantes; sempre consulte antes de realizar</li>
-          <li>É obrigatório avisar no grupo quando iniciar a rota</li>
-        </ul>
-        <p>
-          Para acessar o portal completo com roteiros, links e grupos, <a href="http://alexandreturismo.com/portalintelbras" target="_blank" class="link-inline">clique aqui <i class="fa-solid fa-up-right-from-square"></i></a>.
-        </p>
-
-        <h2>Receber Rotas</h2>
-        <p>
-          Acesse nosso bot no Telegram para receber suas rotas automaticamente:
-        </p>
-        <ul>
-          <li>Ao iniciar, você receberá seu ID de usuário para identificação</li>
-          <li>Nosso bot é seguro e acessa apenas as informações compartilhadas</li>
-          <li>Evite enviar mensagens aleatórias para o bot</li>
-          <li>Todas as mensagens do bot têm um botão de suporte</li>
-        </ul>
-        <p>
-          Para ativar o bot e receber suas rotas, <a href="https://t.me/cadfastbot" target="_blank" class="link-inline">clique aqui <i class="fa-solid fa-up-right-from-square"></i></a>.
-        </p>
-
-        <h2>Registro de Ausência Crachá</h2>
-        <p>
-          Sempre que um passageiro estiver sem o crachá, é obrigatório registrar a ocorrência.
-        </p>
-        <ul>
-          <li>Registre toda e qualquer ausência de crachá, sem exceções.</li>
-          <li>Certifique-se de preencher corretamente todas as informações do funcionário.</li>
-        </ul>
-        
-        <p>
-          Para acessar o formulário de registro, <a href="https://bit.ly/registrocrachas" target="_blank" class="link-inline">clique aqui <i class="fa-solid fa-up-right-from-square"></i></a>.
-        </p>
-
-        <p>
-          Para esclarecimentos adicionais ou suporte técnico, entre em contato com o departamento operacional através dos canais oficiais de comunicação. Ou clique aqui: <a href="https://t.me/oppmotorista" target="_blank" class="link-inline">Suporte <i class="fa-solid fa-up-right-from-square"></i></a>
-        </p>
+    </article><aside class="rail"><div class="rail-inner"><h2><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h12M9 12h12M9 18h12M3 6h1M3 12h1M3 18h1"/></svg><span>Nesta página</span></h2><nav class="toc-links" aria-label="Seções do guia"><a href="#links" data-toc="links" aria-current="location">Formulários e acessos</a><a href="#notas" data-toc="notas">Ao preencher os registros</a></nav>
+      <div class="rail-help"><a class="button button-outline" href="https://t.me/oppmotorista" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v6a3 3 0 0 1-3 3h-4"/><rect x="3" y="12" width="4" height="7" rx="2"/><rect x="17" y="12" width="4" height="7" rx="2"/></svg><span>Falar com o Tráfego</span></a></div></div></aside></div>
+    <div class="notion-toc" data-notion-toc>
+      <button type="button" class="notion-toc-btn" data-toc-toggle aria-expanded="false" aria-controls="notion-toc-panel" aria-label="Índice desta página"><span class="notion-bars" aria-hidden="true"><span data-bar="links" data-active="true"></span><span data-bar="notas"></span></span><span class="notion-toc-label">Tópicos</span></button>
+      <div class="notion-toc-backdrop" data-toc-close hidden></div>
+      <div class="notion-toc-panel" id="notion-toc-panel" role="dialog" aria-label="Tópicos desta página" hidden>
+        <div class="notion-toc-head"><span>Nesta página</span><button type="button" class="icon-button" data-toc-close aria-label="Fechar índice"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+        <nav class="toc-links" aria-label="Seções do guia"><a href="#links" data-toc="links" aria-current="location">Formulários e acessos</a><a href="#notas" data-toc="notas">Ao preencher os registros</a></nav>
       </div>
-    </article>
-
-    <div id="footer-anchor" class="footer-anchor"></div>
-  </div>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Menu mobile toggle
-      const hamburger = document.querySelector('.hamburger');
-      const nav = document.querySelector('.nav');
-      
-      hamburger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        nav.classList.toggle('active');
-      });
-      
-      // Fechar menu ao clicar fora
-      document.addEventListener('click', function(e) {
-        if (!nav.contains(e.target) && !hamburger.contains(e.target) && nav.classList.contains('active')) {
-          nav.classList.remove('active');
-        }
-      });
-      
-      // Fechar menu ao clicar em um link
-      const navLinks = nav.querySelectorAll('a');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          nav.classList.remove('active');
-        });
-      });
-      
-      // Footer async load
-      fetch('https://raw.githubusercontent.com/euoryan/euoryan.github.io/refs/heads/main/assets/pages/footer.html')
-        .then(response => response.ok ? response.text() : Promise.reject())
-        .then(html => {
-          const temp = document.createElement('div');
-          temp.innerHTML = html.trim();
-          const footer = temp.querySelector('footer');
-          if (footer) document.querySelector('.footer-anchor').appendChild(footer);
-        })
-        .catch(() => {
-          document.querySelector('.footer-anchor').innerHTML = `
-            <footer class="footer">
-              <div class="container">
-                <div class="footer-rights">
-                  <span>© 2024 por Ryan</span>
-                </div>
-              </div>
-            </footer>
-          `;
-        });
-    });
-  </script>
-</body>
-</html>
+    </div>
+    <nav class="related" aria-label="Outros guias"><h2>Continue lendo</h2><ul>
+      <li><a class="related-card" href="../wifimotoristas/"><img src="../assets/images/pages/wifimotoristas/thumb/wifimotoristas.png" alt="" width="500" height="300" loading="lazy"><span><strong>Wi-Fi dos motoristas</strong><small>Rede, senha e QR Code da unidade.</small></span></a></li><li><a class="related-card" href="../beneficios/"><img src="../assets/images/pages/beneficios/thumb/beneficios.png" alt="" width="500" height="300" loading="lazy"><span><strong>Benefícios e parceiros</strong><small>Descontos e condições dos parceiros.</small></span></a></li><li><a class="related-card" href="../sinistro/"><img src="../assets/images/pages/sinistro/thumb/sinistro.png" alt="" width="500" height="300" loading="lazy"><span><strong>Em caso de sinistro</strong><small>Como agir e registrar um acidente.</small></span></a></li></ul></nav>
+  </main>
+<footer id="rodape"><div class="wrap">
+    <div class="foot-main">
+      <div class="foot-id"><a class="brand" href="../"><span class="brand-mark" aria-hidden="true"></span><span>Portal do Motorista</span></a><p>Guias, avisos e serviços para a rotina de quem dirige.</p><a class="button button-outline foot-support" href="https://t.me/oppmotorista" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v6a3 3 0 0 1-3 3h-4"/><rect x="3" y="12" width="4" height="7" rx="2"/><rect x="17" y="12" width="4" height="7" rx="2"/></svg><span>Falar com o Tráfego</span></a></div>
+      <div class="foot-cols">
+        <div class="foot-col"><h3>Portal</h3><nav aria-label="Seções do portal">
+          <a class="foot-link" href="../">Início</a><a class="foot-link" href="../#avisos">Mural de avisos</a><a class="foot-link" href="../#conteudos">Guias e procedimentos</a><a class="foot-link" href="../pesquisa/">Biblioteca</a>
+        </nav></div>
+        <div class="foot-col"><h3>Guias</h3><nav aria-label="Guias operacionais">
+          <a class="foot-link" href="../guianovos/">Novos motoristas</a><a class="foot-link" href="../sinistro/">Em caso de sinistro</a><a class="foot-link" href="../nossasregras/">Nossas regras</a><a class="foot-link" href="../guiaintelbras/">Guia Intelbras</a>
+        </nav></div>
+        <div class="foot-col"><h3>Serviços</h3><nav aria-label="Serviços e recursos">
+          <a class="foot-link" href="../diretoriosdelinks/">Diretório de links</a><a class="foot-link" href="../beneficios/">Benefícios e parceiros</a><a class="foot-link" href="../wifimotoristas/">Wi-Fi dos motoristas</a><a class="foot-link" href="../bonificacao/">Bonificação</a>
+        </nav></div>
+      </div>
+    </div>
+    <div class="foot-sub"><span class="foot-copy"><span class="brand-mark" aria-hidden="true"></span><small>© 2026 Portal do Motorista</small></span><nav aria-label="Informações legais">
+      <a class="foot-link" href="https://euoryan.com/politica/" target="_blank" rel="noopener noreferrer">Privacidade</a><a class="foot-link" href="https://euoryan.com/termos/" target="_blank" rel="noopener noreferrer">Termos</a>
+    </nav></div>
+  </div></footer><dialog id="menu" class="menu-dialog" aria-labelledby="menu-title">
+    <div class="dialog-head"><a class="brand" href="../"><span class="brand-mark" aria-hidden="true"></span><span>Portal do Motorista</span></a><span class="sr-only" id="menu-title">Menu de navegação</span><button class="icon-button" data-close aria-label="Fechar menu"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div class="sidebar-body"><div class="sidebar-group"><p class="sidebar-label">Navegação</p><nav aria-label="Navegação principal"><a href="../" data-nav-link="/"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10H3zM9 20v-7h6v7"/></svg><span>Início</span></a><a href="../#avisos" data-nav-link="/#avisos"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 20a2.2 2.2 0 0 0 4 0"/></svg><span>Mural de avisos</span></a><a href="../#conteudos" data-nav-link="/#conteudos"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v15M3 4c4 0 6 .5 9 2 3-1.5 5-2 9-2v14c-4 0-6 .5-9 2-3-1.5-5-2-9-2z"/></svg><span>Guias</span></a><a href="../pesquisa/" data-nav-link="/pesquisa/"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h4v15H4zM10 5h4v15h-4zM16 6l3-1 4 14-3 1z"/></svg><span>Biblioteca</span></a></nav></div>
+    <div class="sidebar-group"><p class="sidebar-label">Guias e páginas</p><nav aria-label="Guias do portal"><a href="../guianovos/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Guia para novos motoristas</span></a><a href="../sinistro/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Em caso de sinistro</span></a><a href="../nossasregras/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Nossas regras</span></a><a href="../guiaintelbras/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Guia Intelbras</span></a><a href="../diretoriosdelinks/" aria-current="page"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Diretório de links</span></a><a href="../beneficios/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Benefícios e parceiros</span></a><a href="../wifimotoristas/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Wi-Fi dos motoristas</span></a><a href="../bonificacao/"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg><span>Bonificação</span></a></nav></div></div>
+    <div class="sidebar-foot"><a class="button button-outline menu-support" href="https://t.me/oppmotorista" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v6a3 3 0 0 1-3 3h-4"/><rect x="3" y="12" width="4" height="7" rx="2"/><rect x="17" y="12" width="4" height="7" rx="2"/></svg><span>Falar com o Tráfego</span></a></div>
+  </dialog>
+  <dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title">
+    <h2 class="sr-only" id="search-title">Busca no portal</h2>
+    <div class="command-field"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="command-input" type="search" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="command-results" aria-label="Buscar páginas ou assuntos" placeholder="Buscar páginas ou assuntos…" autocomplete="off" spellcheck="false">
+      <button class="command-close" data-close aria-label="Fechar busca"><span>Esc</span><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div class="command-group" id="command-group">Sugestões</div>
+    <div id="command-results" role="listbox" aria-labelledby="command-group"></div><p class="command-status" role="status"></p>
+    <template id="command-option"><a role="option" tabindex="-1"><span class="result-icon"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 2v6h6M8 13h8m-8 4h6"/></svg></span>
+      <span class="result-copy"><strong></strong><small></small></span><span class="result-key"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5v6a3 3 0 0 1-3 3H4m5-5-5 5 5 5"/></svg></span></a></template>
+    <div class="command-bottom"><div class="keyboard-help"><span><kbd>↑</kbd><kbd>↓</kbd> Navegar</span><span><kbd>↵</kbd> Abrir</span></div>
+    <a class="command-library" href="../pesquisa/">Abrir biblioteca<svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+  </dialog></body></html>

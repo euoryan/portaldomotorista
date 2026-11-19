@@ -1,0 +1,14 @@
+{
+  "name": "portal-do-motorista",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portal de guias, serviços e avisos para motoristas",
+  "scripts": {
+    "build": "node scripts/build-site.mjs && npm run build:css && node scripts/publish-files.mjs",
+    "build:css": "node scripts/build-css.cjs",
+    "serve": "python3 -m http.server 4173"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.10"
+  }
+}
