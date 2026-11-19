@@ -16,12 +16,12 @@ function noticeCard(item) {
 }
 
 export function noticeBoard(items) {
-  const shown = items.slice(0, 4);
-  const rest = items.slice(4);
-  const more = rest.length ? `<details class="older-notices"><summary>Ver mais avisos (${rest.length}) ${icon('down', 14)}</summary><ul class="notice-grid">${rest.map(noticeCard).join('')}</ul></details>` : '';
-  return `<section id="avisos" class="notice-board${items.length ? '' : ' board-empty'}" aria-labelledby="mural-title">
-    <div class="board-heading"><span class="board-tag">${icon('bell', 14)}Mural de avisos</span><h2 id="mural-title" class="sr-only">Avisos da equipe</h2>${items.length ? `<span class="board-count">${items.length} ${items.length === 1 ? 'aviso ativo' : 'avisos ativos'}</span>` : ''}</div>
-    ${items.length ? `<ul class="notice-grid">${shown.map(noticeCard).join('')}</ul>${more}` : '<p class="notice-empty">Nenhum aviso publicado no momento.</p>'}
+  const many = items.length > 1;
+  const controls = many ? `<div class="board-nav" hidden data-board-nav><button type="button" class="icon-button" data-prev aria-label="Aviso anterior">${icon('back', 16)}</button><button type="button" class="icon-button" data-next aria-label="Próximo aviso">${icon('arrow', 16)}</button></div>` : '';
+  const dots = many ? `<div class="board-dots" hidden data-board-dots>${items.map((_, i) => `<button type="button" aria-label="Aviso ${i + 1}" aria-current="${i === 0}"></button>`).join('')}</div>` : '';
+  return `<section id="avisos" class="notice-board${items.length ? '' : ' board-empty'}" aria-labelledby="mural-title"${many ? ' data-carousel' : ''}>
+    <div class="board-heading"><span class="board-tag">${icon('bell', 14)}<span id="mural-title">Mural de avisos</span></span>${controls}</div>
+    ${items.length ? `<ul class="notice-track" tabindex="0" aria-label="Avisos">${items.map(noticeCard).join('')}</ul>${dots}` : '<p class="notice-empty">Nenhum aviso publicado no momento.</p>'}
   </section>`;
 }
 
@@ -68,7 +68,7 @@ export function home(guides) {
   const rank = new Map(guideOrder.map((slug, index) => [slug, index]));
   const ordered = [...guides].sort((a, b) => (rank.get(a.slug) ?? rank.size) - (rank.get(b.slug) ?? rank.size));
   return `<main id="principal" class="home-layout">
-    <section class="hero"><div class="wrap">
+    <section class="hero"><div class="wrap hero-grid">
       <header class="home-heading"><p class="eyebrow">Portal do Motorista</p><h1>Guia de Jornada</h1>
         <p class="lede">Avisos, procedimentos e serviços para a sua rotina, em um só lugar.</p>
         <form class="hero-search" role="search" action="/pesquisa/">${icon('search', 18)}<input type="search" name="q" aria-label="Pesquisar no portal" placeholder="Pesquisar guias e procedimentos" autocomplete="off"><button class="button button-primary" type="submit">Buscar</button></form>

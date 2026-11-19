@@ -1,13 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 32 32">
   <title>Portal do Motorista</title>
   <style>
-    .bg { fill: #111 } .fg { stroke: #fff; fill: none } .dot { fill: #fff }
-    @media (prefers-color-scheme: dark) { .bg { fill: #fff } .fg { stroke: #111 } .dot { fill: #111 } }
+    .bg { fill: #111 } .fg { fill: #fff }
+    @media (prefers-color-scheme: dark) { .bg { fill: #fff } .fg { fill: #111 } }
   </style>
   <rect class="bg" width="32" height="32" rx="8"/>
-  <g class="fg" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 4) scale(.75)">
-    <rect x="5" y="3.5" width="22" height="22" rx="5.5"/><rect x="8.5" y="9" width="15" height="8" rx="2"/>
-    <path d="M12 6.4h8M3 11.5h2m22 0h2M13.5 21.5h5M9 25.5v2.3m14-2.3v2.3"/>
-  </g>
-  <circle class="dot" cx="11.8" cy="20.1" r=".9"/><circle class="dot" cx="20.2" cy="20.1" r=".9"/>
+  <g class="fg" transform="translate(3.2 3.2) scale(.8)"><path fill-rule="evenodd" d="M5.5 28.5 9.3 11C10.1 7.2 12.9 4.8 17.3 4.8H20.2C25.2 4.8 28.3 8 28.3 12.4 28.3 17 25.2 20.4 20.4 20.4H11.7L10.1 28.5ZM13.7 8.4H24.3C25.2 8.4 26 9.2 26 10.1V15.4C26 16.3 25.2 17 24.3 17H13.7C12.8 17 12 16.3 12 15.4V10.1C12 9.2 12.8 8.4 13.7 8.4ZM15.1 9.9H22.9C23.4 9.9 23.8 10.3 23.8 10.8V12.9C23.8 13.4 23.4 13.8 22.9 13.8H15.1C14.6 13.8 14.2 13.4 14.2 12.9V10.8C14.2 10.3 14.6 9.9 15.1 9.9Z"/><circle cx="15.6" cy="15.3" r=".8"/><circle cx="22.4" cy="15.3" r=".8"/></g>
 </svg>

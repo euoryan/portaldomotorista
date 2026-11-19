@@ -180,6 +180,32 @@
     restore();
   }
 
+  const board = $('[data-carousel]');
+  if (board) {
+    const track = board.querySelector('.notice-track');
+    const cards = [...track.children];
+    const dots = [...board.querySelectorAll('[data-board-dots] button')];
+    board.querySelector('[data-board-nav]').hidden = false;
+    board.querySelector('[data-board-dots]').hidden = false;
+    const go = i => track.scrollTo({ left: cards[(i + cards.length) % cards.length].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
+    const current = () => Math.round(track.scrollLeft / cards[0].getBoundingClientRect().width) || 0;
+    const sync = () => dots.forEach((d, i) => d.setAttribute('aria-current', String(i === Math.min(current(), cards.length - 1))));
+    track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+    board.querySelector('[data-prev]').addEventListener('click', () => go(current() - 1));
+    board.querySelector('[data-next]').addEventListener('click', () => go(current() + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+    track.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+    });
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let paused = false;
+      for (const ev of ['pointerenter', 'focusin', 'touchstart']) board.addEventListener(ev, () => { paused = true; });
+      board.addEventListener('pointerleave', () => { paused = false; });
+      setInterval(() => { if (!paused && !document.hidden) go(current() + 1); }, 8000);
+    }
+  }
+
   const sections = all('.reading-section');
   if (sections.length) {
     const toc = all('[data-toc]');

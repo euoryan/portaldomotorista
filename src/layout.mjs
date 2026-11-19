@@ -1,11 +1,8 @@
 import { brand, sectors } from './site.mjs';
 import { escapeHtml, icon, link, supportLink } from './ui.mjs';
 
-// Frente de ônibus em traço único: preto no tema claro, branco no escuro (currentColor).
-const logo = `<svg class="brand-mark" width="26" height="26" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <rect x="5" y="3.5" width="22" height="22" rx="5.5"/><rect x="8.5" y="9" width="15" height="8" rx="2"/>
-  <path d="M12 6.4h8M3 11.5h2m22 0h2M13.5 21.5h5"/><circle cx="10.4" cy="21.5" r=".9" fill="currentColor"/><circle cx="21.6" cy="21.5" r=".9" fill="currentColor"/>
-  <path d="M9 25.5v2.3m14-2.3v2.3"/></svg>`;
+// Letra P sólida com a frente de um ônibus em espaço negativo (currentColor: preto no claro, branco no escuro).
+const logo = `<svg class="brand-mark" width="26" height="26" viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"><path fill-rule="evenodd" d="M5.5 28.5 9.3 11C10.1 7.2 12.9 4.8 17.3 4.8H20.2C25.2 4.8 28.3 8 28.3 12.4 28.3 17 25.2 20.4 20.4 20.4H11.7L10.1 28.5ZM13.7 8.4H24.3C25.2 8.4 26 9.2 26 10.1V15.4C26 16.3 25.2 17 24.3 17H13.7C12.8 17 12 16.3 12 15.4V10.1C12 9.2 12.8 8.4 13.7 8.4ZM15.1 9.9H22.9C23.4 9.9 23.8 10.3 23.8 10.8V12.9C23.8 13.4 23.4 13.8 22.9 13.8H15.1C14.6 13.8 14.2 13.4 14.2 12.9V10.8C14.2 10.3 14.6 9.9 15.1 9.9Z"/><circle cx="15.6" cy="15.3" r=".8"/><circle cx="22.4" cy="15.3" r=".8"/></svg>`;
 const brandLink = `<a class="brand" href="/">${logo}<span>${brand}</span></a>`;
 const destinations = [
   ['Início', '/', 'home'],
@@ -71,7 +68,7 @@ export function layout(title, description, body, current = '', noindex = false) 
 <title>${pageTitle}</title><meta name="description" content="${escapeHtml(description)}"><meta name="application-name" content="${brand}">
 <meta name="apple-mobile-web-app-title" content="${brand}"><meta name="theme-color" content="#fafafb" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#121316" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="${pageTitle}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:site_name" content="${brand}">
-${noindex ? '<meta name="robots" content="noindex">' : ''}<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=4"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=4">
+${noindex ? '<meta name="robots" content="noindex">' : ''}<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=5"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=5">
 <link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/css/styles.css"><script src="/assets/js/app.js" defer></script></head>
 <body class="${current === '/' ? 'is-home' : 'is-inner'}"><a class="skip" href="#principal">Pular para o conteúdo</a>${header(current)}
 ${body}
