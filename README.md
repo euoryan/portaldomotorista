@@ -2,6 +2,8 @@
 
 Portal estático para motoristas: guias, procedimentos, links e orientações operacionais.
 
+A navegação inclui busca global por páginas e procedimentos com `Ctrl + K`.
+
 ## Rodar local
 
 ```bash
@@ -19,4 +21,4 @@ Abra `http://127.0.0.1:8765/`.
 
 ## CSS
 
-Edite `src/input.css` e copie para `assets/css/styles.css`, ou use `npm run build:css` se as dependências Tailwind estiverem instaladas.
+Edite `src/input.css` e execute `npm run build:css`. O comando recompila `assets/css/styles.css` com Tailwind CSS 4.
