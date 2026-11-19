@@ -356,18 +356,42 @@
     }
   }
 
-  // Índice lateral ("Nesta página") nos guias com travamento ao clicar
+  // Índice lateral ("Nesta página") e índice flutuante estilo Notion no mobile
   const sections = all('.reading-section');
   if (sections.length) {
     const toc = all('[data-toc]');
-    const mobileToc = $('.mobile-toc');
+    const bars = all('[data-bar]');
+    const notionBox = $('[data-notion-toc]');
+    const toggleBtn = notionBox?.querySelector('[data-toc-toggle]');
+    const panel = notionBox?.querySelector('.notion-toc-panel');
+    const backdrop = notionBox?.querySelector('.notion-toc-backdrop');
     let lockedId = '';
     let lockTimer = 0;
+
+    function setNotionOpen(open) {
+      if (!notionBox || !toggleBtn || !panel || !backdrop) return;
+      panel.hidden = !open;
+      backdrop.hidden = !open;
+      toggleBtn.setAttribute('aria-expanded', String(open));
+      notionBox.classList.toggle('is-open', open);
+    }
+
+    if (notionBox) {
+      toggleBtn.addEventListener('click', () => setNotionOpen(panel.hidden));
+      notionBox.querySelectorAll('[data-toc-close]').forEach(el => el.addEventListener('click', () => setNotionOpen(false)));
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !panel.hidden) setNotionOpen(false);
+      });
+    }
 
     function applyCurrent(id) {
       toc.forEach(a => {
         if (a.dataset.toc === id) a.setAttribute('aria-current', 'location');
         else a.removeAttribute('aria-current');
+      });
+      bars.forEach(b => {
+        if (b.dataset.bar === id) b.setAttribute('data-active', 'true');
+        else b.removeAttribute('data-active');
       });
     }
 
@@ -376,7 +400,7 @@
       const target = document.getElementById(id);
       if (!target) return;
       e.preventDefault();
-      if (mobileToc) mobileToc.open = false;
+      setNotionOpen(false);
       lockedId = id;
       clearTimeout(lockTimer);
       lockTimer = setTimeout(() => { lockedId = ''; }, 800);

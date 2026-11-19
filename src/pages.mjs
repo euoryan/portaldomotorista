@@ -8,11 +8,13 @@ const noticeDate = new Intl.DateTimeFormat('pt-BR', {
 
 function noticeCard(item) {
   const date = item.date ? `<time datetime="${escapeHtml(item.date)}">${noticeDate.format(new Date(item.date + 'T12:00:00Z'))}</time>` : '';
-  const action = item.href ? `<a class="notice-action" href="${escapeHtml(item.href)}"><span>${escapeHtml(item.cta || 'Saiba mais')}</span>${icon('arrow', 14)}</a>` : '';
   const photo = item.image ? `<img class="notice-photo" src="${escapeHtml(item.image)}" alt="" loading="lazy">` : '';
-  return `<li class="notice-card" data-tone="${item.tone || 'info'}">${photo}
-    <span class="notice-glyph">${icon(item.icon || 'bell', 18)}</span>
-    <div class="notice-copy"><div class="notice-head"><div class="notice-title-wrap">${date}<h3>${escapeHtml(item.title)}</h3></div>${action}</div><p>${escapeHtml(item.text)}</p></div></li>`;
+  const arrow = item.href ? `<span class="notice-chevron" aria-hidden="true">${icon('arrow', 15)}</span>` : '';
+  const inner = `${photo}<span class="notice-glyph">${icon(item.icon || 'bell', 18)}</span>
+    <div class="notice-copy"><div class="notice-meta">${date}${arrow}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.text)}</p></div>`;
+  return item.href
+    ? `<li class="notice-item"><a class="notice-card is-clickable" data-tone="${item.tone || 'info'}" href="${escapeHtml(item.href)}">${inner}</a></li>`
+    : `<li class="notice-item"><div class="notice-card" data-tone="${item.tone || 'info'}">${inner}</div></li>`;
 }
 
 export function noticeBoard(items) {
@@ -87,6 +89,10 @@ export function library(guides) {
     <header class="page-heading"><h1>Biblioteca</h1></header>${catalogue(guides, false)}</main>`;
 }
 
+function notionLines(sections) {
+  return `<span class="notion-bars" aria-hidden="true">${sections.map((s, i) => `<span data-bar="${s.id}"${i === 0 ? ' data-active="true"' : ''}></span>`).join('')}</span>`;
+}
+
 export function article(guide, guides) {
   if (guide.status) return state(guide.title, guide.statusMessage || 'As orientações estão em revisão e serão publicadas aqui.', 'Ver outros guias', '/#conteudos', sectorCredit(guide));
   const toc = `<nav class="toc-links" aria-label="Seções do guia">${guide.sections.map((s, i) => `<a href="#${s.id}" data-toc="${s.id}"${i === 0 ? ' aria-current="location"' : ''}>${escapeHtml(s.title)}</a>`).join('')}</nav>`;
@@ -99,10 +105,19 @@ export function article(guide, guides) {
       <header class="reading-head"><h1>${escapeHtml(guide.title)}</h1>
       <p class="deck">${escapeHtml(guide.summary)}</p>
       ${sectorCredit(guide)}</header>
-      <details class="mobile-toc"><summary>${icon('list', 16)}<span>Nesta página</span>${icon('down', 14)}</summary>${toc}</details>
-      ${guide.sections.map(s => `<section class="reading-section" id="${s.id}"><h2>${escapeHtml(s.title)}</h2>${s.html}</section>`).join('')}
+      <div class="reading-body">
+        ${guide.sections.map(s => `<section class="reading-section" id="${s.id}"><h2>${escapeHtml(s.title)}</h2><div class="prose">${s.html}</div></section>`).join('')}
+      </div>
     </article><aside class="rail"><div class="rail-inner"><h2>${icon('list', 15)}<span>Nesta página</span></h2>${toc}
       <div class="rail-help">${supportLink('button button-outline')}</div></div></aside></div>
+    <div class="notion-toc" data-notion-toc>
+      <button type="button" class="notion-toc-btn" data-toc-toggle aria-expanded="false" aria-controls="notion-toc-panel" aria-label="Índice desta página">${notionLines(guide.sections)}<span class="notion-toc-label">Tópicos</span></button>
+      <div class="notion-toc-backdrop" data-toc-close hidden></div>
+      <div class="notion-toc-panel" id="notion-toc-panel" role="dialog" aria-label="Tópicos desta página" hidden>
+        <div class="notion-toc-head"><span>Nesta página</span><button type="button" class="icon-button" data-toc-close aria-label="Fechar índice">${icon('close', 16)}</button></div>
+        ${toc}
+      </div>
+    </div>
     <nav class="related" aria-label="Outros guias"><h2>Continue lendo</h2><ul>
       ${related.map(g => {
         const thumb = g.cover || g.slug;
