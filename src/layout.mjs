@@ -110,7 +110,9 @@ export function breadcrumbs(title, inLibrary = true) {
 
 export function sectorCredit(guide) {
   const names = guide.sectors.map(id => sectors[id]);
-  return `<dl class="credit"><dt>${icon('layers', 14)}${names.length > 1 ? 'Setores responsáveis' : 'Setor responsável'}</dt>${names.map(name => `<dd>${escapeHtml(name)}</dd>`).join('')}</dl>`;
+  const label = guide.sectors.includes('empresa') ? 'Publicado por' : names.length > 1 ? 'Setores responsáveis' : 'Setor responsável';
+  const credit = new Intl.ListFormat('pt-BR').format(names);
+  return `<dl class="credit"><dt>${label}</dt><dd>${escapeHtml(credit)}</dd></dl>`;
 }
 
 export function state(title, description, action = 'Voltar ao início', href = '/', credit = '') {

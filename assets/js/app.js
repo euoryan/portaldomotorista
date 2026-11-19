@@ -32,6 +32,10 @@
     return indexRequest;
   };
   const menuToggle = $('#menu-toggle');
+  const masthead = $('.masthead');
+  new ResizeObserver(() => {
+    document.documentElement.style.setProperty('--header-height', masthead.offsetHeight + 'px');
+  }).observe(masthead);
   menuToggle.addEventListener('click', () => menu.showModal());
   menuToggle.hidden = false;
   for (const dialog of [menu,search]) {
@@ -182,67 +186,82 @@
   if (board) {
     const track = board.querySelector('.notice-track');
     const cards = [...track.children];
-    const dots = [...board.querySelectorAll('[data-board-dots] button')];
-    board.querySelector('[data-board-nav]').hidden = false;
-    board.querySelector('[data-board-dots]').hidden = false;
-    const step = () => Math.max(1, cards[1].offsetLeft - cards[0].offsetLeft);
-    const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
-    const current = () => {
-      if (track.scrollLeft >= maxScroll() - 8) return cards.length - 1;
-      return Math.min(cards.length - 1, Math.round(track.scrollLeft / step()));
-    };
-    const go = i => {
-      const last = cards.length - 1;
-      const target = i < 0 ? last : i > last ? 0 : i;
-      const left = target === last ? maxScroll() : Math.min(target * step(), maxScroll());
-      track.scrollTo({ left, behavior: 'smooth' });
-    };
-    const sync = () => {
-      const index = current();
-      dots.forEach((d, i) => d.setAttribute('aria-current', String(i === index)));
-    };
-    track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
-    board.querySelector('[data-prev]').addEventListener('click', () => go(current() - 1));
-    board.querySelector('[data-next]').addEventListener('click', () => go(current() + 1));
-    dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
-    track.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+    const nav = board.querySelector('[data-board-nav]');
+    const indicators = board.querySelector('[data-board-dots]');
+    const dots = [...indicators.children];
+    let stops = [];
+    board.dataset.ready = '';
+
+    function position() {
+      return stops.reduce((nearest, left, i) =>
+        Math.abs(left - track.scrollLeft) < Math.abs(stops[nearest] - track.scrollLeft) ? i : nearest, 0);
+    }
+
+    function markPosition() {
+      const active = position();
+      dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === active)));
+    }
+
+    function measure() {
+      const last = Math.max(0, track.scrollWidth - track.clientWidth);
+      const start = cards[0].offsetLeft;
+      stops = [];
+      for (const card of cards) {
+        const left = Math.min(last, card.offsetLeft - start);
+        if (!stops.length || left - stops.at(-1) > 1) stops.push(left);
+      }
+      const scrolls = stops.length > 1;
+      nav.hidden = indicators.hidden = !scrolls;
+      if (scrolls) track.tabIndex = 0;
+      else track.removeAttribute('tabindex');
+      dots.forEach((dot, i) => { dot.hidden = i >= stops.length; });
+      markPosition();
+    }
+
+    function go(index) {
+      const target = (index + stops.length) % stops.length;
+      track.scrollTo({ left: stops[target], behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    }
+
+    measure();
+    new ResizeObserver(measure).observe(track);
+    track.addEventListener('scroll', markPosition, { passive: true });
+    nav.querySelector('[data-prev]').addEventListener('click', () => go(position() - 1));
+    nav.querySelector('[data-next]').addEventListener('click', () => go(position() + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => go(i)));
+    track.addEventListener('keydown', event => {
+      if (stops.length < 2 || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      event.preventDefault();
+      go(position() + (event.key === 'ArrowRight' ? 1 : -1));
     });
-    let drag = null;
+
+    let drag;
     let suppressClick = false;
-    track.addEventListener('pointerdown', e => {
-      if (e.pointerType !== 'mouse' || e.button !== 0) return;
-      drag = { x: e.clientX, left: track.scrollLeft, moved: false };
+    track.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'mouse' && event.button === 0 && stops.length > 1)
+        drag = { x: event.clientX, left: track.scrollLeft, index: position() };
     });
-    window.addEventListener('pointermove', e => {
+    window.addEventListener('pointermove', event => {
       if (!drag) return;
-      const dx = e.clientX - drag.x;
-      if (!drag.moved && Math.abs(dx) > 6) { drag.moved = true; track.classList.add('is-dragging'); }
-      if (drag.moved) track.scrollLeft = drag.left - dx;
+      const delta = drag.x - event.clientX;
+      if (Math.abs(delta) > 6) track.classList.add('is-dragging');
+      if (track.classList.contains('is-dragging')) track.scrollLeft = drag.left + delta;
     });
     window.addEventListener('pointerup', () => {
-      if (!drag) return;
-      const moved = drag.moved;
-      const dx = track.scrollLeft - drag.left;
-      drag = null;
-      track.classList.remove('is-dragging');
-      if (moved) {
+      if (drag && track.classList.contains('is-dragging')) {
+        const delta = track.scrollLeft - drag.left;
+        const target = Math.abs(delta) > 24 ? drag.index + Math.sign(delta) : position();
+        track.classList.remove('is-dragging');
+        go(target);
         suppressClick = true;
-        setTimeout(() => { suppressClick = false; }, 50);
-        go(dx > 24 ? 1 : dx < -24 ? 0 : current());
+        setTimeout(() => { suppressClick = false; }, 0);
       }
+      drag = null;
     });
-    track.addEventListener('click', e => { if (suppressClick) { e.preventDefault(); e.stopPropagation(); } }, true);
-    track.addEventListener('dragstart', e => e.preventDefault());
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      let paused = false;
-      board.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') paused = true; });
-      board.addEventListener('pointerleave', () => { paused = false; });
-      board.addEventListener('focusin', () => { paused = true; });
-      board.addEventListener('focusout', () => { paused = false; });
-      setInterval(() => { if (!paused && !drag && !document.hidden) go(current() + 1); }, 10000);
-    }
+    track.addEventListener('click', event => {
+      if (suppressClick) { event.preventDefault(); event.stopPropagation(); }
+    }, true);
+    track.addEventListener('dragstart', event => event.preventDefault());
   }
 
   const viewBox = $('[data-views]');
@@ -356,118 +375,61 @@
     }
   }
 
-  // Índice lateral ("Nesta página") e índice flutuante estilo Notion no mobile
   const sections = all('.reading-section');
   if (sections.length) {
     const toc = all('[data-toc]');
-    const bars = all('[data-bar]');
-    const notionBox = $('[data-notion-toc]');
-    const toggleBtn = notionBox?.querySelector('[data-toc-toggle]');
-    const panel = notionBox?.querySelector('.notion-toc-panel');
-    const backdrop = notionBox?.querySelector('.notion-toc-backdrop');
-    let lockedId = '';
-    let lockTimer = 0;
-
-    function setNotionOpen(open) {
-      if (!notionBox || !toggleBtn || !panel || !backdrop) return;
-      panel.hidden = !open;
-      backdrop.hidden = !open;
-      toggleBtn.setAttribute('aria-expanded', String(open));
-      notionBox.classList.toggle('is-open', open);
-    }
-
-    if (notionBox) {
-      toggleBtn.addEventListener('click', () => setNotionOpen(panel.hidden));
-      notionBox.querySelectorAll('[data-toc-close]').forEach(el => el.addEventListener('click', () => setNotionOpen(false)));
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && !panel.hidden) setNotionOpen(false);
-      });
-    }
-
-    function applyCurrent(id) {
-      toc.forEach(a => {
-        if (a.dataset.toc === id) a.setAttribute('aria-current', 'location');
-        else a.removeAttribute('aria-current');
-      });
-      bars.forEach(b => {
-        if (b.dataset.bar === id) b.setAttribute('data-active', 'true');
-        else b.removeAttribute('data-active');
-      });
-    }
-
-    toc.forEach(a => a.addEventListener('click', e => {
-      const id = a.dataset.toc;
-      const target = document.getElementById(id);
-      if (!target) return;
-      e.preventDefault();
-      setNotionOpen(false);
-      lockedId = id;
-      clearTimeout(lockTimer);
-      lockTimer = setTimeout(() => { lockedId = ''; }, 800);
-      applyCurrent(id);
-      const navH = ($('.masthead')?.offsetHeight || 58) + 22;
-      const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - navH);
-      window.scrollTo({ top, behavior: 'smooth' });
-      history.replaceState(null, '', '#' + id);
-    }));
-
+    const index = $('.article-index');
     let scheduled = false;
     function highlight() {
       scheduled = false;
-      if (lockedId) {
-        applyCurrent(lockedId);
-        return;
-      }
-      const offset = ($('.masthead')?.offsetHeight || 58) + 34;
-      let current = sections[0];
+      const offset = masthead.getBoundingClientRect().bottom + 38;
+      let active = sections[0];
       for (const section of sections) {
-        if (section.getBoundingClientRect().top <= offset) current = section;
-        else break;
+        if (section.getBoundingClientRect().top > offset) break;
+        active = section;
       }
-      applyCurrent(current.id);
+      toc.forEach(link => {
+        if (link.dataset.toc === active.id) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
     }
-    function schedule() { if (!scheduled) { scheduled = true; requestAnimationFrame(highlight); } }
+    function schedule() {
+      if (!scheduled) { scheduled = true; requestAnimationFrame(highlight); }
+    }
+    index.addEventListener('click', event => {
+      const link = event.target.closest('[data-toc]');
+      if (!link) return;
+      index.open = false;
+      document.getElementById(link.dataset.toc).focus({ preventScroll: true });
+    });
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule);
-    window.addEventListener('load', highlight);
-    if (location.hash) {
-      const initial = sections.find(s => '#' + s.id === location.hash);
-      if (initial) {
-        lockedId = initial.id;
-        applyCurrent(initial.id);
-        setTimeout(() => { lockedId = ''; }, 600);
-      }
-    } else {
-      highlight();
-    }
+    window.addEventListener('pageshow', schedule);
+    highlight();
   }
 
-  const wifi = $('[data-wifi]');
+  const wifi = $('.wifi-access');
   if (wifi) {
-    const password = $('#network-password');
+    const password = wifi.querySelector('#network-password');
     const toggle = wifi.querySelector('[data-toggle-pass]');
-    const copy = wifi.querySelector('[data-copy]');
-    const status = wifi.querySelector('[data-copy-status]');
-    const secret = password.textContent.trim();
-    const mask = '•'.repeat(secret.length);
-    let shown = false;
-    function renderWifi() {
-      password.textContent = shown ? secret : mask;
-      toggle.textContent = shown ? 'Ocultar senha' : 'Mostrar senha';
-      toggle.setAttribute('aria-pressed', String(shown));
+    const status = wifi.querySelector('.copy-status');
+    function showPassword(show) {
+      password.type = show ? 'text' : 'password';
+      toggle.textContent = show ? 'Ocultar senha' : 'Mostrar senha';
+      toggle.setAttribute('aria-pressed', String(show));
     }
-    toggle.addEventListener('click', () => { shown = !shown; renderWifi(); });
-    copy.addEventListener('click', async () => {
+    showPassword(false);
+    toggle.addEventListener('click', () => showPassword(password.type === 'password'));
+    wifi.querySelector('[data-copy]').addEventListener('click', async () => {
       try {
-        await navigator.clipboard.writeText(secret);
-        status.textContent = 'Senha copiada para a área de transferência.';
+        await navigator.clipboard.writeText(password.value);
+        status.textContent = 'Senha copiada.';
       } catch {
-        shown = true;
-        renderWifi();
-        status.textContent = 'Não foi possível copiar automaticamente. A senha foi exibida acima.';
+        showPassword(true);
+        password.select();
+        status.textContent = 'Senha selecionada. Use a opção Copiar do celular.';
       }
     });
     wifi.querySelector('.wifi-actions').hidden = false;
-    renderWifi();
   }
 })();

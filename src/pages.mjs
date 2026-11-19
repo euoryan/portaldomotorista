@@ -10,8 +10,8 @@ function noticeCard(item) {
   const date = item.date ? `<time datetime="${escapeHtml(item.date)}">${noticeDate.format(new Date(item.date + 'T12:00:00Z'))}</time>` : '';
   const photo = item.image ? `<img class="notice-photo" src="${escapeHtml(item.image)}" alt="" loading="lazy">` : '';
   const arrow = item.href ? `<span class="notice-chevron" aria-hidden="true">${icon('arrow', 15)}</span>` : '';
-  const inner = `${photo}<span class="notice-glyph">${icon(item.icon || 'bell', 18)}</span>
-    <div class="notice-copy"><div class="notice-meta">${date}${arrow}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.text)}</p></div>`;
+  const inner = `${photo}<div class="notice-meta"><span class="notice-glyph">${icon(item.icon || 'bell', 16)}</span>${date}${arrow}</div>
+    <div class="notice-copy"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.text)}</p></div>`;
   return item.href
     ? `<li class="notice-item"><a class="notice-card is-clickable" data-tone="${item.tone || 'info'}" href="${escapeHtml(item.href)}">${inner}</a></li>`
     : `<li class="notice-item"><div class="notice-card" data-tone="${item.tone || 'info'}">${inner}</div></li>`;
@@ -22,8 +22,8 @@ export function noticeBoard(items) {
   const controls = many ? `<div class="board-nav" hidden data-board-nav><button type="button" class="icon-button" data-prev aria-label="Aviso anterior">${icon('back', 16)}</button><button type="button" class="icon-button" data-next aria-label="Próximo aviso">${icon('arrow', 16)}</button></div>` : '';
   const dots = many ? `<div class="board-dots" hidden data-board-dots>${items.map((_, i) => `<button type="button" aria-label="Aviso ${i + 1}" aria-current="${i === 0}"></button>`).join('')}</div>` : '';
   return `<section id="avisos" class="notice-board${items.length ? '' : ' board-empty'}" aria-labelledby="mural-title"${many ? ' data-carousel' : ''}>
-    <div class="board-heading"><span class="board-tag">${icon('bell', 14)}<span id="mural-title">Mural de avisos</span></span>${controls}</div>
-    ${items.length ? `<ul class="notice-track" tabindex="0" aria-label="Avisos">${items.map(noticeCard).join('')}</ul>${dots}` : '<p class="notice-empty">Nenhum aviso publicado no momento.</p>'}
+    <div class="board-heading"><h2 id="mural-title" class="board-tag">${icon('bell', 17)}Mural de avisos</h2>${controls}</div>
+    ${items.length ? `<ul class="notice-track" aria-labelledby="mural-title">${items.map(noticeCard).join('')}</ul>${dots}` : '<p class="notice-empty">Nenhum aviso publicado no momento.</p>'}
   </section>`;
 }
 
@@ -77,7 +77,7 @@ export function home(guides) {
     <section class="hero"><div class="wrap">
       <header class="home-heading"><div class="hero-copy"><p class="eyebrow">Portal do Motorista</p><h1>Guia de Jornada</h1>
         <p class="lede">Avisos, procedimentos e serviços para a sua rotina.</p></div>
-        <form class="hero-search" role="search" action="/pesquisa/">${icon('search', 18)}<input type="search" name="q" aria-label="Pesquisar no portal" placeholder="Pesquisar guias e procedimentos" autocomplete="off"><button class="button button-primary" type="submit">Buscar</button></form>
+        <form class="hero-search" role="search" action="/pesquisa/">${icon('search', 18)}<input type="search" name="q" aria-label="Pesquisar no portal" placeholder="Pesquisar guias" autocomplete="off"><button class="button button-primary" type="submit">Buscar</button></form>
       </header>
     </div></section>
     <div class="wrap home-body">${noticeBoard(notices)}${catalogue(ordered, true)}${shortcuts()}</div>
@@ -87,10 +87,6 @@ export function home(guides) {
 export function library(guides) {
   return `<main id="principal" class="wrap library">${breadcrumbs('Biblioteca', false)}
     <header class="page-heading"><h1>Biblioteca</h1></header>${catalogue(guides, false)}</main>`;
-}
-
-function notionLines(sections) {
-  return `<span class="notion-bars" aria-hidden="true">${sections.map((s, i) => `<span data-bar="${s.id}"${i === 0 ? ' data-active="true"' : ''}></span>`).join('')}</span>`;
 }
 
 export function article(guide, guides) {
@@ -105,19 +101,12 @@ export function article(guide, guides) {
       <header class="reading-head"><h1>${escapeHtml(guide.title)}</h1>
       <p class="deck">${escapeHtml(guide.summary)}</p>
       ${sectorCredit(guide)}</header>
+      <details class="article-index"><summary>${icon('list', 16)}Nesta página${icon('down', 14)}</summary>${toc}</details>
       <div class="reading-body">
-        ${guide.sections.map(s => `<section class="reading-section" id="${s.id}"><h2>${escapeHtml(s.title)}</h2><div class="prose">${s.html}</div></section>`).join('')}
+        ${guide.sections.map(s => `<section class="reading-section" id="${s.id}" tabindex="-1"><h2>${escapeHtml(s.title)}</h2><div class="prose">${s.html}</div></section>`).join('')}
       </div>
     </article><aside class="rail"><div class="rail-inner"><h2>${icon('list', 15)}<span>Nesta página</span></h2>${toc}
       <div class="rail-help">${supportLink('button button-outline')}</div></div></aside></div>
-    <div class="notion-toc" data-notion-toc>
-      <button type="button" class="notion-toc-btn" data-toc-toggle aria-expanded="false" aria-controls="notion-toc-panel" aria-label="Índice desta página">${notionLines(guide.sections)}<span class="notion-toc-label">Tópicos</span></button>
-      <div class="notion-toc-backdrop" data-toc-close hidden></div>
-      <div class="notion-toc-panel" id="notion-toc-panel" role="dialog" aria-label="Tópicos desta página" hidden>
-        <div class="notion-toc-head"><span>Nesta página</span><button type="button" class="icon-button" data-toc-close aria-label="Fechar índice">${icon('close', 16)}</button></div>
-        ${toc}
-      </div>
-    </div>
     <nav class="related" aria-label="Outros guias"><h2>Continue lendo</h2><ul>
       ${related.map(g => {
         const thumb = g.cover || g.slug;
