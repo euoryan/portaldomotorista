@@ -2,7 +2,7 @@ import { urls } from '../site.mjs';
 import { bullets, resourceLinks } from '../ui.mjs';
 
 export default {
-  slug: 'diretoriosdelinks', title: 'Diretório de links', category: 'recursos', sectors: ['ti'],
+  slug: 'diretoriosdelinks', cover: 'diretoriolinks', title: 'Diretório de links', category: 'recursos', sectors: ['ti'],
   icon: 'aneis', summary: 'Formulários e sistemas da operação.',
   image: 'diretorio.webp', terms: 'formulários sistemas atalhos ficha mecânica crachá bot Telegram rotas',
   sections: [

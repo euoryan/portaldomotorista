@@ -8,11 +8,11 @@ const noticeDate = new Intl.DateTimeFormat('pt-BR', {
 
 function noticeCard(item) {
   const date = item.date ? `<time datetime="${escapeHtml(item.date)}">${noticeDate.format(new Date(item.date + 'T12:00:00Z'))}</time>` : '';
-  const action = item.href ? `<a class="notice-action" href="${escapeHtml(item.href)}">${escapeHtml(item.cta || 'Saiba mais')}${icon('arrow', 14)}</a>` : '';
+  const action = item.href ? `<a class="notice-action" href="${escapeHtml(item.href)}"><span>${escapeHtml(item.cta || 'Saiba mais')}</span>${icon('arrow', 14)}</a>` : '';
   const photo = item.image ? `<img class="notice-photo" src="${escapeHtml(item.image)}" alt="" loading="lazy">` : '';
   return `<li class="notice-card" data-tone="${item.tone || 'info'}">${photo}
-    <span class="notice-glyph">${icon(item.icon || 'bell', 20)}</span>
-    <div class="notice-copy">${date}<h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.text)}</p>${action}</div></li>`;
+    <span class="notice-glyph">${icon(item.icon || 'bell', 18)}</span>
+    <div class="notice-copy"><div class="notice-head"><div class="notice-title-wrap">${date}<h3>${escapeHtml(item.title)}</h3></div>${action}</div><p>${escapeHtml(item.text)}</p></div></li>`;
 }
 
 export function noticeBoard(items) {
@@ -36,14 +36,15 @@ export function searchText(guide) {
 }
 
 function guideEntry(guide, heading) {
+  const thumb = guide.cover || guide.slug;
+  const cover = `<span class="guide-cover"><img src="/assets/images/pages/${thumb}/thumb/${thumb}.png" alt="" width="500" height="300" loading="lazy" decoding="async"></span>`;
   const illustration = guide.icon
     ? `<img src="/assets/images/atalhos/${guide.icon}.webp" alt="" width="46" height="46" decoding="async">`
     : icon('book', 23);
   return `<li data-guide="${guide.slug}" data-category="${guide.category}" data-terms="${escapeHtml(searchText(guide))}">
-    <a class="guide-row" href="/${guide.slug}/"><span class="guide-art">${illustration}</span>
-      <div class="guide-label"><${heading}>${escapeHtml(guide.title)}</${heading}>
-      <p>${guide.status ? `<span class="guide-status">${escapeHtml(guide.status)}</span>` : escapeHtml(guide.summary)}</p></div>
-      ${icon('chevron', 15)}</a></li>`;
+    <a class="guide-row" href="/${guide.slug}/" data-tilt>${cover}<span class="guide-art">${illustration}</span>
+      <div class="guide-label"><div class="guide-title-row"><${heading}>${escapeHtml(guide.title)}</${heading}>${icon('chevron', 15)}</div>
+      <p>${guide.status ? `<span class="guide-status">${escapeHtml(guide.status)}</span>` : escapeHtml(guide.summary)}</p></div></a></li>`;
 }
 
 function catalogue(guides, onHome) {
@@ -76,9 +77,8 @@ export function home(guides) {
         <p class="lede">Avisos, procedimentos e serviços para a sua rotina.</p></div>
         <form class="hero-search" role="search" action="/pesquisa/">${icon('search', 18)}<input type="search" name="q" aria-label="Pesquisar no portal" placeholder="Pesquisar guias e procedimentos" autocomplete="off"><button class="button button-primary" type="submit">Buscar</button></form>
       </header>
-      ${noticeBoard(notices)}
     </div></section>
-    <div class="wrap home-body">${catalogue(ordered, true)}${shortcuts()}</div>
+    <div class="wrap home-body">${noticeBoard(notices)}${catalogue(ordered, true)}${shortcuts()}</div>
   </main>`;
 }
 
@@ -89,7 +89,7 @@ export function library(guides) {
 
 export function article(guide, guides) {
   if (guide.status) return state(guide.title, guide.statusMessage || 'As orientações estão em revisão e serão publicadas aqui.', 'Ver outros guias', '/#conteudos', sectorCredit(guide));
-  const toc = `<nav class="toc-links" aria-label="Seções do guia">${guide.sections.map(s => `<a href="#${s.id}" data-toc="${s.id}">${escapeHtml(s.title)}</a>`).join('')}</nav>`;
+  const toc = `<nav class="toc-links" aria-label="Seções do guia">${guide.sections.map((s, i) => `<a href="#${s.id}" data-toc="${s.id}"${i === 0 ? ' aria-current="location"' : ''}>${escapeHtml(s.title)}</a>`).join('')}</nav>`;
   function relevance(g) {
     return Number(g.category === guide.category) + Number(g.sectors.some(id => guide.sectors.includes(id)));
   }
@@ -99,11 +99,14 @@ export function article(guide, guides) {
       <header class="reading-head"><h1>${escapeHtml(guide.title)}</h1>
       <p class="deck">${escapeHtml(guide.summary)}</p>
       ${sectorCredit(guide)}</header>
-      <details class="mobile-toc"><summary>${icon('list', 16)} Nesta página ${icon('down', 14)}</summary>${toc}</details>
+      <details class="mobile-toc"><summary>${icon('list', 16)}<span>Nesta página</span>${icon('down', 14)}</summary>${toc}</details>
       ${guide.sections.map(s => `<section class="reading-section" id="${s.id}"><h2>${escapeHtml(s.title)}</h2>${s.html}</section>`).join('')}
-    </article><aside class="rail"><div class="rail-inner"><h2>${icon('list', 15)}Nesta página</h2>${toc}
+    </article><aside class="rail"><div class="rail-inner"><h2>${icon('list', 15)}<span>Nesta página</span></h2>${toc}
       <div class="rail-help">${supportLink('button button-outline')}</div></div></aside></div>
     <nav class="related" aria-label="Outros guias"><h2>Continue lendo</h2><ul>
-      ${related.map(g => `<li><a class="related-card" href="/${g.slug}/"><img src="/assets/images/${g.image}" alt="" width="320" height="180" loading="lazy"><span><strong>${escapeHtml(g.title)}</strong><small>${escapeHtml(g.summary)}</small></span></a></li>`).join('')}</ul></nav>
+      ${related.map(g => {
+        const thumb = g.cover || g.slug;
+        return `<li><a class="related-card" href="/${g.slug}/"><img src="/assets/images/pages/${thumb}/thumb/${thumb}.png" alt="" width="500" height="300" loading="lazy"><span><strong>${escapeHtml(g.title)}</strong><small>${escapeHtml(g.summary)}</small></span></a></li>`;
+      }).join('')}</ul></nav>
   </main>`;
 }

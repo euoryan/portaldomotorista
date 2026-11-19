@@ -58,33 +58,31 @@
     const tokens = terms(input.value);
     const status = search.querySelector('.command-status');
     $('#command-group').textContent = tokens.length ? 'Resultados' : 'Sugestões';
-    try {
-      const index = await getIndex();
+    let index;
+    try { index = await getIndex(); } catch {
       if (version !== drawVersion) return;
-      const filtered = tokens.length
-        ? index.filter(row => matches(row.title + ' ' + row.detail + ' ' + row.terms, tokens))
-            .sort((a, b) => Number(matches(b.title, tokens)) - Number(matches(a.title, tokens)))
-        : index.filter(row => row.href === '/#avisos' || row.href.startsWith('https:'));
-      const options = filtered.slice(0,16).map((row,i) => {
-        const a = $('#command-option').content.firstElementChild.cloneNode(true);
-        a.href = row.href.startsWith('/') ? new URL(row.href.slice(1),siteRoot).href : row.href;
-        a.id = 'result-'+i;
-        if (row.href.startsWith('https:')) { a.target='_blank'; a.rel='noopener noreferrer'; }
-        a.querySelector('strong').textContent = row.title;
-        a.querySelector('small').textContent = row.detail;
-        return a;
-      });
-      results.replaceChildren(...options);
-      status.textContent = options.length ? '' : 'Nenhum resultado. Tente outro assunto.';
-      select(0);
-    } catch {
-      if (version !== drawVersion) return;
-      results.replaceChildren(); select(-1);
-      status.textContent = 'A pesquisa está indisponível. Consulte a biblioteca abaixo.';
+      results.replaceChildren();
+      select(-1);
+      status.textContent = 'Não foi possível carregar a busca. Abra a biblioteca para consultar os guias.';
+      return;
     }
+    if (version !== drawVersion) return;
+    const items = (tokens.length ? index.filter(item => matches(`${item.title} ${item.detail} ${item.terms || ''}`, tokens)) : index).slice(0,8);
+    const template = $('#command-option');
+    results.replaceChildren(...items.map((item, i) => {
+      const link = template.content.firstElementChild.cloneNode(true);
+      const external = /^https?:/.test(item.href);
+      link.id = 'command-item-' + i;
+      link.href = external ? item.href : new URL(item.href.replace(/^\//, ''), siteRoot).href;
+      if (external) { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
+      link.querySelector('strong').textContent = item.title;
+      link.querySelector('small').textContent = item.detail;
+      return link;
+    }));
+    status.textContent = items.length ? '' : 'Nenhum resultado encontrado.';
+    select(items.length ? 0 : -1);
   }
   function openSearch() {
-    if (search.open) return;
     if (menu.open) menu.close();
     input.value = '';
     results.replaceChildren();
@@ -187,16 +185,20 @@
     const dots = [...board.querySelectorAll('[data-board-dots] button')];
     board.querySelector('[data-board-nav]').hidden = false;
     board.querySelector('[data-board-dots]').hidden = false;
-    const step = () => cards[1].offsetLeft - cards[0].offsetLeft;
-    const maxScroll = () => track.scrollWidth - track.clientWidth;
-    const current = () => Math.min(cards.length - 1, Math.round(track.scrollLeft / step()));
+    const step = () => Math.max(1, cards[1].offsetLeft - cards[0].offsetLeft);
+    const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
+    const current = () => {
+      if (track.scrollLeft >= maxScroll() - 8) return cards.length - 1;
+      return Math.min(cards.length - 1, Math.round(track.scrollLeft / step()));
+    };
     const go = i => {
       const last = cards.length - 1;
       const target = i < 0 ? last : i > last ? 0 : i;
-      track.scrollTo({ left: Math.min(target * step(), maxScroll()), behavior: 'smooth' });
+      const left = target === last ? maxScroll() : Math.min(target * step(), maxScroll());
+      track.scrollTo({ left, behavior: 'smooth' });
     };
     const sync = () => {
-      const index = track.scrollLeft >= maxScroll() - 2 ? cards.length - 1 : current();
+      const index = current();
       dots.forEach((d, i) => d.setAttribute('aria-current', String(i === index)));
     };
     track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
@@ -207,8 +209,8 @@
       if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
       if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
     });
-    // Arrastar com o mouse (toque já rola nativamente)
     let drag = null;
+    let suppressClick = false;
     track.addEventListener('pointerdown', e => {
       if (e.pointerType !== 'mouse' || e.button !== 0) return;
       drag = { x: e.clientX, left: track.scrollLeft, moved: false };
@@ -216,16 +218,22 @@
     window.addEventListener('pointermove', e => {
       if (!drag) return;
       const dx = e.clientX - drag.x;
-      if (!drag.moved && Math.abs(dx) > 5) { drag.moved = true; track.classList.add('is-dragging'); }
+      if (!drag.moved && Math.abs(dx) > 6) { drag.moved = true; track.classList.add('is-dragging'); }
       if (drag.moved) track.scrollLeft = drag.left - dx;
     });
     window.addEventListener('pointerup', () => {
       if (!drag) return;
       const moved = drag.moved;
+      const dx = track.scrollLeft - drag.left;
       drag = null;
       track.classList.remove('is-dragging');
-      if (moved) go(Math.round(track.scrollLeft / step()));
+      if (moved) {
+        suppressClick = true;
+        setTimeout(() => { suppressClick = false; }, 50);
+        go(dx > 24 ? 1 : dx < -24 ? 0 : current());
+      }
     });
+    track.addEventListener('click', e => { if (suppressClick) { e.preventDefault(); e.stopPropagation(); } }, true);
     track.addEventListener('dragstart', e => e.preventDefault());
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       let paused = false;
@@ -238,11 +246,19 @@
   }
 
   const viewBox = $('[data-views]');
-  if (viewBox) {
-    const list = $('.guide-list');
+  const guideList = $('.guide-list');
+  if (viewBox && guideList) {
+    const resetTilt = () => {
+      guideList.querySelectorAll('[data-tilt]').forEach(card => {
+        card.style.removeProperty('transform');
+        card.style.removeProperty('--mouse-x');
+        card.style.removeProperty('--mouse-y');
+      });
+    };
     const apply = view => {
-      list.dataset.view = view;
+      guideList.dataset.view = view;
       viewBox.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+      if (view !== 'cards') resetTilt();
     };
     let saved = 'cards';
     try { saved = localStorage.getItem('portal-view') || 'cards'; } catch {}
@@ -254,49 +270,180 @@
       apply(b.dataset.view);
       try { localStorage.setItem('portal-view', b.dataset.view); } catch {}
     });
+
+    // Efeito 3D de carta ao mover o mouse nos cards
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      guideList.querySelectorAll('[data-tilt]').forEach(card => {
+        let frame = 0;
+        card.addEventListener('pointermove', e => {
+          if (guideList.dataset.view !== 'cards') return;
+          if (frame) cancelAnimationFrame(frame);
+          frame = requestAnimationFrame(() => {
+            const r = card.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width;
+            const py = (e.clientY - r.top) / r.height;
+            const rx = ((0.5 - py) * 7).toFixed(2);
+            const ry = ((px - 0.5) * 7).toFixed(2);
+            card.style.setProperty('--mouse-x', `${(px * 100).toFixed(1)}%`);
+            card.style.setProperty('--mouse-y', `${(py * 100).toFixed(1)}%`);
+            card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
+          });
+        });
+        card.addEventListener('pointerleave', () => {
+          if (frame) cancelAnimationFrame(frame);
+          card.style.removeProperty('transform');
+        });
+      });
+    }
   }
 
+  // Navegação por seções na página inicial (Início, Mural de avisos, Guias)
+  if (document.body.classList.contains('is-home')) {
+    const navLinks = all('[data-nav-link]');
+    const homeTargets = [
+      { key: '/', el: null },
+      { key: '/#avisos', el: $('#avisos') },
+      { key: '/#conteudos', el: $('#conteudos') }
+    ];
+    let navLock = 0;
+    const setHomeNav = key => {
+      navLinks.forEach(a => {
+        if (a.dataset.navLink === key) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+    };
+    const scrollToSection = (key, pushHash = true) => {
+      const entry = homeTargets.find(t => t.key === key);
+      if (!entry) return;
+      navLock = Date.now() + 700;
+      setHomeNav(key);
+      if (menu.open) menu.close();
+      const navH = ($('.masthead')?.offsetHeight || 58) + 18;
+      const top = entry.el ? Math.max(0, entry.el.getBoundingClientRect().top + window.scrollY - navH) : 0;
+      window.scrollTo({ top, behavior: 'smooth' });
+      if (pushHash) {
+        const hash = key.includes('#') ? key.slice(key.indexOf('#')) : '';
+        history.replaceState(null, '', location.pathname + location.search + hash);
+      }
+    };
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href]');
+      if (!a) return;
+      const raw = a.getAttribute('href');
+      if (raw === './' || raw === '/') {
+        e.preventDefault();
+        scrollToSection('/');
+      } else if (raw === './#avisos' || raw === '/#avisos' || raw === '#avisos') {
+        e.preventDefault();
+        scrollToSection('/#avisos');
+      } else if (raw === './#conteudos' || raw === '/#conteudos' || raw === '#conteudos') {
+        e.preventDefault();
+        scrollToSection('/#conteudos');
+      }
+    });
+    const syncHomeNav = () => {
+      if (Date.now() < navLock) return;
+      const offset = ($('.masthead')?.offsetHeight || 58) + 60;
+      let active = '/';
+      for (const t of homeTargets) {
+        if (t.el && t.el.getBoundingClientRect().top <= offset) active = t.key;
+      }
+      setHomeNav(active);
+    };
+    window.addEventListener('scroll', () => requestAnimationFrame(syncHomeNav), { passive: true });
+    if (location.hash === '#avisos' || location.hash === '#conteudos') {
+      requestAnimationFrame(() => scrollToSection('/' + location.hash, false));
+    }
+  }
+
+  // Índice lateral ("Nesta página") nos guias com travamento ao clicar
   const sections = all('.reading-section');
   if (sections.length) {
     const toc = all('[data-toc]');
     const mobileToc = $('.mobile-toc');
-    toc.forEach(a=>a.addEventListener('click',()=>{ mobileToc.open = false; }));
-    let scheduled = false;
-    function highlight() {
-      const offset = $('.masthead').offsetHeight + 40;
-      let current = sections[0];
-      for (const section of sections) {
-        if (section.getBoundingClientRect().top > offset) break;
-        current = section;
-      }
-      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) current = sections.at(-1);
-      toc.forEach(a=>{
-        if (a.dataset.toc === current.id) a.setAttribute('aria-current','location');
+    let lockedId = '';
+    let lockTimer = 0;
+
+    function applyCurrent(id) {
+      toc.forEach(a => {
+        if (a.dataset.toc === id) a.setAttribute('aria-current', 'location');
         else a.removeAttribute('aria-current');
       });
+    }
+
+    toc.forEach(a => a.addEventListener('click', e => {
+      const id = a.dataset.toc;
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      if (mobileToc) mobileToc.open = false;
+      lockedId = id;
+      clearTimeout(lockTimer);
+      lockTimer = setTimeout(() => { lockedId = ''; }, 800);
+      applyCurrent(id);
+      const navH = ($('.masthead')?.offsetHeight || 58) + 22;
+      const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - navH);
+      window.scrollTo({ top, behavior: 'smooth' });
+      history.replaceState(null, '', '#' + id);
+    }));
+
+    let scheduled = false;
+    function highlight() {
       scheduled = false;
+      if (lockedId) {
+        applyCurrent(lockedId);
+        return;
+      }
+      const offset = ($('.masthead')?.offsetHeight || 58) + 34;
+      let current = sections[0];
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= offset) current = section;
+        else break;
+      }
+      applyCurrent(current.id);
     }
     function schedule() { if (!scheduled) { scheduled = true; requestAnimationFrame(highlight); } }
-    window.addEventListener('scroll',schedule,{passive:true});
-    window.addEventListener('resize',schedule);
-    window.addEventListener('load',highlight);
-    highlight();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    window.addEventListener('load', highlight);
+    if (location.hash) {
+      const initial = sections.find(s => '#' + s.id === location.hash);
+      if (initial) {
+        lockedId = initial.id;
+        applyCurrent(initial.id);
+        setTimeout(() => { lockedId = ''; }, 600);
+      }
+    } else {
+      highlight();
+    }
   }
-  const password = $('#network-password');
-  if (password) {
-    if (matchMedia('(max-width: 600px)').matches) $('.wifi-qr').open = false;
-    password.type = 'password';
-    $('.wifi-actions').hidden = false;
-    const toggle = $('[data-toggle-pass]');
-    toggle.addEventListener('click',()=>{
-      const show = password.type === 'password';
-      password.type = show ? 'text' : 'password';
-      toggle.textContent = show ? 'Ocultar senha' : 'Mostrar senha';
-      toggle.setAttribute('aria-pressed',String(show));
+
+  const wifi = $('[data-wifi]');
+  if (wifi) {
+    const password = $('#network-password');
+    const toggle = wifi.querySelector('[data-toggle-pass]');
+    const copy = wifi.querySelector('[data-copy]');
+    const status = wifi.querySelector('[data-copy-status]');
+    const secret = password.textContent.trim();
+    const mask = '•'.repeat(secret.length);
+    let shown = false;
+    function renderWifi() {
+      password.textContent = shown ? secret : mask;
+      toggle.textContent = shown ? 'Ocultar senha' : 'Mostrar senha';
+      toggle.setAttribute('aria-pressed', String(shown));
+    }
+    toggle.addEventListener('click', () => { shown = !shown; renderWifi(); });
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(secret);
+        status.textContent = 'Senha copiada para a área de transferência.';
+      } catch {
+        shown = true;
+        renderWifi();
+        status.textContent = 'Não foi possível copiar automaticamente. A senha foi exibida acima.';
+      }
     });
-    $('[data-copy]').addEventListener('click',async()=>{
-      try { await navigator.clipboard.writeText(password.value); $('.copy-status').textContent = 'Senha copiada.'; }
-      catch { if (password.type === 'password') toggle.click(); password.select(); $('.copy-status').textContent = 'Senha selecionada. Use o comando Copiar do celular.'; }
-    });
+    wifi.querySelector('.wifi-actions').hidden = false;
+    renderWifi();
   }
 })();

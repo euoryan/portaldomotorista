@@ -14,6 +14,8 @@ for (const file of (await readdir(source)).filter(name => name.endsWith('.mjs'))
       g.sectors.some(id => !sectors[id]) || new Set(g.sections.map(s=>s.id)).size !== g.sections.length)
     throw new Error('Verifique o cadastro de ' + file);
   await access(resolve(root,'assets/images',g.image));
+  const thumbDir = g.cover || g.slug;
+  await access(resolve(root, 'assets/images/pages', thumbDir, 'thumb', thumbDir + '.png'));
   if (g.icon) await access(resolve(root, 'assets/images/atalhos', g.icon + '.webp'));
   guides.push(g);
 }

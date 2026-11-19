@@ -7,12 +7,32 @@ const brandLink = `<a class="brand" href="/">${logo}<span>${brand}</span></a>`;
 const destinations = [
   ['Início', '/', 'home'],
   ['Mural de avisos', '/#avisos', 'bell'],
+  ['Guias', '/#conteudos', 'book'],
   ['Biblioteca', '/pesquisa/', 'guides']
 ];
 
-function navigation(current, mobile = false) {
-  const items = mobile ? [...destinations, ['Benefícios', '/beneficios/', 'badge'], ['Links úteis', '/diretoriosdelinks/', 'external']] : destinations;
-  return items.map(([label, href, glyph]) => `<a href="${href}"${current === href ? ' aria-current="page"' : ''}>${mobile ? icon(glyph, 17) : ''}${label}</a>`).join('');
+const sidebarGuides = [
+  ['Guia para novos motoristas', '/guianovos/'],
+  ['Em caso de sinistro', '/sinistro/'],
+  ['Nossas regras', '/nossasregras/'],
+  ['Guia Intelbras', '/guiaintelbras/'],
+  ['Diretório de links', '/diretoriosdelinks/'],
+  ['Benefícios e parceiros', '/beneficios/'],
+  ['Wi-Fi dos motoristas', '/wifimotoristas/'],
+  ['Bonificação', '/bonificacao/']
+];
+
+function navigation(current) {
+  return destinations.map(([label, href]) => `<a href="${href}" data-nav-link="${href}"${current === href ? ' aria-current="page"' : ''}>${label}</a>`).join('');
+}
+
+function sidebarNav(current) {
+  const mainLinks = destinations.map(([label, href, glyph]) =>
+    `<a href="${href}" data-nav-link="${href}"${current === href ? ' aria-current="page"' : ''}>${icon(glyph, 16)}<span>${label}</span></a>`).join('');
+  const guideLinks = sidebarGuides.map(([label, href]) =>
+    `<a href="${href}"${current === href ? ' aria-current="page"' : ''}>${icon('file', 15)}<span>${label}</span></a>`).join('');
+  return `<div class="sidebar-group"><p class="sidebar-label">Navegação</p><nav aria-label="Navegação principal">${mainLinks}</nav></div>
+    <div class="sidebar-group"><p class="sidebar-label">Guias e páginas</p><nav aria-label="Guias do portal">${guideLinks}</nav></div>`;
 }
 
 const searchTrigger = `<a class="search-trigger" href="/pesquisa/" data-search aria-haspopup="dialog" aria-controls="search-dialog" aria-keyshortcuts="Control+K Meta+K" aria-label="Buscar no portal">
@@ -29,8 +49,9 @@ function header(current) {
 
 function dialogs(current) {
   return `<dialog id="menu" class="menu-dialog" aria-labelledby="menu-title">
-    <div class="dialog-head"><h2 id="menu-title">Menu</h2><button class="icon-button" data-close aria-label="Fechar menu">${icon('close', 18)}</button></div>
-    <nav aria-label="Menu do celular">${navigation(current, true)}</nav>${supportLink('menu-support')}
+    <div class="dialog-head">${brandLink}<span class="sr-only" id="menu-title">Menu de navegação</span><button class="icon-button" data-close aria-label="Fechar menu">${icon('close', 18)}</button></div>
+    <div class="sidebar-body">${sidebarNav(current)}</div>
+    <div class="sidebar-foot">${supportLink('button button-outline menu-support', 'Falar com o Tráfego')}</div>
   </dialog>
   <dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title">
     <h2 class="sr-only" id="search-title">Busca no portal</h2>
@@ -49,14 +70,21 @@ function footer(onHome) {
   const year = new Date().getUTCFullYear();
   return `<footer id="rodape"><div class="wrap">
     <div class="foot-main"${onHome ? ' id="contato"' : ''}>
-      <div class="foot-id">${brandLink}<p>Guias, avisos e serviços para a rotina de quem dirige.</p></div>
-      <nav class="foot-nav" aria-label="Navegação do rodapé">
-        ${link('Início', '/', 'foot-link')}${link('Mural de avisos', '/#avisos', 'foot-link')}${link('Guias e procedimentos', '/#conteudos', 'foot-link')}${link('Links úteis', '/diretoriosdelinks/', 'foot-link')}
-      </nav>
-      ${supportLink('button button-outline foot-support', 'Falar com o Tráfego')}
+      <div class="foot-id">${brandLink}<p>Guias, avisos e serviços para a rotina de quem dirige.</p>${supportLink('button button-outline foot-support', 'Falar com o Tráfego')}</div>
+      <div class="foot-cols">
+        <div class="foot-col"><h3>Portal</h3><nav aria-label="Seções do portal">
+          ${link('Início', '/', 'foot-link')}${link('Mural de avisos', '/#avisos', 'foot-link')}${link('Guias e procedimentos', '/#conteudos', 'foot-link')}${link('Biblioteca', '/pesquisa/', 'foot-link')}
+        </nav></div>
+        <div class="foot-col"><h3>Guias</h3><nav aria-label="Guias operacionais">
+          ${link('Novos motoristas', '/guianovos/', 'foot-link')}${link('Em caso de sinistro', '/sinistro/', 'foot-link')}${link('Nossas regras', '/nossasregras/', 'foot-link')}${link('Guia Intelbras', '/guiaintelbras/', 'foot-link')}
+        </nav></div>
+        <div class="foot-col"><h3>Serviços</h3><nav aria-label="Serviços e recursos">
+          ${link('Diretório de links', '/diretoriosdelinks/', 'foot-link')}${link('Benefícios e parceiros', '/beneficios/', 'foot-link')}${link('Wi-Fi dos motoristas', '/wifimotoristas/', 'foot-link')}${link('Bonificação', '/bonificacao/', 'foot-link')}
+        </nav></div>
+      </div>
     </div>
-    <div class="foot-legal"><small>© ${year} ${brand}</small><nav aria-label="Informações legais">
-      ${link('Privacidade', 'https://euoryan.com/politica/', 'foot-link')}${link('Termos de uso', 'https://euoryan.com/termos/', 'foot-link')}
+    <div class="foot-sub"><span class="foot-copy">${logo}<small>© ${year} ${brand}</small></span><nav aria-label="Informações legais">
+      ${link('Privacidade', 'https://euoryan.com/politica/', 'foot-link')}${link('Termos', 'https://euoryan.com/termos/', 'foot-link')}
     </nav></div>
   </div></footer>`;
 }
@@ -66,7 +94,7 @@ export function layout(title, description, body, current = '', noindex = false) 
   return `<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${pageTitle}</title><meta name="description" content="${escapeHtml(description)}"><meta name="application-name" content="${brand}">
-<meta name="apple-mobile-web-app-title" content="${brand}"><meta name="theme-color" content="#fafafb" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#121316" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-title" content="${brand}"><meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="${pageTitle}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:site_name" content="${brand}">
 ${noindex ? '<meta name="robots" content="noindex">' : ''}<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=6"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=6">
 <link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/css/styles.css"><script src="/assets/js/app.js" defer></script></head>
