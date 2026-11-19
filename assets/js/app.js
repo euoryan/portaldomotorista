@@ -187,9 +187,18 @@
     const dots = [...board.querySelectorAll('[data-board-dots] button')];
     board.querySelector('[data-board-nav]').hidden = false;
     board.querySelector('[data-board-dots]').hidden = false;
-    const go = i => track.scrollTo({ left: cards[(i + cards.length) % cards.length].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
-    const current = () => Math.round(track.scrollLeft / cards[0].getBoundingClientRect().width) || 0;
-    const sync = () => dots.forEach((d, i) => d.setAttribute('aria-current', String(i === Math.min(current(), cards.length - 1))));
+    const step = () => cards[1].offsetLeft - cards[0].offsetLeft;
+    const maxScroll = () => track.scrollWidth - track.clientWidth;
+    const current = () => Math.min(cards.length - 1, Math.round(track.scrollLeft / step()));
+    const go = i => {
+      const last = cards.length - 1;
+      const target = i < 0 ? last : i > last ? 0 : i;
+      track.scrollTo({ left: Math.min(target * step(), maxScroll()), behavior: 'smooth' });
+    };
+    const sync = () => {
+      const index = track.scrollLeft >= maxScroll() - 2 ? cards.length - 1 : current();
+      dots.forEach((d, i) => d.setAttribute('aria-current', String(i === index)));
+    };
     track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
     board.querySelector('[data-prev]').addEventListener('click', () => go(current() - 1));
     board.querySelector('[data-next]').addEventListener('click', () => go(current() + 1));
@@ -198,12 +207,53 @@
       if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
       if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
     });
+    // Arrastar com o mouse (toque já rola nativamente)
+    let drag = null;
+    track.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      drag = { x: e.clientX, left: track.scrollLeft, moved: false };
+    });
+    window.addEventListener('pointermove', e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) > 5) { drag.moved = true; track.classList.add('is-dragging'); }
+      if (drag.moved) track.scrollLeft = drag.left - dx;
+    });
+    window.addEventListener('pointerup', () => {
+      if (!drag) return;
+      const moved = drag.moved;
+      drag = null;
+      track.classList.remove('is-dragging');
+      if (moved) go(Math.round(track.scrollLeft / step()));
+    });
+    track.addEventListener('dragstart', e => e.preventDefault());
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       let paused = false;
-      for (const ev of ['pointerenter', 'focusin', 'touchstart']) board.addEventListener(ev, () => { paused = true; });
+      board.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') paused = true; });
       board.addEventListener('pointerleave', () => { paused = false; });
-      setInterval(() => { if (!paused && !document.hidden) go(current() + 1); }, 8000);
+      board.addEventListener('focusin', () => { paused = true; });
+      board.addEventListener('focusout', () => { paused = false; });
+      setInterval(() => { if (!paused && !drag && !document.hidden) go(current() + 1); }, 10000);
     }
+  }
+
+  const viewBox = $('[data-views]');
+  if (viewBox) {
+    const list = $('.guide-list');
+    const apply = view => {
+      list.dataset.view = view;
+      viewBox.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+    };
+    let saved = 'cards';
+    try { saved = localStorage.getItem('portal-view') || 'cards'; } catch {}
+    apply(saved === 'list' ? 'list' : 'cards');
+    viewBox.hidden = false;
+    viewBox.addEventListener('click', e => {
+      const b = e.target.closest('[data-view]');
+      if (!b) return;
+      apply(b.dataset.view);
+      try { localStorage.setItem('portal-view', b.dataset.view); } catch {}
+    });
   }
 
   const sections = all('.reading-section');

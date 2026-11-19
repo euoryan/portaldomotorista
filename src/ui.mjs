@@ -29,6 +29,8 @@ const shapes = {
   cloud: '<path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5M8 21l1-2m4 2 1-2m4 2 1-2"/>',
   alert: '<path d="M12 3 2 20h20zM12 10v4.5m0 3v.01"/>',
   filter: '<path d="M4 6h16M7 12h10m-7 6h4"/>',
+  grid: '<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>',
+  rows: '<path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/>',
   home: '<path d="m3 10 9-7 9 7v10H3zM9 20v-7h6v7"/>'
 };
 
