@@ -44,7 +44,7 @@ export const workLinks = [
 export const notices = [
   {
     title: 'Cuidado com ruas alagadas', date: '2026-11-19', icon: 'cloud', tone: 'warn',
-    text: 'A previsão do tempo indica chuva nos próximos dias. Não entre em ruas alagadas e escolha um caminho alternativo. Em caso de dúvida, fale com o Tráfego.'
+    text: 'A previsão do tempo indica chuva nos próximos dias. Não entre em ruas alagadas. Se a rua estiver alagada, pare e ligue para o Tráfego.'
   },
   {
     title: 'Siga os procedimentos em caso de acidente', date: '2026-11-19', icon: 'alert', tone: 'alert',
