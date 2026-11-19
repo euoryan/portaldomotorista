@@ -31,8 +31,9 @@
     }).catch(error => { indexRequest = undefined; throw error; });
     return indexRequest;
   };
-  function openMenu() { menu.showModal(); }
-  $('#menu-toggle').addEventListener('click',openMenu);
+  const menuToggle = $('#menu-toggle');
+  menuToggle.addEventListener('click', () => menu.showModal());
+  menuToggle.hidden = false;
   for (const dialog of [menu,search]) {
     dialog.querySelector('[data-close]').addEventListener('click',()=>dialog.close());
     dialog.addEventListener('click', event => {
@@ -56,23 +57,21 @@
     const version = ++drawVersion;
     const tokens = terms(input.value);
     const status = search.querySelector('.command-status');
+    $('#command-group').textContent = tokens.length ? 'Resultados' : 'Sugestões';
     try {
       const index = await getIndex();
       if (version !== drawVersion) return;
-      const filtered = index.filter(row => tokens.length ? matches(row.title+' '+row.detail+' '+row.terms,tokens) : !row.href.includes('#') && row.href !== '/');
-      if (tokens.length) filtered.sort((a,b) => Number(matches(b.title,tokens))-Number(matches(a.title,tokens)));
+      const filtered = tokens.length
+        ? index.filter(row => matches(row.title + ' ' + row.detail + ' ' + row.terms, tokens))
+            .sort((a, b) => Number(matches(b.title, tokens)) - Number(matches(a.title, tokens)))
+        : index.filter(row => row.href === '/#avisos' || row.href.startsWith('https:'));
       const options = filtered.slice(0,16).map((row,i) => {
-        const a = document.createElement('a');
+        const a = $('#command-option').content.firstElementChild.cloneNode(true);
         a.href = row.href.startsWith('/') ? new URL(row.href.slice(1),siteRoot).href : row.href;
         a.id = 'result-'+i;
-        a.tabIndex = -1;
-        a.setAttribute('role','option');
         if (row.href.startsWith('https:')) { a.target='_blank'; a.rel='noopener noreferrer'; }
-        const title = document.createElement('strong');
-        const subtitle = document.createElement('small');
-        title.textContent = row.title;
-        subtitle.textContent = row.detail;
-        a.append(title,subtitle);
+        a.querySelector('strong').textContent = row.title;
+        a.querySelector('small').textContent = row.detail;
         return a;
       });
       results.replaceChildren(...options);
@@ -88,6 +87,8 @@
     if (search.open) return;
     if (menu.open) menu.close();
     input.value = '';
+    results.replaceChildren();
+    select(-1);
     search.showModal();
     input.focus();
     draw();
@@ -98,43 +99,76 @@
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); if(search.open) search.close(); else openSearch(); }
   });
   input.addEventListener('input',draw);
+  results.addEventListener('pointermove', event => {
+    const option = event.target.closest('[role="option"]');
+    if (event.pointerType === 'mouse' && option && option.getAttribute('aria-selected') !== 'true') {
+      select([...results.children].indexOf(option));
+    }
+  });
   input.addEventListener('keydown',e=>{
+    if (e.isComposing) return;
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); select(selected+(e.key === 'ArrowDown' ? 1 : -1),true); }
     if (e.key === 'Enter' && selected >= 0) { e.preventDefault(); results.children[selected].click(); }
   });
 
-  const filters = $('.filters');
-  if (filters) {
-    const cards = all('[data-guide]');
-    const paramNames = ['q','setor','categoria'];
-    function restore() {
-      const url = new URL(location.href);
-      for (const name of paramNames) filters.elements[name].value = url.searchParams.get(name) || '';
-      filter(false);
-    }
-    function filter(updateURL) {
-      const {q,setor,categoria} = filters.elements;
-      const tokens = terms(q.value);
+  const catalog = $('[data-catalog]');
+  if (catalog) {
+    const guides = [...catalog.querySelectorAll('[data-guide]')];
+    const topicButtons = [...catalog.querySelectorAll('[data-topic]')];
+    const query = catalog.querySelector('[name="q"]');
+    const more = catalog.querySelector('[data-more]');
+    const pageSize = Number(catalog.dataset.pageSize) || Infinity;
+    let topic = '';
+    let limit = pageSize;
+
+    function renderCatalog() {
+      const tokens = terms(query?.value || '');
       let count = 0;
-      for (const card of cards) {
-        const data = card.dataset;
-        card.hidden = !matches(data.terms,tokens) || (setor.value && !data.sectors.split(' ').includes(setor.value)) || (categoria.value && data.category !== categoria.value);
-        if (!card.hidden) count++;
+      for (const guide of guides) {
+        const match = (!topic || guide.dataset.category === topic) && matches(guide.dataset.terms, tokens);
+        if (match) count++;
+        guide.hidden = !match || count > limit;
       }
-      $('.result-count').textContent = count + (count === 1 ? ' conteúdo' : ' conteúdos');
-      $('.no-results').hidden = count > 0;
-      if (updateURL) {
-        const url = new URL(location.href);
-        for (const name of paramNames) {
-          const value = filters.elements[name].value.trim();
-          if (value) url.searchParams.set(name,value); else url.searchParams.delete(name);
-        }
-        history.replaceState(null,'',url);
-      }
+      topicButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.topic === topic)));
+      catalog.querySelector('[data-count]').textContent = count + (count === 1 ? ' conteúdo' : ' conteúdos');
+      catalog.querySelector('.no-results').hidden = count > 0;
+      catalog.querySelector('.guide-list').hidden = count === 0;
+      more.hidden = count <= limit;
     }
-    filters.addEventListener('input',()=>filter(true));
-    filters.addEventListener('submit',e=>{ e.preventDefault(); filter(true); });
-    window.addEventListener('popstate',restore);
+
+    function changeFilter() {
+      limit = pageSize;
+      const url = new URL(location.href);
+      if (topic) url.searchParams.set('categoria', topic); else url.searchParams.delete('categoria');
+      if (query?.value.trim()) url.searchParams.set('q', query.value.trim()); else url.searchParams.delete('q');
+      url.searchParams.delete('setor');
+      history.replaceState(null, '', url);
+      renderCatalog();
+    }
+
+    function restore() {
+      const params = new URL(location.href).searchParams;
+      const requested = params.get('categoria');
+      topic = topicButtons.some(button => button.dataset.topic === requested) ? requested : '';
+      if (query) query.value = params.get('q') || '';
+      limit = pageSize;
+      renderCatalog();
+    }
+    topicButtons.forEach(button => button.addEventListener('click', () => {
+      topic = button.dataset.topic;
+      changeFilter();
+    }));
+    query?.addEventListener('input', changeFilter);
+    query?.form.addEventListener('submit', event => { event.preventDefault(); changeFilter(); });
+    more.addEventListener('click', () => {
+      const previous = limit;
+      limit += pageSize;
+      renderCatalog();
+      guides.filter(guide => !guide.hidden)[previous]?.querySelector('a').focus();
+    });
+    catalog.querySelector('[data-topics]').hidden = false;
+    if (query) query.form.hidden = false;
+    window.addEventListener('popstate', restore);
     restore();
   }
 
@@ -166,6 +200,7 @@
   }
   const password = $('#network-password');
   if (password) {
+    if (matchMedia('(max-width: 600px)').matches) $('.wifi-qr').open = false;
     password.type = 'password';
     $('.wifi-actions').hidden = false;
     const toggle = $('[data-toggle-pass]');

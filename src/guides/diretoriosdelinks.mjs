@@ -3,7 +3,7 @@ import { bullets, resourceLinks } from '../ui.mjs';
 
 export default {
   slug: 'diretoriosdelinks', title: 'Diretório de links', category: 'recursos', sectors: ['ti'],
-  summary: 'Abra a ficha mecânica, o cadastro de crachá e os canais que você usa durante o trabalho.',
+  icon: 'aneis', summary: 'Formulários e sistemas da operação.',
   image: 'diretorio.webp', terms: 'formulários sistemas atalhos ficha mecânica crachá bot Telegram rotas',
   sections: [
     { id: 'links', title: 'Formulários e acessos', html: resourceLinks([

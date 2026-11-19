@@ -18,6 +18,8 @@ Abra http://localhost:4173. Os HTMLs, o índice de pesquisa e a folha de estilos
 
 Cada arquivo em `src/guides/` define uma página. Use um dos guias existentes como modelo. O nome do arquivo corresponde ao endereço da página. Cadastre título, resumo, categoria, setores, foto, termos de pesquisa e seções. Mantenha os identificadores das seções já publicadas para preservar links diretos.
 
-A compilação inclui o guia na biblioteca, nos filtros e na pesquisa geral. O índice lateral usa as mesmas seções do artigo. Para mudar os setores, os guias em destaque ou os avisos, edite `src/site.mjs`. Cada aviso recebe os campos `title` e `text`.
+A compilação inclui o guia no início, na biblioteca e na busca. A categoria define o filtro por assunto. Os setores identificam os responsáveis no artigo. O campo opcional `icon` aponta para uma miniatura WebP em `assets/images/atalhos/`. O índice da página usa os mesmos títulos e identificadores das seções.
+
+Em `src/site.mjs`, `guideOrder` define a ordem inicial dos guias. A página mostra até oito por vez e oferece “Mostrar mais” quando há outros resultados. O mural usa a lista `notices`, na ordem de leitura. Cada aviso tem `title`, `text` e, opcionalmente, `date` no formato `AAAA-MM-DD`.
 
 O layout compartilhado está em `src/layout.mjs`. Edite os estilos em `src/input.css` e compile com `npm run build`.

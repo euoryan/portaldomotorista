@@ -1,6 +1,11 @@
 import { urls } from './site.mjs';
 
 const shapes = {
+  bell: '<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 20a2.2 2.2 0 0 0 4 0"/>',
+  wrench: '<path d="M14 6a5 5 0 0 0-6 6L3.8 17a2.1 2.1 0 0 0 3.2 3l5-4.4A5.6 5.6 0 0 0 19.5 8l-3.6 3.1-3-3L16 4.5z"/>',
+  badge: '<rect x="3" y="6" width="18" height="15" rx="3"/><path d="M9 6V3h6v3m-1 6h4m-4 4h3M5.5 17c.5-2.5 5.5-2.5 6 0"/><circle cx="8.5" cy="11.5" r="1.6"/>',
+  guides: '<path d="M4 5h4v15H4zM10 5h4v15h-4zM16 6l3-1 4 14-3 1z"/>',
+  return: '<path d="M20 5v6a3 3 0 0 1-3 3H4m5-5-5 5 5 5"/>',
   search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>',
   menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
   close: '<path d="m6 6 12 12M18 6 6 18"/>',

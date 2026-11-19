@@ -10,9 +10,9 @@ export const sectors = {
 };
 
 export const categoryNames = {
-  guias: 'Guias',
+  guias: 'Orientações',
   operacao: 'Operação',
-  recursos: 'Recursos'
+  recursos: 'Serviços'
 };
 
 export const urls = {
@@ -27,7 +27,17 @@ export const urls = {
   partners: 'https://alexandreroteiros.notion.site/Alexandre-Turismo-Parceiras-12d214b1b1b980e7a645d05ef6231d0f?source=copy_link'
 };
 
-export const featuredSlugs = ['guianovos', 'sinistro', 'beneficios'];
+// Os próximos guias entram automaticamente depois destes, por título.
+export const guideOrder = [
+  'guianovos', 'sinistro', 'nossasregras', 'diretoriosdelinks',
+  'guiaintelbras', 'beneficios', 'wifimotoristas', 'bonificacao'
+];
 
-// Cada comunicado publicado tem um título e um texto.
+export const workLinks = [
+  { label: 'Ficha mecânica', href: urls.mechanic, icon: 'wrench' },
+  { label: 'Receber rotas', href: urls.routesBot, icon: 'route' },
+  { label: 'Registrar falta de crachá', href: urls.badge, icon: 'badge' }
+];
+
+// A ordem da lista é a ordem de exibição. A data de publicação é opcional (AAAA-MM-DD).
 export const notices = [];
