@@ -12,7 +12,7 @@ npm run build
 npm run serve
 ```
 
-Abra http://localhost:4173. Os HTMLs, o índice de pesquisa e a folha de estilos gerados acompanham o commit.
+Abra http://localhost:4173. Os HTMLs, o índice de pesquisa e a folha de estilos gerados acompanham o commit. A Vercel executa a compilação e publica a pasta `dist/`.
 
 ## Publicar conteúdo
 

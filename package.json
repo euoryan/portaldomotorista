@@ -4,7 +4,7 @@
   "private": true,
   "description": "Portal de guias, serviços e avisos para motoristas",
   "scripts": {
-    "build": "node scripts/build-site.mjs && npm run build:css",
+    "build": "node scripts/build-site.mjs && npm run build:css && node scripts/publish-files.mjs",
     "build:css": "node scripts/build-css.cjs",
     "serve": "python3 -m http.server 4173"
   },
