@@ -1,24 +1,23 @@
 # Portal do Motorista
 
-Portal estático para motoristas: guias, procedimentos, links e orientações operacionais.
+Portal estático com avisos, procedimentos e serviços para motoristas. O conteúdo e os links de cada guia já estão no HTML. A pesquisa global também aceita Ctrl + K ou ⌘ K.
 
-A navegação inclui busca global por páginas e procedimentos com `Ctrl + K`.
+## Desenvolvimento
 
-## Rodar local
+Com Node.js 22 ou superior, use os comandos abaixo para instalar as dependências, compilar e abrir o servidor local.
 
-```bash
-python3 -m http.server 8765
+```sh
+npm ci
+npm run build
+npm run serve
 ```
 
-Abra `http://127.0.0.1:8765/`.
+Abra http://localhost:4173. Os HTMLs, o índice de pesquisa e a folha de estilos gerados acompanham o commit.
 
-## Estrutura
+## Publicar conteúdo
 
-- `assets/js/app.js`: navegação, conteúdo oficial e interações
-- `assets/css/styles.css`: tema escuro (fonte: `src/input.css`)
-- Pastas por página (`sinistro/`, `guianovos/`, …) com shell HTML
-- `_archive-original/`: snapshot da versão anterior à migração
+Cada arquivo em `src/guides/` define uma página. Use um dos guias existentes como modelo. O nome do arquivo corresponde ao endereço da página. Cadastre título, resumo, categoria, setores, foto, termos de pesquisa e seções. Mantenha os identificadores das seções já publicadas para preservar links diretos.
 
-## CSS
+A compilação inclui o guia na biblioteca, nos filtros e na pesquisa geral. O índice lateral usa as mesmas seções do artigo. Para mudar os setores, os guias em destaque ou os avisos, edite `src/site.mjs`. Cada aviso recebe os campos `title` e `text`.
 
-Edite `src/input.css` e execute `npm run build:css`. O comando recompila `assets/css/styles.css` com Tailwind CSS 4.
+O layout compartilhado está em `src/layout.mjs`. Edite os estilos em `src/input.css` e compile com `npm run build`.
