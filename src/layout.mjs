@@ -1,7 +1,11 @@
 import { brand, sectors } from './site.mjs';
 import { escapeHtml, icon, link, supportLink } from './ui.mjs';
 
-const logo = '<img class="brand-mark" src="/assets/favicon.svg?v=3" width="34" height="34" alt="">';
+// Frente de ônibus em traço único: preto no tema claro, branco no escuro (currentColor).
+const logo = `<svg class="brand-mark" width="26" height="26" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="5" y="3.5" width="22" height="22" rx="5.5"/><rect x="8.5" y="9" width="15" height="8" rx="2"/>
+  <path d="M12 6.4h8M3 11.5h2m22 0h2M13.5 21.5h5"/><circle cx="10.4" cy="21.5" r=".9" fill="currentColor"/><circle cx="21.6" cy="21.5" r=".9" fill="currentColor"/>
+  <path d="M9 25.5v2.3m14-2.3v2.3"/></svg>`;
 const brandLink = `<a class="brand" href="/">${logo}<span>${brand}</span></a>`;
 const destinations = [
   ['Início', '/', 'home'],
@@ -47,10 +51,13 @@ function dialogs(current) {
 function footer(onHome) {
   const year = new Date().getUTCFullYear();
   return `<footer id="rodape"><div class="wrap">
-    <div class="foot-main"${onHome ? ' id="contato"' : ''}>${brandLink}
+    <div class="foot-main"${onHome ? ' id="contato"' : ''}>
+      <div class="foot-id">${brandLink}<p>Guias, avisos e serviços para a rotina de quem dirige.</p></div>
       <nav class="foot-nav" aria-label="Navegação do rodapé">
-        ${link('Mural de avisos', '/#avisos', 'foot-link')}${link('Guias e procedimentos', '/#conteudos', 'foot-link')}${link('Links úteis', '/diretoriosdelinks/', 'foot-link')}
-      </nav>${supportLink('foot-support')}</div>
+        ${link('Início', '/', 'foot-link')}${link('Mural de avisos', '/#avisos', 'foot-link')}${link('Guias e procedimentos', '/#conteudos', 'foot-link')}${link('Links úteis', '/diretoriosdelinks/', 'foot-link')}
+      </nav>
+      ${supportLink('button button-outline foot-support', 'Falar com o Tráfego')}
+    </div>
     <div class="foot-legal"><small>© ${year} ${brand}</small><nav aria-label="Informações legais">
       ${link('Privacidade', 'https://euoryan.com/politica/', 'foot-link')}${link('Termos de uso', 'https://euoryan.com/termos/', 'foot-link')}
     </nav></div>
@@ -64,9 +71,9 @@ export function layout(title, description, body, current = '', noindex = false) 
 <title>${pageTitle}</title><meta name="description" content="${escapeHtml(description)}"><meta name="application-name" content="${brand}">
 <meta name="apple-mobile-web-app-title" content="${brand}"><meta name="theme-color" content="#fafafb" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#121316" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="${pageTitle}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:site_name" content="${brand}">
-${noindex ? '<meta name="robots" content="noindex">' : ''}<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=3"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=3">
+${noindex ? '<meta name="robots" content="noindex">' : ''}<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=4"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=4">
 <link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/css/styles.css"><script src="/assets/js/app.js" defer></script></head>
-<body><a class="skip" href="#principal">Pular para o conteúdo</a>${header(current)}
+<body class="${current === '/' ? 'is-home' : 'is-inner'}"><a class="skip" href="#principal">Pular para o conteúdo</a>${header(current)}
 ${body}
 ${footer(current === '/')}${dialogs(current)}</body></html>
 `;
@@ -78,7 +85,7 @@ export function breadcrumbs(title, inLibrary = true) {
 
 export function sectorCredit(guide) {
   const names = guide.sectors.map(id => sectors[id]);
-  return `<dl class="credit"><dt>${icon('layers', 14)}${names.length > 1 ? 'Setores responsáveis' : 'Setor responsável'}</dt><dd>${new Intl.ListFormat('pt-BR', { type:'conjunction' }).format(names)}</dd></dl>`;
+  return `<dl class="credit"><dt>${icon('layers', 14)}${names.length > 1 ? 'Setores responsáveis' : 'Setor responsável'}</dt>${names.map(name => `<dd>${escapeHtml(name)}</dd>`).join('')}</dl>`;
 }
 
 export function state(title, description, action = 'Voltar ao início', href = '/', credit = '') {

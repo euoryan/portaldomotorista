@@ -1,7 +1,7 @@
 export const brand = 'Portal do Motorista';
 
 export const sectors = {
-  empresa: 'Empresa',
+  empresa: 'Portal do Motorista',
   trafego: 'Tráfego',
   dlv: 'DLV (Documentos, Licenças e Veículos)',
   ti: 'Infraestrutura e TI (DevOps)',
@@ -40,4 +40,15 @@ export const workLinks = [
 ];
 
 // A ordem da lista é a ordem de exibição. A data de publicação é opcional (AAAA-MM-DD).
-export const notices = [];
+// Campos: title, text, icon (cloud, alert, bell...), tone (info | warn | alert), href e cta opcionais.
+export const notices = [
+  {
+    title: 'Cuidado com ruas alagadas', date: '2026-11-19', icon: 'cloud', tone: 'warn',
+    text: 'A previsão do tempo indica chuva nos próximos dias. Não entre em ruas alagadas e escolha um caminho alternativo. Em caso de dúvida, fale com o Tráfego.'
+  },
+  {
+    title: 'Siga os procedimentos em caso de acidente', date: '2026-11-19', icon: 'alert', tone: 'alert',
+    text: 'Se houver um sinistro, garanta a segurança do local e acione o SAMU quando houver feridos. Depois, siga o passo a passo para registrar a ocorrência.',
+    href: '/sinistro/', cta: 'Ver procedimentos'
+  }
+];

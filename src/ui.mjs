@@ -26,11 +26,15 @@ const shapes = {
   info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-9v.01"/>',
   wifi: '<path d="M2 9a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M12 19h.01"/>',
   copy: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/>',
+  cloud: '<path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5M8 21l1-2m4 2 1-2m4 2 1-2"/>',
+  alert: '<path d="M12 3 2 20h20zM12 10v4.5m0 3v.01"/>',
+  filter: '<path d="M4 6h16M7 12h10m-7 6h4"/>',
   home: '<path d="m3 10 9-7 9 7v10H3zM9 20v-7h6v7"/>'
 };
 
 export function icon(name, size = 18) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">${shapes[name]}</svg>`;
+  const px = Math.round(size * .86);
+  return `<svg width="${px}" height="${px}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${shapes[name]}</svg>`;
 }
 
 export function escapeHtml(value) {
@@ -44,7 +48,7 @@ export function link(label, href, className = 'text-link', glyph = '') {
 }
 
 export function supportLink(className = 'button button-outline', label = 'Falar com o Tráfego') {
-  return `<a class="${className}" href="${urls.support}" target="_blank" rel="noopener noreferrer">${icon('headset', 17)}<span>${label}</span></a>`;
+  return `<a class="${className}" href="${urls.support}" target="_blank" rel="noopener noreferrer">${icon('headset', 16)}<span>${label}</span></a>`;
 }
 
 export function bullets(items) {

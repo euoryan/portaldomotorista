@@ -6,19 +6,22 @@ const noticeDate = new Intl.DateTimeFormat('pt-BR', {
   day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC'
 });
 
-function noticeRow(item, open) {
+function noticeCard(item) {
   const date = item.date ? `<time datetime="${escapeHtml(item.date)}">${noticeDate.format(new Date(item.date + 'T12:00:00Z'))}</time>` : '';
-  return `<details class="notice-item"${open ? ' open' : ''}><summary><span>${date}${escapeHtml(item.title)}</span>${icon('down', 15)}</summary>
-    <p>${escapeHtml(item.text)}</p></details>`;
+  const action = item.href ? `<a class="notice-action" href="${escapeHtml(item.href)}">${escapeHtml(item.cta || 'Saiba mais')}${icon('arrow', 14)}</a>` : '';
+  const photo = item.image ? `<img class="notice-photo" src="${escapeHtml(item.image)}" alt="" loading="lazy">` : '';
+  return `<li class="notice-card" data-tone="${item.tone || 'info'}">${photo}
+    <span class="notice-glyph">${icon(item.icon || 'bell', 20)}</span>
+    <div class="notice-copy">${date}<h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.text)}</p>${action}</div></li>`;
 }
 
 export function noticeBoard(items) {
-  const first = items.slice(0, 2).map((item, i) => noticeRow(item, i === 0)).join('');
-  const rest = items.slice(2);
-  const more = rest.length ? `<details class="older-notices"><summary>Ver mais avisos (${rest.length}) ${icon('down', 14)}</summary>${rest.map(item => noticeRow(item, false)).join('')}</details>` : '';
+  const shown = items.slice(0, 4);
+  const rest = items.slice(4);
+  const more = rest.length ? `<details class="older-notices"><summary>Ver mais avisos (${rest.length}) ${icon('down', 14)}</summary><ul class="notice-grid">${rest.map(noticeCard).join('')}</ul></details>` : '';
   return `<section id="avisos" class="notice-board${items.length ? '' : ' board-empty'}" aria-labelledby="mural-title">
-    <div class="board-heading"><span class="board-icon">${icon('bell', 18)}</span><h2 id="mural-title">Mural de avisos</h2></div>
-    ${items.length ? `<div class="board-posts">${first}${more}</div>` : '<p class="notice-empty">Nenhum aviso publicado no momento.</p>'}
+    <div class="board-heading"><span class="board-tag">${icon('bell', 14)}Mural de avisos</span><h2 id="mural-title" class="sr-only">Avisos da equipe</h2>${items.length ? `<span class="board-count">${items.length} ${items.length === 1 ? 'aviso ativo' : 'avisos ativos'}</span>` : ''}</div>
+    ${items.length ? `<ul class="notice-grid">${shown.map(noticeCard).join('')}</ul>${more}` : '<p class="notice-empty">Nenhum aviso publicado no momento.</p>'}
   </section>`;
 }
 
@@ -45,13 +48,14 @@ function guideEntry(guide, heading) {
 
 function catalogue(guides, onHome) {
   const tabs = [['', 'Todos'], ...Object.entries(categoryNames)];
-  const filters = `<div class="topic-filters" role="group" aria-label="Filtrar por assunto" data-topics hidden>
+  const filters = `<div class="topic-filters" id="topic-panel" role="group" aria-label="Filtrar por assunto" data-topics hidden>
     ${tabs.map(([id, label]) => `<button type="button" data-topic="${id}" aria-pressed="${id === ''}">${label}</button>`).join('')}
   </div>`;
-  const search = `<form class="library-search" role="search" action="/pesquisa/" hidden>${icon('search', 17)}
-    <input type="search" name="q" aria-label="Pesquisar na biblioteca" placeholder="Pesquisar por assunto" autocomplete="off"></form>`;
+  const tools = onHome ? '' : `<div class="library-tools"><form class="library-search" role="search" action="/pesquisa/" hidden>${icon('search', 17)}
+    <input type="search" name="q" aria-label="Pesquisar na biblioteca" placeholder="Pesquisar por assunto" autocomplete="off"></form>
+    <button type="button" class="button button-outline filter-toggle" data-filter-toggle aria-expanded="false" aria-controls="topic-panel" hidden>${icon('filter', 15)}<span>Filtrar</span></button></div>${filters}`;
   return `<section class="catalogue" id="conteudos" data-catalog data-page-size="${onHome ? 8 : 0}" aria-label="Guias e procedimentos">
-    <div class="catalog-toolbar">${onHome ? '<h2>Guias e procedimentos</h2>' : search}${filters}</div>
+    <div class="catalog-toolbar">${onHome ? `<div class="section-title"><h2>Guias e procedimentos</h2><p>Tudo o que você precisa para a rotina de viagem.</p></div>` : tools}</div>
     <p class="${onHome ? 'sr-only' : 'result-count'}" data-count role="status">${guides.length} conteúdos</p>
     <ul class="guide-list">${guides.map(g => guideEntry(g, onHome ? 'h3' : 'h2')).join('')}</ul>
     <div class="no-results" hidden>${icon('search', 23)}<h3>Nenhum conteúdo encontrado</h3>
@@ -63,9 +67,15 @@ function catalogue(guides, onHome) {
 export function home(guides) {
   const rank = new Map(guideOrder.map((slug, index) => [slug, index]));
   const ordered = [...guides].sort((a, b) => (rank.get(a.slug) ?? rank.size) - (rank.get(b.slug) ?? rank.size));
-  return `<main id="principal" class="wrap home-layout">
-    <header class="home-heading"><h1>Guia de Jornada</h1></header>
-    ${noticeBoard(notices)}${catalogue(ordered, true)}${shortcuts()}
+  return `<main id="principal" class="home-layout">
+    <section class="hero"><div class="wrap">
+      <header class="home-heading"><p class="eyebrow">Portal do Motorista</p><h1>Guia de Jornada</h1>
+        <p class="lede">Avisos, procedimentos e serviços para a sua rotina, em um só lugar.</p>
+        <form class="hero-search" role="search" action="/pesquisa/">${icon('search', 18)}<input type="search" name="q" aria-label="Pesquisar no portal" placeholder="Pesquisar guias e procedimentos" autocomplete="off"><button class="button button-primary" type="submit">Buscar</button></form>
+      </header>
+      ${noticeBoard(notices)}
+    </div></section>
+    <div class="wrap home-body">${catalogue(ordered, true)}${shortcuts()}</div>
   </main>`;
 }
 
@@ -80,17 +90,17 @@ export function article(guide, guides) {
   function relevance(g) {
     return Number(g.category === guide.category) + Number(g.sectors.some(id => guide.sectors.includes(id)));
   }
-  const related = guides.filter(g => g.slug !== guide.slug && !g.status).sort((a, b) => relevance(b) - relevance(a)).slice(0, 2);
+  const related = guides.filter(g => g.slug !== guide.slug && !g.status).sort((a, b) => relevance(b) - relevance(a)).slice(0, 3);
   return `<main id="principal" class="wrap article-shell">${breadcrumbs(guide.title)}
     <div class="article-layout"><article class="reading">
-      <header class="reading-head"><div class="doc-intro"><div><h1>${escapeHtml(guide.title)}</h1>
-      <p class="deck">${escapeHtml(guide.summary)}</p></div><img class="doc-thumb" src="/assets/images/${guide.image}" width="100" height="76" loading="lazy" alt=""></div>
+      <header class="reading-head"><h1>${escapeHtml(guide.title)}</h1>
+      <p class="deck">${escapeHtml(guide.summary)}</p>
       ${sectorCredit(guide)}</header>
       <details class="mobile-toc"><summary>${icon('list', 16)} Nesta página ${icon('down', 14)}</summary>${toc}</details>
       ${guide.sections.map(s => `<section class="reading-section" id="${s.id}"><h2>${escapeHtml(s.title)}</h2>${s.html}</section>`).join('')}
-      <nav class="related" aria-label="Leituras relacionadas"><h2>Outros guias</h2><div>
-        ${related.map(g => link(g.title, `/${g.slug}/`, 'related-link', 'arrow')).join('')}</div></nav>
     </article><aside class="rail"><div class="rail-inner"><h2>${icon('list', 15)}Nesta página</h2>${toc}
-      <div class="rail-help">${supportLink('foot-link')}</div></div></aside></div>
+      <div class="rail-help">${supportLink('button button-outline')}</div></div></aside></div>
+    <nav class="related" aria-label="Outros guias"><h2>Continue lendo</h2><ul>
+      ${related.map(g => `<li><a class="related-card" href="/${g.slug}/"><img src="/assets/images/${g.image}" alt="" width="320" height="180" loading="lazy"><span><strong>${escapeHtml(g.title)}</strong><small>${escapeHtml(g.summary)}</small></span></a></li>`).join('')}</ul></nav>
   </main>`;
 }

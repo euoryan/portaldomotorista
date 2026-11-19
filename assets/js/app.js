@@ -166,7 +166,15 @@
       renderCatalog();
       guides.filter(guide => !guide.hidden)[previous]?.querySelector('a').focus();
     });
-    catalog.querySelector('[data-topics]').hidden = false;
+    const panel = catalog.querySelector('[data-topics]');
+    const toggle = catalog.querySelector('[data-filter-toggle]');
+    if (toggle) {
+      toggle.hidden = false;
+      toggle.addEventListener('click', () => {
+        panel.hidden = !panel.hidden;
+        toggle.setAttribute('aria-expanded', String(!panel.hidden));
+      });
+    }
     if (query) query.form.hidden = false;
     window.addEventListener('popstate', restore);
     restore();
